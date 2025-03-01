@@ -1,9 +1,9 @@
-# -------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------------
 # Name:        Operations-on-Finite-Automata
 # Author:      ...
-# Purpose:     Project Operations file - All functions to transform the automata
+# Purpose:     Project Operations file - All functions to transform an automaton
 # Created:     01/03/2025
-# -------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------------
 # IMPORTATIONS OF MODULES
 
 
