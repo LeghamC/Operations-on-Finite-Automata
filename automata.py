@@ -20,7 +20,9 @@ class FiniteAutomaton:
         self.states = []  # The states of the automaton
         self.initial_states = []  # The initial states of the automaton
         self.terminal_states = []  # The terminal states of the automaton
-        self.transitions = []  # The transitions of the automaton
+        self.transitions = {}  # The transitions of the automaton : each key is a tuple (state, symbol) and the value
+        # is the next state which is stored in an array. The key represents the current state and the symbol that is
+        # read to go to the next state
 
     # ---------------------------------------------------------------------------------------------------------------
 
@@ -63,14 +65,25 @@ class FiniteAutomaton:
             for i in range(int(nb_terminal_states)):
                 self.terminal_states.append(int(terminal_states_line[i + 1]))
 
-            #store the transitions (still in development)
+            #store the transitions
             transition_txt = lines[5:]  # retrieve the transitions from the file, skip the fifth line as it contains
             # only contain the number of transitions, but we can get it back by getting the length of the array with
             # len()
             for line in transition_txt:  # iterate through the transitions
-                current_transition = line.strip()  # remove the '\n' character
-                self.transitions.append(current_transition)  # add the transition to the list of transitions
+                current_transition = line.strip().split()  # remove the '\n' character and split the different
+                # strings into a list
+                print(current_transition[0])
+                current_state = int(current_transition[0])  # retrieve the current state which is always the first
+                # element
+                symbol = current_transition[1]  # retrieve the symbol which is always the second element
 
+                next_states = {int(state) for state in current_transition[2:]}  # retrieve the next states and
+                # convert them into integers, the braces {} are used to create a set which ensure that the elements
+                # are unique
+
+                if (current_state, symbol) not in self.transitions:
+                    self.transitions[(current_state, symbol)] = set()  # if the key is not in the dictionary, we add it
+                self.transitions[(current_state, symbol)].update(next_states)  # add the next states to the current key
 
 
 '''
@@ -81,7 +94,10 @@ class FiniteAutomaton:
 
 
 def display_automaton(FA):
-    pass
+    automaton_array = []  # create an empty array to store the automaton so that we will be easier to display it later
+    for i in range(len(FA.states)):  # iterate through the states
+        automaton_array.append([])  # for each state, we create an array that will store the state we can reach from
+        # the current state
 
 
 '''
