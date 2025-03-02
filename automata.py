@@ -85,6 +85,34 @@ class FiniteAutomaton:
                     self.transitions[(current_state, symbol)] = set()  # if the key is not in the dictionary, we add it
                 self.transitions[(current_state, symbol)].update(next_states)  # add the next states to the current key
 
+    def display_automaton(self):
+        #display of the header that contains the alphabet
+        print("-" * (4 + 6 * len(self.alphabet)))
+        print("|    | " + " |  ".join(self.alphabet) + "|")
+        print("-" * (4 + 6 * len(self.alphabet)))
+
+        #display all the states with its transitions
+        for state in self.states:
+
+            if state in self.terminal_states and state in self.initial_states:
+                print("<->", end="")
+            elif state in self.terminal_states:
+                print("<-", end="")
+            elif state in self.initial_states:
+                print("->", end="")
+
+
+            row = [f"{state}"]  # create a list that will store the row of the current state, we convert the state
+            # into a string using f"{state}" to be able to concatenate it with other strings
+            for symbol in self.alphabet:
+                next_states = self.transitions.get((state, symbol), set())  # get the next states of the current state
+                if next_states:
+                    row.append(", ".join(map(str, next_states)))  # if there are next states, we add them to the row
+                else:
+                    row.append("__")  # if there are no next states, we add "__" to the row
+
+            print("  |  ".join(row) + " |")  # display the row
+
 
 '''
  * @brief : Displays the FA with indications of initial states, terminal states, and the transition table.
@@ -126,6 +154,7 @@ test = FiniteAutomaton()
 test.read_automaton_from_file("Automatons/project_automaton_test.txt")
 print(test.alphabet)
 print(test.states)
-print(test.initial_states)
+print("The initial states are : ",test.initial_states)
 print(test.terminal_states)
 print(test.transitions)
+test.display_automaton()
