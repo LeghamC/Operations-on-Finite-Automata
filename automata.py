@@ -29,11 +29,12 @@ class FiniteAutomaton:
     def read_automaton_from_file(self, filename: str) -> None:
         """
         Reads the automaton from a .txt file and stores it
-        :param filename:
-        :return:
+        :param filename: The .txt file with the automata's properties
+        :return: None
         """
         with open(filename, "r") as file:
-            first_lines = file.readlines()[:4]  # retrieve the first 4 lines as they contain
+            lines = file.readlines()  # read the entire file and store it in a list of strings
+            first_lines = lines[:4]  # retrieve the first 4 lines as they contain
             # the general information of the automaton | use readlines() as the first 4 lines are always the same
 
             #store the alphabet
@@ -63,22 +64,13 @@ class FiniteAutomaton:
                 self.terminal_states.append(int(terminal_states_line[i + 1]))
 
             #store the transitions (still in development)
-            """for line in file:
-                current_transition = line.strip()
-                self.transitions.append(current_transition)"""
+            transition_txt = lines[5:]  # retrieve the transitions from the file, skip the fifth line as it contains
+            # only contain the number of transitions, but we can get it back by getting the length of the array with
+            # len()
+            for line in transition_txt:  # iterate through the transitions
+                current_transition = line.strip()  # remove the '\n' character
+                self.transitions.append(current_transition)  # add the transition to the list of transitions
 
-
-
-
-'''
- * @brief : Reads the FA from a .txt file and stores it
- * @param filename : The .txt file with the automata's propeties
- * @return : ...
- '''
-
-
-def read_automaton_from_file(filename):
-    pass
 
 
 '''
@@ -119,4 +111,5 @@ test.read_automaton_from_file("Automatons/project_automaton_test.txt")
 print(test.alphabet)
 print(test.states)
 print(test.initial_states)
+print(test.terminal_states)
 print(test.transitions)
