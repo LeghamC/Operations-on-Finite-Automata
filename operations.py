@@ -5,7 +5,7 @@
 # Created:     01/03/2025
 # ---------------------------------------------------------------------------------------------------------------
 # IMPORTATIONS OF MODULES
-
+import automata
 
 '''
  * @brief : Standardize an automaton
@@ -72,4 +72,16 @@ def minimization(CDFA):
  * @return complementary_A: The automaton recognizing the complementary language
  '''
 def complementary_automaton(A):
-    pass
+
+    B = automata.FiniteAutomaton()
+    B.terminal_states = []
+    B.initial_states = A.initial_states
+    B.states = A.states
+    B.alphabet = A.alphabet
+    B.transitions = A.transitions
+
+    for i in B.states :
+        if i not in A.terminal_states :
+            B.terminal_states.append(i)
+    return B
+
