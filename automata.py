@@ -5,7 +5,8 @@
 # Created:     01/03/2025
 # ---------------------------------------------------------------------------------------------------------------
 # IMPORTATIONS OF MODULES
-
+import operations
+import properties_check
 
 class FiniteAutomaton:
     """
@@ -158,3 +159,9 @@ print("The initial states are : ",test.initial_states)
 print(test.terminal_states)
 print(test.transitions)
 test.display_automaton()
+print(properties_check.is_complete(test))
+
+print("completing FA : ")
+operations.completion(test)
+test.display_automaton()
+print(properties_check.is_complete(test))

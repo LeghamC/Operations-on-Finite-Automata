@@ -42,6 +42,6 @@ def is_deterministic(FA):
 def is_complete(FA):
     for state in FA.states:
         for letter in FA.alphabet:
-            if [(state,letter)] not in FA.transitions :
+            if (state,letter) not in FA.transitions :
                 return False
     return True

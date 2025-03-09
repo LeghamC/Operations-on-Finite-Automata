@@ -34,7 +34,7 @@ def completion(FA):
                 if "bin" not in FA.states :
 
                 #if the bin doesn't exist we create it and create the transitions to itself to complete the bin
-                    FA.state.append("bin")
+                    FA.states.append("bin")
                     for s in FA.alphabet :
                         FA.transitions[("bin", s)] = "bin"
 
