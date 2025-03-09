@@ -5,6 +5,9 @@
 # Created:     01/03/2025
 # ---------------------------------------------------------------------------------------------------------------
 # IMPORTATIONS OF MODULES
+import operations
+import properties_check
+import general_functions
 
 
 class FiniteAutomaton:
@@ -20,7 +23,9 @@ class FiniteAutomaton:
         self.states = []  # The states of the automaton
         self.initial_states = []  # The initial states of the automaton
         self.terminal_states = []  # The terminal states of the automaton
-        self.transitions = []  # The transitions of the automaton
+        self.transitions = {}  # The transitions of the automaton : each key is a tuple (state, symbol) and the value
+        # is the next state which is stored in an array. The key represents the current state and the symbol that is
+        # read to go to the next state
 
     # ---------------------------------------------------------------------------------------------------------------
 
@@ -63,14 +68,108 @@ class FiniteAutomaton:
             for i in range(int(nb_terminal_states)):
                 self.terminal_states.append(int(terminal_states_line[i + 1]))
 
-            #store the transitions (still in development)
+            #store the transitions
             transition_txt = lines[5:]  # retrieve the transitions from the file, skip the fifth line as it contains
             # only contain the number of transitions, but we can get it back by getting the length of the array with
             # len()
             for line in transition_txt:  # iterate through the transitions
-                current_transition = line.strip()  # remove the '\n' character
-                self.transitions.append(current_transition)  # add the transition to the list of transitions
+                current_transition = line.strip().split()  # remove the '\n' character and split the different
+                # strings into a list
 
+                current_state = int(current_transition[0])  # retrieve the current state which is always the first
+                # element
+
+                symbol = current_transition[1]  # retrieve the symbol which is always the second element
+
+                next_states = {int(state) for state in current_transition[2:]}  # retrieve the next states and
+                # convert them into integers, the braces {} are used to create a set which ensure that the elements
+                # are unique
+
+                if (current_state, symbol) not in self.transitions:
+                    self.transitions[(current_state, symbol)] = set()  # if the key is not in the dictionary, we add it
+                self.transitions[(current_state, symbol)].update(next_states)  # add the next states to the current key
+
+    def display_automaton(self):
+
+        length_table = general_functions.total_table_length(len(self.alphabet))  # get the length of the table in
+        # terms of characters
+
+        # --------------------------------------------------------------------------------------------------------------
+        # display of the upper border of the table
+        # --------------------------------------------------------------------------------------------------------------
+        for i in range(length_table):  # iterate through the length of the table
+            if i == 0:  # if we are at the beginning of the table, we display the top left corner
+                print("┌", end="")
+            if i == length_table - 1:  # if we are at the end of the table, we display the top right corner
+                print("─", end="")
+                print("┐")
+            if i % 5 == 0 and i != 0 and i != length_table - 1:  # if we are at the position of the vertical lines
+                print("┬", end="")
+            elif i != length_table - 1:  # if we are not at the position of the vertical lines, we display a horizontal
+                print("─", end="")
+
+        # --------------------------------------------------------------------------------------------------------------
+        # display of the alphabet
+        # --------------------------------------------------------------------------------------------------------------
+        state_placing = f"│{"S":^{5}}│"  # calculate the spacing for the state S place
+        alphabet_line = "|".join(f"{alphabet:^{4}}" for alphabet in self.alphabet)  # calculate the spacing for the
+        # alphabet line and join the elements of the alphabet with the vertical line
+        print(state_placing + alphabet_line + "│")  # display the alphabet line
+
+        # --------------------------------------------------------------------------------------------------------------
+        # display the border between the alphabet and the states
+        # --------------------------------------------------------------------------------------------------------------
+        for i in range(length_table):  # iterate through the length of the table
+            if i == 0:  # if we are at the beginning of the table, we display the top left corner
+                print("├", end="")
+            if i == length_table - 1:  # if we are at the end of the table, we display the top right corner
+                print("─", end="")
+                print("┤")
+            if i % 5 == 0 and i != 0 and i != length_table - 1:  # if we are at the position of the vertical lines
+                print("┼", end="")
+            elif i != length_table - 1:  # if we are not at the position of the vertical lines, we display a horizontal
+                print("─", end="")
+
+        # --------------------------------------------------------------------------------------------------------------
+        # display all the states with its transitions
+        # --------------------------------------------------------------------------------------------------------------
+        for state in self.states:
+            if state in self.terminal_states and state in self.initial_states:
+                beginning_character = "│ ↔"  # if the state is both terminal and initial
+                row = [f"{state}".ljust(2)]  # create a list that will store the row of the current state, we convert
+                # the state into a string using f"{state}" to be able to concatenate it with other strings
+            elif state in self.terminal_states:
+                beginning_character = "│ ←"  # if the state is terminal
+                row = [f"{state}".ljust(2)]
+            elif state in self.initial_states:
+                beginning_character = "│ →"  # if the state is initial
+                row = [f"{state}".ljust(2)]
+            else:
+                beginning_character = "│"  # the beginning character of the row
+                row = [f"{state}".ljust(2)]
+
+            for symbol in self.alphabet:
+                next_states = self.transitions.get((state, symbol), set())  # get the next states of the current state
+                if next_states:
+                    row.append(", ".join(map(str, next_states)))  # if there are next states, we add them to the row
+                else:
+                    row.append("__")  # if there are no next states, we add "__" to the row
+
+            print(beginning_character + " | ".join(row) + " |")  # display the row
+
+        # --------------------------------------------------------------------------------------------------------------
+        # display of the lower border of the table
+        # --------------------------------------------------------------------------------------------------------------
+        for i in range(length_table):  # iterate through the length of the table
+            if i == 0:  # if we are at the beginning of the table, we display the top left corner
+                print("└", end="")
+            if i == length_table - 1:  # if we are at the end of the table, we display the top right corner
+                print("─", end="")
+                print("┘")
+            if i % 5 == 0 and i != 0 and i != length_table - 1:  # if we are at the position of the vertical lines
+                print("┴", end="")
+            elif i != length_table - 1:  # if we are not at the position of the vertical lines, we display a horizontal
+                print("─", end="")
 
 
 '''
@@ -81,7 +180,10 @@ class FiniteAutomaton:
 
 
 def display_automaton(FA):
-    pass
+    automaton_array = []  # create an empty array to store the automaton so that we will be easier to display it later
+    for i in range(len(FA.states)):  # iterate through the states
+        automaton_array.append([])  # for each state, we create an array that will store the state we can reach from
+        # the current state
 
 
 '''
@@ -104,12 +206,3 @@ def display_complete_dererministic_automaton(CDFA):
 
 def display_minimal_automaton(MCDFA):
     pass
-
-
-test = FiniteAutomaton()
-test.read_automaton_from_file("Automatons/project_automaton_test.txt")
-print(test.alphabet)
-print(test.states)
-print(test.initial_states)
-print(test.terminal_states)
-print(test.transitions)

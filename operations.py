@@ -5,7 +5,7 @@
 # Created:     01/03/2025
 # ---------------------------------------------------------------------------------------------------------------
 # IMPORTATIONS OF MODULES
-
+import automata
 
 '''
  * @brief : Standardize an automaton
@@ -22,7 +22,30 @@ def standardization(FA):
  * @return CDFA: The complete automaton
  '''
 def completion(FA):
+
+#we go through all states to check if they have a transition for every letter of the alphabet
+    for state in FA.states :
+        for symbol in FA.alphabet :
+
+            #we check if the combination is in the transitions (a.k.a there is a transition linked to the symbol)
+            if (state, symbol) not in FA.transitions :
+
+                #if we found a missing symbol transition, we check if a bin exists
+                if "P" not in FA.states :
+
+                #if the bin doesn't exist we create it and create the transitions to itself to complete the bin
+                    FA.states.append("P")
+                    for s in FA.alphabet :
+                        FA.transitions[("P", s)] = "P"
+
+                # once we made sure a bin exist, we add the missing transition towards the bin.
+                FA.transitions[(state,symbol)] = "P"
+    return FA
     pass
+
+
+#this function isn't great because it only works on standardized FA
+
 
 
 '''
@@ -49,4 +72,16 @@ def minimization(CDFA):
  * @return complementary_A: The automaton recognizing the complementary language
  '''
 def complementary_automaton(A):
-    pass
+
+    B = automata.FiniteAutomaton()
+    B.terminal_states = []
+    B.initial_states = A.initial_states
+    B.states = A.states
+    B.alphabet = A.alphabet
+    B.transitions = A.transitions
+
+    for i in B.states :
+        if i not in A.terminal_states :
+            B.terminal_states.append(i)
+    return B
+
