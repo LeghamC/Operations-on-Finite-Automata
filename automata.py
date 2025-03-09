@@ -158,3 +158,4 @@ print("The initial states are : ",test.initial_states)
 print(test.terminal_states)
 print(test.transitions)
 test.display_automaton()
+
