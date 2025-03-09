@@ -151,14 +151,6 @@ def display_minimal_automaton(MCDFA):
     pass
 
 
-test = FiniteAutomaton()
-test.read_automaton_from_file("Automatons/project_automaton_test.txt")
-print(test.alphabet)
-print(test.states)
-print("The initial states are : ",test.initial_states)
-print(test.terminal_states)
-print(test.transitions)
-test.display_automaton()
-print(properties_check.is_complete(test))
+
 
 

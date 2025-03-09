@@ -9,7 +9,7 @@ import automata
 import operations
 import properties_check
 
-
+""""
 test = automata.FiniteAutomaton()
 test.read_automaton_from_file("Automatons/project_automaton_test.txt")
 print(test.alphabet)
@@ -29,3 +29,5 @@ print("finding the complementary FA")
 B = operations.complementary_automaton(test)
 test.display_automaton()
 B.display_automaton()
+"""
+
