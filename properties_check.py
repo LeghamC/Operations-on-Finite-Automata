@@ -40,4 +40,8 @@ def is_deterministic(FA):
  * @return : a boolean  with 1: the automaton is complete, 0 else
  '''
 def is_complete(FA):
-    pass
+    for state in FA.states:
+        for letter in FA.alphabet:
+            if [(state,letter)] not in FA.transitions :
+                return False
+    return True

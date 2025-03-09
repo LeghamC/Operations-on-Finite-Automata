@@ -28,7 +28,7 @@ def completion(FA):
         for symbol in FA.alphabet :
 
             #we check if the combination is in the transitions (a.k.a there is a transition linked to the symbol)
-            if [state, symbol] not in FA.transitions :
+            if (state, symbol) not in FA.transitions :
 
                 #if we found a missing symbol transition, we check if a bin exists
                 if "bin" not in FA.states :
@@ -36,19 +36,17 @@ def completion(FA):
                 #if the bin doesn't exist we create it and create the transitions to itself to complete the bin
                     FA.state.append("bin")
                     for s in FA.alphabet :
-                        FA.transitions["bin", s] = "bin"
+                        FA.transitions[("bin", s)] = "bin"
 
                 # once we made sure a bin exist, we add the missing transition towards the bin.
-                FA.transitions[state,symbol] = "bin"
-
+                FA.transitions[(state,symbol)] = "bin"
+    return FA
     pass
 
 
 #this function isn't great because it only works on standardized FA
-def check_complete(FA):
-    if len(FA.states) < len(FA.states) * len(FA.alphabet):
-        return False
-    return True
+
+
 
 '''
  * @brief : Determinizes and completes an automaton
