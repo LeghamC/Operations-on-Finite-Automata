@@ -85,6 +85,7 @@ class FiniteAutomaton:
                     self.transitions[(current_state, symbol)] = set()  # if the key is not in the dictionary, we add it
                 self.transitions[(current_state, symbol)].update(next_states)  # add the next states to the current key
 
+
     def display_automaton(self):
         #display of the header that contains the alphabet
         print("-" * (4 + 6 * len(self.alphabet)))
@@ -150,11 +151,11 @@ def display_minimal_automaton(MCDFA):
     pass
 
 
-test = FiniteAutomaton()
+"""test = FiniteAutomaton()
 test.read_automaton_from_file("Automatons/project_automaton_test.txt")
 print(test.alphabet)
 print(test.states)
 print("The initial states are : ",test.initial_states)
 print(test.terminal_states)
 print(test.transitions)
-test.display_automaton()
+test.display_automaton()"""

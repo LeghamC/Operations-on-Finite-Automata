@@ -7,6 +7,7 @@
 # IMPORTATIONS OF MODULES
 import automata
 import properties_check
+import operations
 
 
 if __name__ == '__main__':
@@ -15,7 +16,11 @@ if __name__ == '__main__':
     fa = automata.FiniteAutomaton()
     fa.read_automaton_from_file("Automatons/project_automaton_test.txt")  # this automaton is not deterministic
     properties_check.is_deterministic(fa)
+    cdfa = operations.determinization_and_completion_automaton(fa)
 
-    fa2 = automata.FiniteAutomaton()
-    fa2.read_automaton_from_file("Automatons/project_automaton_test_deterministic")  # this automaton is deterministic
-    properties_check.is_deterministic(fa2)
+    print(cdfa.alphabet)
+    print(cdfa.states)
+    print("The initial states are : ", cdfa.initial_states)
+    print(cdfa.terminal_states)
+    print(cdfa.transitions)
+    cdfa.display_automaton()
