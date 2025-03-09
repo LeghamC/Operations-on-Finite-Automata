@@ -9,9 +9,9 @@ import automata
 import operations
 import properties_check
 
+
+
 """"
-test = automata.FiniteAutomaton()
-test.read_automaton_from_file("Automatons/project_automaton_test.txt")
 print(test.alphabet)
 print(test.states)
 print("The initial states are : ",test.initial_states)
@@ -30,4 +30,8 @@ B = operations.complementary_automaton(test)
 test.display_automaton()
 B.display_automaton()
 """
+
+test = automata.FiniteAutomaton()
+test.read_automaton_from_file("Automatons/project_automaton_test.txt")
+test.display_automaton()
 
