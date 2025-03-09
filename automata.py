@@ -161,7 +161,4 @@ print(test.transitions)
 test.display_automaton()
 print(properties_check.is_complete(test))
 
-print("completing FA : ")
-operations.completion(test)
-test.display_automaton()
-print(properties_check.is_complete(test))
+
