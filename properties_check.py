@@ -30,8 +30,36 @@ def is_not_standard(FA):
  * @param FA : The FA that we want to check if is deterministic or not
  * @return : a boolean  with 1: the automaton is deterministic, 0 else
  '''
-def is_deterministic(FA):
-    pass
+def is_deterministic(self):
+    """We have to check 3 conditions to know if an automaton is deterministic :
+            1. Only one initial state
+            2. No two transitions of same label from same state
+            3. No epsilon (ε) transition"""
+
+    initial = 1
+    transitions = 1
+    epsilon = 1
+
+    # check of first condition
+    if len(self.initial_states) != 1:
+        initial = 0
+        print("The automaton is not deterministic as we have do not have a single initial state.")
+
+    # check of second condition
+    for (state, label), target_state in self.transitions.items():
+        if len(target_state) > 1:
+            transitions = 0
+            print(f"The automaton is not deterministic as state '{state}' has multiple transitions for label '{label}'.")
+
+    # check of third condition
+    if any(label == 'ε' for (_, label) in self.transitions.keys()):
+        print("The automaton is not deterministic as it contains an epsilon (ε) transition.")
+
+    # else the automaton is deterministic
+    if initial == 1 and transitions == 1 and epsilon == 1:
+        print("The automaton is deterministic.")
+
+    return
 
 
 '''
