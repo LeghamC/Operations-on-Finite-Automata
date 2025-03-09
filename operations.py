@@ -7,48 +7,39 @@
 # IMPORTATIONS OF MODULES
 from automata import FiniteAutomaton
 
-
 '''
- * @brief : Standardize an automaton
- * @param FA : The FA that we want to standardize
- * @return SFA: The standardized automaton
+ * @brief : Says if an automaton is standard or not
+ * @param FA : A FA 
+ * @return bool : True if it is a standard automaton, False otherwise
  '''
-def standardization(FA):
-       pass
-
-def is_standard(filename :str) :
-
+def is_standard(filename : str) -> bool :
     fa = FiniteAutomaton()
-    fa.read_automaton_from_file(filename)
-    standard = True           # we begin by saying that the automata is standard
+    fa.read_automaton_from_file(filename)  # Read the automaton to retrieve the needed informations
 
-    with open(filename, "r") as file:
-        lines = file.readlines()  # read the entire file and store it in a list of strings
-        first_lines = lines[:4]  # retrieve the first 4 lines as they contain
-        # the general information of the automaton | use readlines() as the first 4 lines are always the same
-
-    next_state=[]
-
-    initial_states_line = first_lines[2].split()  # split the line into a list of strings
-    nb_initial_states = initial_states_line[0].strip()  # retrieve the number of initial states
-    initial_states = initial_states_line[1:]
-
+    initial_states = fa.initial_states
     transitions = fa.transitions
 
-    for states in transitions :
-        third_char = states[2:]
+    terminal_states = fa.terminal_states
+    nb_initial_states = len(initial_states) #gives the number of initial states
+
+    if nb_initial_states != 1:
+        return False  #If there is more than one initial state, the automata is not standard so we return false
+
+    first_state = initial_states[0]
+    next_state = []
+
+    for transi in transitions: # It gives us the next state of each transition. They are in the form AbC and we only need the C.
+        third_char = transi[2]
         next_state.append(third_char)
 
+    for state in next_state: # It verifies if there is a transition that goes towards the initial state. If it is the case, the automaton is not standard so we return false.
+        if state == first_state :
+            return False
+    return True #If the automaton has only one state and there is no transition towards it, then it is standard and we return true.
 
-    if int(nb_initial_states) > 1 :
-        standard = False  #If there is more than one initial state, the automata is not standard
 
-    for i in next_state :
-        for j in initial_states:
-            if i == j :
-                standard = False
 
-    return standard
+
 
 
 
@@ -58,6 +49,13 @@ print(standard)
 
 
 
+'''
+ * @brief : Standardize an automaton
+ * @param FA : The FA that we want to standardize
+ * @return SFA: The standardized automaton
+ '''
+def standardization(FA):
+    pass
 
 
 
