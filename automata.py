@@ -8,6 +8,7 @@
 import operations
 import properties_check
 import general_functions
+from general_functions import retrieve_max_transition_length
 
 
 class FiniteAutomaton:
@@ -90,63 +91,60 @@ class FiniteAutomaton:
                 self.transitions[(current_state, symbol)].update(next_states)  # add the next states to the current key
 
     def display_automaton(self):
-
-        length_table = general_functions.total_table_length(len(self.alphabet))  # get the length of the table in
-        # terms of characters
+        alphabet_length = len(self.alphabet)  # get the length of the alphabet
+        max_transition_length = retrieve_max_transition_length(self.transitions)  # get the length of the longest
+        print("maximum transition length : ", max_transition_length)
+        length_table = general_functions.total_table_length(alphabet_length, max_transition_length)  # get the length
+        # of the table in terms of characters
+        size_box = length_table // alphabet_length + 1
 
         # --------------------------------------------------------------------------------------------------------------
         # display of the upper border of the table
         # --------------------------------------------------------------------------------------------------------------
-        for i in range(length_table):  # iterate through the length of the table
-            if i == 0:  # if we are at the beginning of the table, we display the top left corner
-                print("┌", end="")
-            if i == length_table - 1:  # if we are at the end of the table, we display the top right corner
-                print("─", end="")
-                print("┐")
-            if i % 5 == 0 and i != 0 and i != length_table - 1:  # if we are at the position of the vertical lines
-                print("┬", end="")
-            elif i != length_table - 1:  # if we are not at the position of the vertical lines, we display a horizontal
-                print("─", end="")
+        # if we are at the beginning of the table, we display the top left corner
+        print("┌", end="")
+        print("─" * (size_box-3), end="")
+        for i in range(alphabet_length):
+            print("┬", end="")
+            print("─" * (size_box-3), end="")
+        print("┐")
 
         # --------------------------------------------------------------------------------------------------------------
         # display of the alphabet
         # --------------------------------------------------------------------------------------------------------------
-        state_placing = f"│{"S":^{5}}│"  # calculate the spacing for the state S place
-        alphabet_line = "|".join(f"{alphabet:^{4}}" for alphabet in self.alphabet)  # calculate the spacing for the
+        state_placing = f"│{"S":^{size_box-3}}"  # calculate the spacing for the state S place
+        alphabet_line = "│".join(f"{alphabet:^{size_box-3}}" for alphabet in self.alphabet)  # calculate the spacing for the
         # alphabet line and join the elements of the alphabet with the vertical line
-        print(state_placing + alphabet_line + "│")  # display the alphabet line
+        alphabet_line = f"│{alphabet_line}│"
+        print(state_placing + alphabet_line)  # display the alphabet line
 
         # --------------------------------------------------------------------------------------------------------------
         # display the border between the alphabet and the states
         # --------------------------------------------------------------------------------------------------------------
-        for i in range(length_table):  # iterate through the length of the table
-            if i == 0:  # if we are at the beginning of the table, we display the top left corner
-                print("├", end="")
-            if i == length_table - 1:  # if we are at the end of the table, we display the top right corner
-                print("─", end="")
-                print("┤")
-            if i % 5 == 0 and i != 0 and i != length_table - 1:  # if we are at the position of the vertical lines
-                print("┼", end="")
-            elif i != length_table - 1:  # if we are not at the position of the vertical lines, we display a horizontal
-                print("─", end="")
+        print("├", end="")
+        print("─" * (size_box - 3), end="")
+        for i in range(alphabet_length):
+            print("┼", end="")
+            print("─" * (size_box - 3), end="")
+        print("┤")
 
         # --------------------------------------------------------------------------------------------------------------
         # display all the states with its transitions
         # --------------------------------------------------------------------------------------------------------------
         for state in self.states:
             if state in self.terminal_states and state in self.initial_states:
-                beginning_character = "│ ↔"  # if the state is both terminal and initial
-                row = [f"{state}".ljust(2)]  # create a list that will store the row of the current state, we convert
+                beginning_character = "│↔"  # if the state is both terminal and initial
+                row = [f"{state}".ljust(size_box-5)]  # create a list that will store the row of the current state, we convert
                 # the state into a string using f"{state}" to be able to concatenate it with other strings
             elif state in self.terminal_states:
-                beginning_character = "│ ←"  # if the state is terminal
-                row = [f"{state}".ljust(2)]
+                beginning_character = "│←"  # if the state is terminal
+                row = [f"{state}".ljust(size_box-5)]
             elif state in self.initial_states:
-                beginning_character = "│ →"  # if the state is initial
-                row = [f"{state}".ljust(2)]
+                beginning_character = "│→"  # if the state is initial
+                row = [f"{state}".ljust(size_box-5)]
             else:
-                beginning_character = "│"  # the beginning character of the row
-                row = [f"{state}".ljust(2)]
+                beginning_character = "│ "  # the beginning character of the row
+                row = [f"{state}".ljust(size_box-5)]
 
             for symbol in self.alphabet:
                 next_states = self.transitions.get((state, symbol), set())  # get the next states of the current state
@@ -160,16 +158,12 @@ class FiniteAutomaton:
         # --------------------------------------------------------------------------------------------------------------
         # display of the lower border of the table
         # --------------------------------------------------------------------------------------------------------------
-        for i in range(length_table):  # iterate through the length of the table
-            if i == 0:  # if we are at the beginning of the table, we display the top left corner
-                print("└", end="")
-            if i == length_table - 1:  # if we are at the end of the table, we display the top right corner
-                print("─", end="")
-                print("┘")
-            if i % 5 == 0 and i != 0 and i != length_table - 1:  # if we are at the position of the vertical lines
-                print("┴", end="")
-            elif i != length_table - 1:  # if we are not at the position of the vertical lines, we display a horizontal
-                print("─", end="")
+        print("└", end="")
+        print("─" * (size_box - 3), end="")
+        for i in range(alphabet_length):
+            print("┴", end="")
+            print("─" * (size_box - 3), end="")
+        print("┘")
 
 
 '''
@@ -206,3 +200,5 @@ def display_complete_dererministic_automaton(CDFA):
 
 def display_minimal_automaton(MCDFA):
     pass
+
+
