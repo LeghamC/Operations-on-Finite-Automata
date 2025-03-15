@@ -210,4 +210,5 @@ def display_complete_dererministic_automaton(CDFA):
 
 
 def display_minimal_automaton(MCDFA):
+
     pass
