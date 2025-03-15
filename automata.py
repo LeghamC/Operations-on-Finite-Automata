@@ -93,7 +93,6 @@ class FiniteAutomaton:
     def display_automaton(self):
         alphabet_length = len(self.alphabet)  # get the length of the alphabet
         max_transition_length = retrieve_max_transition_length(self.transitions)  # get the length of the longest
-        print("maximum transition length : ", max_transition_length)
         length_table = general_functions.total_table_length(alphabet_length, max_transition_length)  # get the length
         # of the table in terms of characters
         size_box = length_table // alphabet_length + 1
@@ -103,17 +102,18 @@ class FiniteAutomaton:
         # --------------------------------------------------------------------------------------------------------------
         # if we are at the beginning of the table, we display the top left corner
         print("┌", end="")
-        print("─" * (size_box-3), end="")
+        print("─" * (size_box - 3), end="")
         for i in range(alphabet_length):
             print("┬", end="")
-            print("─" * (size_box-3), end="")
+            print("─" * (size_box - 3), end="")
         print("┐")
 
         # --------------------------------------------------------------------------------------------------------------
         # display of the alphabet
         # --------------------------------------------------------------------------------------------------------------
-        state_placing = f"│{"S":^{size_box-3}}"  # calculate the spacing for the state S place
-        alphabet_line = "│".join(f"{alphabet:^{size_box-3}}" for alphabet in self.alphabet)  # calculate the spacing for the
+        state_placing = f"│{"S":^{size_box - 3}}"  # calculate the spacing for the state S place
+        alphabet_line = "│".join(
+            f"{alphabet:^{size_box - 3}}" for alphabet in self.alphabet)  # calculate the spacing for the
         # alphabet line and join the elements of the alphabet with the vertical line
         alphabet_line = f"│{alphabet_line}│"
         print(state_placing + alphabet_line)  # display the alphabet line
@@ -131,29 +131,40 @@ class FiniteAutomaton:
         # --------------------------------------------------------------------------------------------------------------
         # display all the states with its transitions
         # --------------------------------------------------------------------------------------------------------------
-        for state in self.states:
+        for state in self.states:  # iterate through the states
+
+            # check if the state is terminal, initial, both or none ----------------------------------------------------
             if state in self.terminal_states and state in self.initial_states:
                 beginning_character = "│↔"  # if the state is both terminal and initial
-                row = [f"{state}".ljust(size_box-5)]  # create a list that will store the row of the current state, we convert
-                # the state into a string using f"{state}" to be able to concatenate it with other strings
+
             elif state in self.terminal_states:
                 beginning_character = "│←"  # if the state is terminal
-                row = [f"{state}".ljust(size_box-5)]
+
             elif state in self.initial_states:
                 beginning_character = "│→"  # if the state is initial
-                row = [f"{state}".ljust(size_box-5)]
+
             else:
                 beginning_character = "│ "  # the beginning character of the row
-                row = [f"{state}".ljust(size_box-5)]
 
-            for symbol in self.alphabet:
+            # ----------------------------------------------------------------------------------------------------------
+
+            row = f"{state}".ljust(size_box - 5)  # create a new string that will store the row of the current
+            # state and we convert the state into a string using f"{state}" to be able to concatenate it with
+            # other strings
+
+
+            for symbol in self.alphabet:  # iterate through the alphabet
                 next_states = self.transitions.get((state, symbol), set())  # get the next states of the current state
-                if next_states:
-                    row.append(", ".join(map(str, next_states)))  # if there are next states, we add them to the row
+                if next_states:  # if there are next states, we add them to the row
+                    curr_state_str = ",".join(str(state) for state in next_states)  # convert the next states into a
+                    # string
+                    row += f"│{curr_state_str:^{size_box - 3}}"  # add the next states to the row
                 else:
-                    row.append("__")  # if there are no next states, we add "__" to the row
+                    empty_transitions = "_" * max_transition_length
+                    row += f"│{empty_transitions:^{size_box - 3}}"  # if there are no next states, we add an empty
+                    # string to the row
 
-            print(beginning_character + " | ".join(row) + " |")  # display the row
+            print(f"{beginning_character} {row}│")  # display the row
 
         # --------------------------------------------------------------------------------------------------------------
         # display of the lower border of the table
@@ -200,5 +211,3 @@ def display_complete_dererministic_automaton(CDFA):
 
 def display_minimal_automaton(MCDFA):
     pass
-
-
