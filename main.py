@@ -8,8 +8,7 @@
 import automata
 import operations
 import properties_check
-
-
+from word_recognition import recognize_word_recursive
 
 """"
 print(test.alphabet)
@@ -38,4 +37,9 @@ test.display_automaton()
 test2 = automata.FiniteAutomaton()
 test2.read_automaton_from_file("Automatons/project_automaton_test_2")
 test2.display_automaton()
+
+print(test2.terminal_states)
+print(test2.transitions)
+print(test2.initial_states)
+print(recognize_word_recursive("abaabababababababababbbaabbabababbbbbbaaaaabbbbabababababababaabbaa", test ))
 
