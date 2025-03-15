@@ -5,7 +5,7 @@
 # Created:     01/03/2025
 # ---------------------------------------------------------------------------------------------------------------
 # IMPORTATIONS OF MODULES
-import operations
+
 import properties_check
 import general_functions
 from general_functions import retrieve_max_transition_length

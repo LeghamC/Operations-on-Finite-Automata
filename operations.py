@@ -5,7 +5,45 @@
 # Created:     01/03/2025
 # ---------------------------------------------------------------------------------------------------------------
 # IMPORTATIONS OF MODULES
-import automata
+from automata import FiniteAutomaton
+
+fa = FiniteAutomaton()
+'''
+ * @brief :Says if an automaton is standard or not
+ * @param FA : The FA that we want to standardize
+ * @return bool: True if it is standard. False otherwise.
+ '''
+
+
+
+def is_standard(filename: str) -> bool:
+    
+    fa.read_automaton_from_file(filename)  # Read the automaton to retrieve the needed informations
+
+    initial_states = fa.initial_states
+    transitions = fa.transitions
+
+    terminal_states = fa.terminal_states
+    nb_initial_states = len(initial_states)  # gives the number of initial states
+
+    if nb_initial_states != 1:
+        return False  # If there is more than one initial state, the automata is not standard so we return false
+
+    first_state = initial_states[0]
+
+    for (state, symbol), next_state in transitions.items():
+        if first_state in next_state:
+            return False
+
+
+    return True  # If the automaton has only one state and there is no transition towards it, then it is standard and we return true.
+
+
+filename = "Automatons/project_automaton_test.txt"
+standard = is_standard(filename)
+print(standard)
+
+
 
 '''
  * @brief : Standardize an automaton
