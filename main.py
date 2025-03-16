@@ -9,7 +9,8 @@ import automata
 import operations
 import properties_check
 
-user_automaton = int(input("Enter the number corresponding to the automaton you want to manipulate: "))
+
+"""user_automaton = int(input("Enter the number corresponding to the automaton you want to manipulate: "))
 
 if user_automaton == 1:
     test = automata.FiniteAutomaton()
@@ -25,5 +26,5 @@ elif user_automaton == 3:
     test3.display_automaton()
 elif user_automaton == 4:
     test4 = automata.FiniteAutomaton()
-    test4.read_automaton_from_file("Automatons/automaton_27.txt")
-    test4.display_automaton()
+    test4.read_automaton_from_file("Automatons/automaton_41.txt")
+    test4.display_automaton()"""
