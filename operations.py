@@ -7,7 +7,7 @@
 # IMPORTATIONS OF MODULES
 from automata import FiniteAutomaton
 
-fa = FiniteAutomaton()
+
 '''
  * @brief :Says if an automaton is standard or not
  * @param FA : The FA that we want to standardize
@@ -16,14 +16,11 @@ fa = FiniteAutomaton()
 
 
 
-def is_standard(filename: str) -> bool:
-    
-    fa.read_automaton_from_file(filename)  # Read the automaton to retrieve the needed informations
+def is_standard(FA : FiniteAutomaton) -> bool:
+    initial_states = FA.initial_states
+    transitions = FA.transitions
 
-    initial_states = fa.initial_states
-    transitions = fa.transitions
-
-    terminal_states = fa.terminal_states
+    terminal_states = FA.terminal_states
     nb_initial_states = len(initial_states)  # gives the number of initial states
 
     if nb_initial_states != 1:
@@ -40,7 +37,9 @@ def is_standard(filename: str) -> bool:
 
 
 filename = "Automatons/project_automaton_test.txt"
-standard = is_standard(filename)
+FA = FiniteAutomaton()
+FA.read_automaton_from_file(filename)
+standard = is_standard(FA)
 print(standard)
 
 
