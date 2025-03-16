@@ -38,7 +38,7 @@ class FiniteAutomaton:
         :param filename: The .txt file with the automata's properties
         :return: None
         """
-        with open(filename, "r") as file:
+        with open(filename, "r", encoding='utf-8') as file:
             lines = file.readlines()  # read the entire file and store it in a list of strings
             first_lines = lines[:4]  # retrieve the first 4 lines as they contain
             # the general information of the automaton | use readlines() as the first 4 lines are always the same
