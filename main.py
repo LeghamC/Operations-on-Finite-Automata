@@ -25,5 +25,5 @@ elif user_automaton == 3:
     test3.display_automaton()
 elif user_automaton == 4:
     test4 = automata.FiniteAutomaton()
-    test4.read_automaton_from_file("Automatons/automaton_01.txt")
+    test4.read_automaton_from_file("Automatons/automaton_27.txt")
     test4.display_automaton()
