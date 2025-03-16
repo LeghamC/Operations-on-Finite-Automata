@@ -60,7 +60,6 @@ def completion(FA):
 def determinization_and_completion_of_automaton(FA):
     pass
 
-
 '''
  * @brief : Minimizes an automaton
  * @param CDFA : The CDFA that we want to minimize
