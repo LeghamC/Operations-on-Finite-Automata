@@ -39,10 +39,10 @@ def completion(FA):
                     # if the bin doesn't exist we create it and create the transitions to itself to complete the bin
                     FA.states.append("P")
                     for s in FA.alphabet:
-                        FA.transitions[("P", s)] = "P"
+                        FA.transitions[("P", s)].append("P")
 
                 # once we made sure a bin exist, we add the missing transition towards the bin.
-                FA.transitions[(state, symbol)] = "P"
+                FA.transitions[(state, symbol)].append("P")
     return FA
     pass
 
