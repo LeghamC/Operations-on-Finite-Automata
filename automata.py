@@ -30,7 +30,7 @@ class FiniteAutomaton:
 
     # ---------------------------------------------------------------------------------------------------------------
 
-    #Methods of the class
+    # Methods of the class
 
     def read_automaton_from_file(self, filename: str) -> None:
         """
@@ -91,6 +91,10 @@ class FiniteAutomaton:
                 self.transitions[(current_state, symbol)].update(next_states)  # add the next states to the current key
 
     def display_automaton(self):
+        """
+        Displays the FA with indications of initial states, terminal states, and the transition table.
+        :return: nothing
+        """
         alphabet_length = len(self.alphabet)  # get the length of the alphabet
         max_transition_length = retrieve_max_transition_length(self.transitions)  # get the length of the longest
         length_table = general_functions.total_table_length(alphabet_length, max_transition_length)  # get the length
@@ -152,7 +156,6 @@ class FiniteAutomaton:
             # state and we convert the state into a string using f"{state}" to be able to concatenate it with
             # other strings
 
-
             for symbol in self.alphabet:  # iterate through the alphabet
                 next_states = self.transitions.get((state, symbol), set())  # get the next states of the current state
                 if next_states:  # if there are next states, we add them to the row
@@ -176,39 +179,27 @@ class FiniteAutomaton:
             print("─" * (size_box - 3), end="")
         print("┘")
 
+    def display_complete_dererministic_automaton(self):
+        '''
+         * @brief : Displays the CDFA with indications of initial states, terminal states, and the transition table.
+         * @param CDFA : The FA that we want to display
+         * @return : ...
+         '''
+        pass
 
-'''
- * @brief : Displays the FA with indications of initial states, terminal states, and the transition table.
- * @param FA : The FA that we want to display
- * @return : ...
- '''
-
-
-def display_automaton(FA):
-    automaton_array = []  # create an empty array to store the automaton so that we will be easier to display it later
-    for i in range(len(FA.states)):  # iterate through the states
-        automaton_array.append([])  # for each state, we create an array that will store the state we can reach from
-        # the current state
-
-
-'''
- * @brief : Displays the CDFA with indications of initial states, terminal states, and the transition table.
- * @param CDFA : The FA that we want to display
- * @return : ...
- '''
+    def display_minimal_automaton(self):
+        '''
+         * @brief : Displays the MCDFA with indications of initial states, terminal states, and the transition table.
+         * @param MCDFA : The MCDFA that we want to display
+         * @return : ...
+         '''
+        pass
 
 
-def display_complete_dererministic_automaton(CDFA):
-    pass
 
 
-'''
- * @brief : Displays the MCDFA with indications of initial states, terminal states, and the transition table.
- * @param MCDFA : The MCDFA that we want to display
- * @return : ...
- '''
 
 
-def display_minimal_automaton(MCDFA):
 
-    pass
+
+
