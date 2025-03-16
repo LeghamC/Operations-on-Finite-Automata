@@ -9,29 +9,21 @@ import automata
 import operations
 import properties_check
 
+user_automaton = int(input("Enter the number corresponding to the automaton you want to manipulate: "))
 
-
-""""
-print(test.alphabet)
-print(test.states)
-print("The initial states are : ",test.initial_states)
-print(test.terminal_states)
-print(test.transitions)
-test.display_automaton()
-print(properties_check.is_complete(test))
-
-print("completing FA : ")
-operations.completion(test)
-test.display_automaton()
-print(properties_check.is_complete(test))
-
-print("finding the complementary FA")
-B = operations.complementary_automaton(test)
-test.display_automaton()
-B.display_automaton()
-"""
-
-test = automata.FiniteAutomaton()
-test.read_automaton_from_file("Automatons/project_automaton_test.txt")
-test.display_automaton()
-
+if user_automaton == 1:
+    test = automata.FiniteAutomaton()
+    test.read_automaton_from_file("Automatons/project_automaton_test.txt")
+    test.display_automaton()
+elif user_automaton == 2:
+    test2 = automata.FiniteAutomaton()
+    test2.read_automaton_from_file("Automatons/project_automaton_test_2")
+    test2.display_automaton()
+elif user_automaton == 3:
+    test3 = automata.FiniteAutomaton()
+    test3.read_automaton_from_file("Automatons/automaton_20.txt")
+    test3.display_automaton()
+elif user_automaton == 4:
+    test4 = automata.FiniteAutomaton()
+    test4.read_automaton_from_file("Automatons/automaton_27.txt")
+    test4.display_automaton()

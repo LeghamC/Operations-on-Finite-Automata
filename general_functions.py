@@ -5,13 +5,24 @@
 # Created:     09/03/2025
 # ---------------------------------------------------------------------------------------------------------------
 
-def total_table_length(alphabet_length: int) -> int:
-    return alphabet_length * 5 + 5
+def total_table_length(alphabet_length: int, max_transition_length: int) -> int:
+    nb_character_state = alphabet_length * 5
+    nb_character_state_cube_left_top_corner = 5
+    nb_character_transition = round_up(max_transition_length * 4)
+    return nb_character_state + nb_character_state_cube_left_top_corner + nb_character_transition
 
 
-"""print("─"*15)
-columns = ["a", "b", "c"]
-header = " | ".join(f"{col:^3}" for col in columns)
-print(header)"""
+def retrieve_max_transition_length(dict: dict) -> int:
+    max_transition_length = 0
+    for key, value in dict.items():
+        current_length = len(value)
+        if current_length > max_transition_length:
+            max_transition_length = current_length
+    return max_transition_length
 
 
+def round_up(number) -> int:
+    if number == int(number):
+        return number
+    else:
+        return int(number) + 1
