@@ -47,7 +47,7 @@ class FiniteAutomaton:
             nb_elem_alphabet = first_lines[0].strip()  # .strip() removes the '\n' character, we get as a result a
             # string that contains the number of the symbols in the alphabet
 
-            if int(nb_elem_alphabet) == 0:
+            if int(nb_elem_alphabet) == 0:  # Special case for the empty automaton
                 self.alphabet.append("a")
                 self.states.append("0")
                 self.initial_states.append("0")
