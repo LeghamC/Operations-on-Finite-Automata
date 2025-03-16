@@ -6,7 +6,7 @@
 # ---------------------------------------------------------------------------------------------------------------
 # IMPORTATIONS OF MODULES
 import automata
-import operations
+import operations as op
 import properties_check
 
 
@@ -35,7 +35,17 @@ test = automata.FiniteAutomaton()
 test.read_automaton_from_file("Automatons/project_automaton_test.txt")
 test.display_automaton()
 
+op.is_standard(test)
+if op.is_standard(test) == False :
+    op.standardization(test)
+test.display_automaton()
+
+
 test2 = automata.FiniteAutomaton()
 test2.read_automaton_from_file("Automatons/project_automaton_test_2")
 test2.display_automaton()
 
+op.is_standard(test2)
+if op.is_standard(test2) == False :
+    op.standardization(test2)
+test2.display_automaton()
