@@ -12,6 +12,8 @@ import automata
  * @param FA : The FA that we want to standardize
  * @return SFA: The standardized automaton
  '''
+
+
 def standardization(FA):
     pass
 
@@ -21,31 +23,31 @@ def standardization(FA):
  * @param FA : The FA that we want to complete
  * @return CDFA: The complete automaton
  '''
+
+
 def completion(FA):
+    # we go through all states to check if they have a transition for every letter of the alphabet
+    for state in FA.states:
+        for symbol in FA.alphabet:
 
-#we go through all states to check if they have a transition for every letter of the alphabet
-    for state in FA.states :
-        for symbol in FA.alphabet :
+            # we check if the combination is in the transitions (a.k.a there is a transition linked to the symbol)
+            if (state, symbol) not in FA.transitions:
 
-            #we check if the combination is in the transitions (a.k.a there is a transition linked to the symbol)
-            if (state, symbol) not in FA.transitions :
+                # if we found a missing symbol transition, we check if a bin exists
+                if "P" not in FA.states:
 
-                #if we found a missing symbol transition, we check if a bin exists
-                if "P" not in FA.states :
-
-                #if the bin doesn't exist we create it and create the transitions to itself to complete the bin
+                    # if the bin doesn't exist we create it and create the transitions to itself to complete the bin
                     FA.states.append("P")
-                    for s in FA.alphabet :
+                    for s in FA.alphabet:
                         FA.transitions[("P", s)] = "P"
 
                 # once we made sure a bin exist, we add the missing transition towards the bin.
-                FA.transitions[(state,symbol)] = "P"
+                FA.transitions[(state, symbol)] = "P"
     return FA
     pass
 
 
-#this function isn't great because it only works on standardized FA
-
+# this function isn't great because it only works on standardized FA
 
 
 '''
@@ -53,6 +55,8 @@ def completion(FA):
  * @param FA : The FA that we want to determinize then complete
  * @return CDFA : The determinized and complete automaton
  '''
+
+
 def determinization_and_completion_of_automaton(FA):
     pass
 
@@ -62,6 +66,8 @@ def determinization_and_completion_of_automaton(FA):
  * @param CDFA : The CDFA that we want to minimize
  * @return MCDFA: The minimized CDFA
  '''
+
+
 def minimization(CDFA):
     pass
 
@@ -71,8 +77,9 @@ def minimization(CDFA):
  * @param A : previously obtained CDFA or MCDFA
  * @return complementary_A: The automaton recognizing the complementary language
  '''
-def complementary_automaton(A):
 
+
+def complementary_automaton(A):
     B = automata.FiniteAutomaton()
     B.terminal_states = []
     B.initial_states = A.initial_states
@@ -80,8 +87,7 @@ def complementary_automaton(A):
     B.alphabet = A.alphabet
     B.transitions = A.transitions
 
-    for i in B.states :
-        if i not in A.terminal_states :
+    for i in B.states:
+        if i not in A.terminal_states:
             B.terminal_states.append(i)
     return B
-
