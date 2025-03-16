@@ -49,6 +49,7 @@ def completion(FA):
     return FA
 
 
+
 # this function isn't great because it only works on standardized FA
 
 
