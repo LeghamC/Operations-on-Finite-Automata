@@ -5,6 +5,8 @@
 # Created:     01/03/2025
 # ---------------------------------------------------------------------------------------------------------------
 # IMPORTATIONS OF MODULES
+from inspect import stack
+
 import automata
 
 '''
@@ -40,14 +42,12 @@ def completion(FA):
 
                 # if we found a missing symbol transition, we check if a bin exists
                 if "P" not in FA.states:
-
                     # if the bin doesn't exist we create it and create the transitions to itself to complete the bin
                     FA.states.append("P")
 
                 # Once we made sure a bin exist, we add the missing transition towards the bin.
                 FA.transitions[(state, symbol)] = {"P"}
     return FA
-
 
 
 # this function isn't great because it only works on standardized FA
@@ -62,6 +62,7 @@ def completion(FA):
 
 def determinization_and_completion_of_automaton(FA):
     pass
+
 
 '''
  * @brief : Minimizes an automaton
@@ -93,3 +94,15 @@ def complementary_automaton(A):
         if i not in A.terminal_states:
             B.terminal_states.append(i)
     return B
+
+
+def epsilon_closure(FA, state):
+    closure = set()
+    stack = {state}
+
+    while stack:
+        current_state = stack.pop()
+        if current_state not in closure:
+            closure.add(current_state)
+            stack.update(FA.transitions.get((current_state, "ε"), set()))
+    pass
