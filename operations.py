@@ -7,6 +7,7 @@
 # IMPORTATIONS OF MODULES
 import automata
 import properties_check
+import useful_methods
 
 
 '''
@@ -62,9 +63,10 @@ def determinization_and_completion_automaton(FA):
             return FA
 
     # else it is not deterministic, and we need to determinize it
-    cdfa = automata.FiniteAutomaton()
 
-
+    # First condition : Only one initial state
+    if deterministic_conditions[0] != 1:
+        useful_methods.merge_initial_states(FA)
 
 
 
