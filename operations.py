@@ -26,9 +26,14 @@ def standardization(FA):
 
 
 def completion(FA):
+    """
+    This function completes an automaton by adding a bin state and transitions to it for every missing transition
+    :param FA: The automaton to complete
+    :return: The completed automaton
+    """
     # we go through all states to check if they have a transition for every letter of the alphabet
-    for state in FA.states:
-        for symbol in FA.alphabet:
+    for state in FA.states:  # we go through all the states
+        for symbol in FA.alphabet:  # we go through all the symbols of the alphabet
 
             # we check if the combination is in the transitions (a.k.a there is a transition linked to the symbol)
             if (state, symbol) not in FA.transitions:
@@ -38,13 +43,11 @@ def completion(FA):
 
                     # if the bin doesn't exist we create it and create the transitions to itself to complete the bin
                     FA.states.append("P")
-                    for s in FA.alphabet:
-                        FA.transitions[("P", s)].append("P")
 
-                # once we made sure a bin exist, we add the missing transition towards the bin.
-                FA.transitions[(state, symbol)].append("P")
+                # Once we made sure a bin exist, we add the missing transition towards the bin.
+                FA.transitions[(state, symbol)] = {"P"}
     return FA
-    pass
+
 
 
 # this function isn't great because it only works on standardized FA
