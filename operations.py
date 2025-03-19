@@ -79,7 +79,7 @@ def minimization2(CDFA):
     current_partitioning.append([state for state in CDFA.states if state not in CDFA.terminal_states]) # Non-terminal states
 
     minimized = 0
-    while not minimized :
+    while not minimized:
         patterns = [] 
         # patterns will contain the pattern for each state. The indexes are equal to the names of the state, the pattern of the state named '0' is at the index 0.
         # At the end, we make new groups, joining the states having the same patterns
