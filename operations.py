@@ -13,7 +13,6 @@ import automata
  * @return bool: True if it is standard. False otherwise.
  '''
 
-
 def is_standard(FA: automata.FiniteAutomaton) -> bool:
     initial_states = FA.initial_states
     transitions = FA.transitions
