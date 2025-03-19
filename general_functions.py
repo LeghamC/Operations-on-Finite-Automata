@@ -5,9 +5,9 @@
 # Created:     09/03/2025
 # ---------------------------------------------------------------------------------------------------------------
 
-def total_table_length(alphabet_length: int, max_transition_length: int) -> int:
+def total_table_length(alphabet_length: int, max_transition_length: int, longest_transition: int) -> int:
     nb_character_state = alphabet_length * 5
-    nb_character_state_cube_left_top_corner = 5
+    nb_character_state_cube_left_top_corner = longest_transition * longest_transition
     nb_character_transition = round_up(max_transition_length * 4)
     return nb_character_state + nb_character_state_cube_left_top_corner + nb_character_transition
 
@@ -19,6 +19,23 @@ def retrieve_max_transition_length(dict: dict) -> int:
         if current_length > max_transition_length:
             max_transition_length = current_length
     return max_transition_length
+
+
+def retrieve_longest_state(states: list) -> int:
+    longest_state = 0
+    for state in states:
+        if type(state) == str:
+            if len(state) > longest_state:
+                longest_state = len(state)
+    return longest_state
+
+
+def all_int(list: list) -> int:
+    yes = 1
+    for item in list:
+        if type(item) != int:
+            yes = 0
+    return yes
 
 
 def round_up(number) -> int:

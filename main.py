@@ -19,3 +19,6 @@ test.display_automaton()
 
 general_functions.merge_initial_states(test)
 test.display_automaton()
+print(type(test.states[0]))
+
+print(general_functions.retrieve_longest_state(test.states))
