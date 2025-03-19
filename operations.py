@@ -7,7 +7,6 @@
 # IMPORTATIONS OF MODULES
 import automata
 
-
 '''
  * @brief :Says if an automaton is standard or not
  * @param FA : The FA that we want to standardize
@@ -15,8 +14,7 @@ import automata
  '''
 
 
-
-def is_standard(FA : a.FiniteAutomaton) -> bool:
+def is_standard(FA: automata.FiniteAutomaton) -> bool:
     initial_states = FA.initial_states
     transitions = FA.transitions
 
@@ -31,10 +29,7 @@ def is_standard(FA : a.FiniteAutomaton) -> bool:
         if first_state in next_state:
             return False
 
-
     return True  # If the automaton has only one state and there is no transition towards it, then it is standard and we return true.
-
-
 
 
 '''
@@ -42,7 +37,9 @@ def is_standard(FA : a.FiniteAutomaton) -> bool:
  * @param FA : The FA that we want to standardize
  * @return SFA: The standardized automaton
  '''
-def standardization(FA : automata.FiniteAutomaton)->automata.FiniteAutomaton:
+
+
+def standardization(FA: automata.FiniteAutomaton) -> automata.FiniteAutomaton:
     '''
         When using this function, we assume that the automaton is not standard and is deterministic.
         It handles two cases :
@@ -54,22 +51,21 @@ def standardization(FA : automata.FiniteAutomaton)->automata.FiniteAutomaton:
 
     '''
     nb_initial_states = len(FA.initial_states)  # gives the number of initial states
-    FA.states.append('I') # Add the new initial state to the existing states
-    FA.initial_states.append('I') # Add I as an initial state
-    new_transitions = {} # The dictionary of transitions containing I
+    FA.states.append('I')  # Add the new initial state to the existing states
+    FA.initial_states.append('I')  # Add I as an initial state
+    new_transitions = {}  # The dictionary of transitions containing I
 
-
-    for (state, symbol), next_state in FA.transitions.items() :
+    for (state, symbol), next_state in FA.transitions.items():
         # If we have the transition of an initial state we copy the transition with I
         if state in FA.initial_states:
             new_transitions[('I', symbol)] = next_state.copy()
 
     # Add the transitions of all states including the former initial ones
-    for(state, symbol), next_state in FA.transitions.items():
+    for (state, symbol), next_state in FA.transitions.items():
         new_transitions[(state, symbol)] = next_state.copy()
 
-    FA.transitions = new_transitions # We replace with our new dictionary
-    FA.initial_states = ['I'] # There is only one state and is I
+    FA.transitions = new_transitions  # We replace with our new dictionary
+    FA.initial_states = ['I']  # There is only one state and is I
 
     return FA
 
@@ -96,14 +92,12 @@ def completion(FA):
 
                 # if we found a missing symbol transition, we check if a bin exists
                 if "P" not in FA.states:
-
                     # if the bin doesn't exist we create it and create the transitions to itself to complete the bin
                     FA.states.append("P")
 
                 # Once we made sure a bin exist, we add the missing transition towards the bin.
                 FA.transitions[(state, symbol)] = {"P"}
     return FA
-
 
 
 # this function isn't great because it only works on standardized FA
@@ -118,6 +112,7 @@ def completion(FA):
 
 def determinization_and_completion_of_automaton(FA):
     pass
+
 
 '''
  * @brief : Minimizes an automaton
