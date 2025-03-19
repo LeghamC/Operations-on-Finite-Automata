@@ -8,9 +8,11 @@
 import automata as a
 import operations as op
 import properties_check as pc
-
+import word_recognition as wr
 end = False
-
+# TODO : complete merge all functions
+# TODO : Delete all the non-used part of the menu
+# TODO : Adapt the menu with your function's specifities
 while end == False :
     user_automaton = input("Enter the number corresponding to the automaton you want to manipulate: ")
 
@@ -21,7 +23,7 @@ while end == False :
 
     #STANDARDIZATION ON DEMAND
     if op.is_standard(FA) == True :
-        stop = input("The automaton is already standard. Do you want to continue and determinize it ? \n If you want to continue press y. If you want to exit press n : ")
+        stop = input("The automaton is already standard. Do you want to continue and determinize it ? \nIf you want to continue press y. If you want to exit press n : ")
         if stop == 'n' or stop == 'N' :
             end = True
     else :
@@ -30,8 +32,7 @@ while end == False :
             print("Here is your standardized automaton :")
             FA = op.standardization(FA)
             FA.display_automaton()
-            stop = input(
-                "Do you want to continue and determinize it ? \n If you want to continue press y. If you want to exit press n : ")
+            stop = input("Do you want to continue and determinize it ? \n If you want to continue press y. If you want to exit press n : ")
             if stop == 'n' or stop == 'N':
                 end = True
 
@@ -41,7 +42,67 @@ while end == False :
                 end = True
 
         # DETERMINIZATION AND COMPLETION
-        if isinstance(FA, a.FiniteAutomaton) ==
+        # TODO : Transform de pseudo code into a python code
+
+        if pc.is_an_automaton(FA) == True :
+            CDFA = FA
+        elif pc.is_deterministic(FA) == True :
+            if pc.is_complete(FA) == True:
+                CDFA = FA
+            else :
+                op.completion(FA)
+        else :
+            CDFA = op.determinization_and_completion_of_automaton(FA)
+        CDFA.display_complete_dererministic_automaton()
+        stop = input("Do you want to continue and minimize it ? \n If you want to continue press y. If you want to exit press n : ")
+        if stop == 'n' or stop == 'N':
+            end = True
+
+        #MINIMIZATION
+
+        print("Here is your minimized automaton : ")
+        MCDFA = op.minimization(CDFA)
+        MCDFA.display_minimal_automaton()
+        stop = input(
+            "Do you want to continue test de word recognition ? \n If you want to continue press y. If you want to exit press n : ")
+        if stop == 'n' or stop == 'N':
+            end = True
+
+
+
+        #WORD RECONGNITION
+
+        word = wr.read_word(word)
+        while word != '.' :
+            wr.recognize_word(word,MCDFA.alphabet)
+            wr.read_word(word)
+        top = input(
+            "Do you want to continue test complementary language ? \n If you want to continue press y. If you want to exit press n : ")
+        if stop == 'n' or stop == 'N':
+            end = True
+
+        #COMPLEMENTARY LANGUAGE
+
+        AComp = op.complementary_automaton(FA)
+        AComp.display_automaton()
+        word = wr.read_word(word)
+        while word != '.':
+            wr.recognize_word(word, MCDFA.alphabet)
+            wr.read_word(word)
+
+        top = input("Should we test a different automaton ? If you want to restart press y else press n :")
+        if stop == 'n' or stop == 'N':
+            end = True
+        else:
+            print(f"Your last automaton was the number {user_automaton}")
+
+
+
+
+
+
+
+
 
 
 
