@@ -5,7 +5,7 @@
 # Created:     01/03/2025
 # ---------------------------------------------------------------------------------------------------------------
 # IMPORTATIONS OF MODULES
-import operations
+
 import properties_check
 import general_functions
 from general_functions import retrieve_max_transition_length
@@ -38,14 +38,14 @@ class FiniteAutomaton:
         :param filename: The .txt file with the automata's properties
         :return: None
         """
-        with open(filename, "r", encoding="utf-8") as file:
+        with open(filename, "r", encoding='utf-8') as file:
             lines = file.readlines()  # read the entire file and store it in a list of strings
             first_lines = lines[:4]  # retrieve the first 4 lines as they contain
             # the general information of the automaton | use readlines() as the first 4 lines are always the same
 
             # store the alphabet
             nb_elem_alphabet = first_lines[0].strip()  # .strip() removes the '\n' character, we get as a result a
-            # string that contains the number symbols in the alphabet
+            # string that contains the number of symbols in the alphabet
 
             if int(nb_elem_alphabet) == 0:  # Special case for the empty automaton
                 self.alphabet.append("a")

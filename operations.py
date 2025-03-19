@@ -10,14 +10,71 @@ from inspect import stack
 import automata
 
 '''
+ * @brief :Says if an automaton is standard or not
+ * @param FA : The FA that we want to standardize
+ * @return bool: True if it is standard. False otherwise.
+ '''
+
+
+def is_standard(FA: automata.FiniteAutomaton) -> bool:
+    initial_states = FA.initial_states
+    transitions = FA.transitions
+
+    nb_initial_states = len(initial_states)  # gives the number of initial states
+
+    if nb_initial_states != 1:
+        return False  # If there is more than one initial state, the automata is not standard so we return false
+
+    first_state = initial_states[0]
+
+    for (state, symbol), next_state in transitions.items():  # We go through all the transitions
+        if first_state in next_state:  # If there is a transition towards the initial state, the automaton is not
+            # standard
+            return False
+
+    return True  # If the automaton has only one state and there is no transition towards it, then it is standard and
+    # we return true.
+
+
+'''
  * @brief : Standardize an automaton
  * @param FA : The FA that we want to standardize
  * @return SFA: The standardized automaton
  '''
 
 
-def standardization(FA):
-    pass
+def standardization(FA: automata.FiniteAutomaton) -> automata.FiniteAutomaton:
+    """
+        When using this function, we assume that the automaton is not standard and is deterministic.
+        It handles two cases :
+            1. The automaton has more than one initial state
+            2. There are transitions toward the initial sta
+
+        In both cases, we just replace the initial state(s) by a new one and copy the transition of the
+        former initial state(s)
+
+    """
+    if is_standard(FA):  # If the automaton is already standard, we return it as it is
+        return FA
+    else:
+        nb_initial_states = len(FA.initial_states)  # gives the number of initial states
+        FA.states.append('I')  # Add the new initial state to the existing states
+        FA.initial_states.append('I')  # Add I as an initial state
+        new_transitions = {}  # The dictionary of transitions containing I
+
+        for (state, symbol), next_state in FA.transitions.items():
+            # If we have the transition of an initial state we copy the transition with I
+            if state in FA.initial_states:
+                new_transitions[('I', symbol)] = next_state.copy()
+
+        # Add the transitions of all states including the former initial ones
+        for (state, symbol), next_state in FA.transitions.items():
+            new_transitions[(state, symbol)] = next_state.copy()
+
+        FA.transitions = new_transitions  # We replace with our new dictionary
+        FA.initial_states = ['I']  # There is only one state and is I
+
+        return FA
 
 
 '''
@@ -82,7 +139,12 @@ def minimization(CDFA):
  '''
 
 
-def complementary_automaton(A):
+def complementary_automaton(A: automata.FiniteAutomaton):
+    """
+    This function returns the complementary automaton of the automaton A
+    :param A:
+    :return:
+    """
     B = automata.FiniteAutomaton()
     B.terminal_states = []
     B.initial_states = A.initial_states
