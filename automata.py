@@ -26,7 +26,8 @@ class FiniteAutomaton:
         self.terminal_states = []  # The terminal states of the automaton
         self.transitions = {}  # The transitions of the automaton : each key is a tuple (state, symbol) and the value
         # is the next state which is stored in an array. The key represents the current state and the symbol that is
-        # read to go to the next state
+        # read to go to the next state. Key's value is stored as set containing the next states.
+        self.epsilon_closure = {}  # we will use it when doing the determinization of the automaton containing epsilon
 
     # ---------------------------------------------------------------------------------------------------------------
 
@@ -207,3 +208,14 @@ class FiniteAutomaton:
          * @return : ...
          '''
         pass
+
+    def is_asynchronous(self):
+        """
+        This function checks if the automaton contains epsilon transitions, if so it is an asynchronous automaton
+        :return: True if the automaton contains epsilon transitions, False otherwise
+        """
+        for transition in self.transitions:
+            if transition[1] == "ε":
+                return True
+        return False
+
