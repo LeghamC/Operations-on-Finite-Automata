@@ -137,7 +137,12 @@ def minimization(CDFA):
  '''
 
 
-def complementary_automaton(A):
+def complementary_automaton(A: automata.FiniteAutomaton):
+    """
+    This function returns the complementary automaton of the automaton A
+    :param A:
+    :return:
+    """
     B = automata.FiniteAutomaton()
     B.terminal_states = []
     B.initial_states = A.initial_states
