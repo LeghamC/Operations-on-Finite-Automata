@@ -9,10 +9,10 @@ import automata as a
 import operations as op
 import properties_check as pc
 import word_recognition as wr
-end = False
 # TODO : complete merge all functions
 # TODO : Delete all the non-used part of the menu
 # TODO : Adapt the menu with your function's specifities
+end = False
 while end == False :
     user_automaton = input("Enter the number corresponding to the automaton you want to manipulate: ")
 
