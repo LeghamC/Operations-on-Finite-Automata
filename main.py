@@ -14,4 +14,3 @@ user_automaton = input("Enter the number corresponding to the automaton you want
 test = automata.FiniteAutomaton()
 test.read_automaton_from_file(f"Automatons/automaton_{user_automaton}.txt")
 test.display_automaton()
-

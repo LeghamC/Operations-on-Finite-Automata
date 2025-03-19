@@ -126,7 +126,7 @@ class FiniteAutomaton:
         # --------------------------------------------------------------------------------------------------------------
         # display of the alphabet
         # --------------------------------------------------------------------------------------------------------------
-        state_placing = f"│{"S":^{size_box - 3}}"  # calculate the spacing for the state S place
+        state_placing = f"│{'S':^{size_box - 3}}"  # calculate the spacing for the state S place
         alphabet_line = "│".join(
             f"{alphabet:^{size_box - 3}}" for alphabet in self.alphabet)  # calculate the spacing for the
         # alphabet line and join the elements of the alphabet with the vertical line
