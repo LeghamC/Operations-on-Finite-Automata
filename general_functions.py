@@ -26,3 +26,23 @@ def round_up(number) -> int:
         return number
     else:
         return int(number) + 1
+
+
+def display_menu():
+    title = "Finite Automata emulator"
+    description = "Description : Oe tkt"
+    menu_options = [
+        "1. Load Automaton",
+        "2. Display Automaton",
+    ]
+
+    border = "═" * 40
+    print(f"╔{border}╗")
+    print(f"║{title:^40}║")
+    print(f"╠{border}╣")
+    print(f"║{description:^40}║")
+    print(f"╠{border}╣")
+    for option in menu_options:
+        print(f"║ {option:^39}║")
+    print(f"╚{border}╝")
+
