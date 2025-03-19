@@ -9,33 +9,7 @@ from inspect import stack
 
 import automata
 import general_functions
-
-'''
- * @brief :Says if an automaton is standard or not
- * @param FA : The FA that we want to standardize
- * @return bool: True if it is standard. False otherwise.
- '''
-
-
-def is_standard(FA: automata.FiniteAutomaton) -> bool:
-    initial_states = FA.initial_states
-    transitions = FA.transitions
-
-    nb_initial_states = len(initial_states)  # gives the number of initial states
-
-    if nb_initial_states != 1:
-        return False  # If there is more than one initial state, the automata is not standard so we return false
-
-    first_state = initial_states[0]
-
-    for (state, symbol), next_state in transitions.items():  # We go through all the transitions
-        if first_state in next_state:  # If there is a transition towards the initial state, the automaton is not
-            # standard
-            return False
-
-    return True  # If the automaton has only one state and there is no transition towards it, then it is standard and
-    # we return true.
-
+import properties_check
 
 '''
  * @brief : Standardize an automaton
@@ -55,7 +29,7 @@ def standardization(FA: automata.FiniteAutomaton) -> automata.FiniteAutomaton:
         former initial state(s)
 
     """
-    if is_standard(FA):  # If the automaton is already standard, we return it as it is
+    if properties_check.is_standard(FA):  # If the automaton is already standard, we return it as it is
         return FA
     else:
         nb_initial_states = len(FA.initial_states)  # gives the number of initial states
@@ -211,7 +185,6 @@ def determinization_asynchronous(FA: automata.FiniteAutomaton):
     # ------------------------------------------------------------------------------------------------------------------
     # now that we retrieved all the new states, we can compute the initial states
     # if we have several initial states, we need to combine them
-
 
     """
     # ------------------------------------------------------------------------------------------------------------------
