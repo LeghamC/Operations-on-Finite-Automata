@@ -86,6 +86,8 @@ def merge_initial_states(self):
             self.states.remove(state)
 
 
-    # Then finally we update the transitions
+    # Finally we update the transitions
     self.transitions = new_transitions
+
+
 

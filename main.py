@@ -20,13 +20,12 @@ if __name__ == '__main__':
     print(fa.transitions)
 
     properties_check.is_deterministic(fa)
-    useful_methods.merge_initial_states(fa)
-    useful_methods.merge(fa,1, 3)
+    cdfa = operations.determinization(fa)
 
 
-    print(fa.alphabet)
-    print(fa.states)
-    print("The initial states are : ", fa.initial_states)
-    print(fa.terminal_states)
-    print(fa.transitions)
-    fa.display_automaton()
+    print(cdfa.alphabet)
+    print(cdfa.states)
+    print("The initial states are : ", cdfa.initial_states)
+    print(cdfa.terminal_states)
+    print(cdfa.transitions)
+    cdfa.display_automaton()
