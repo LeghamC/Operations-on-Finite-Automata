@@ -171,9 +171,12 @@ class FiniteAutomaton:
                 beginning_character = "│ "  # the beginning character of the row
 
             # ----------------------------------------------------------------------------------------------------------
-            row = f"{state}".center(size_box - 5)
-              # create a new string that will store the row of the current
-            # state and we convert the state into a string using f"{state}" to be able to concatenate it with
+            if beginning_character == "│ ":
+                row = f"{state}".center(size_box - 5)
+            else:
+                row = f"{state}".center(size_box - 7) + " "
+            # create a new string that will store the row of the current
+            # state, and we convert the state into a string using f"{state}" to be able to concatenate it with
             # other strings
 
             for symbol in self.alphabet:  # iterate through the alphabet

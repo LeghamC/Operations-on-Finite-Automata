@@ -9,7 +9,7 @@ def total_table_length(alphabet_length: int, max_transition_length: int, longest
     nb_character_state = alphabet_length * 5
     nb_character_state_cube_left_top_corner = longest_transition * longest_transition
     nb_character_transition = round_up(max_transition_length * 4)
-    return nb_character_state + nb_character_state_cube_left_top_corner + nb_character_transition
+    return nb_character_state + nb_character_state_cube_left_top_corner + nb_character_transition + 2
 
 
 def retrieve_max_transition_length(dict: dict) -> int:

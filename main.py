@@ -13,7 +13,7 @@ import properties_check
 
 # user_automaton = input("Enter the number corresponding to the automaton you want to manipulate: ")
 test = automata.FiniteAutomaton()
-test.read_automaton_from_file(f"Automatons/automaton_{20}.txt")
+test.read_automaton_from_file(f"Automatons/automaton_{31}.txt")
 #test.read_automaton_from_file(f"Automatons/automaton_{31}.txt")
 test.display_automaton()
 
