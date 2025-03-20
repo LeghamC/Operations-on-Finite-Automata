@@ -8,10 +8,18 @@
 import automata
 import properties_check
 import operations
-#import useful_methods
+import useful_methods
+
 
 if __name__ == '__main__':
-    user_automaton = input("Enter the number corresponding to the automaton you want to manipulate: ")
-    test = automata.FiniteAutomaton()
-    test.read_automaton_from_file(f"Automatons/automaton_{user_automaton}.txt")
-    test.display_automaton()
+
+    # Test to know if deterministic
+    fa = automata.FiniteAutomaton()
+    fa.read_automaton_from_file("Automatons/project_automaton_test.txt")  # this automaton is not deterministic
+    fa.display_automaton()
+
+
+    cdfa = operations.determinization_and_completion_automaton(fa)
+
+
+    cdfa.display_automaton()
