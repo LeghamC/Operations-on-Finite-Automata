@@ -45,6 +45,7 @@ def is_deterministic(FA):
 
     # check of third condition
     if any(label == 'ε' for (_, label) in FA.transitions.keys()):
+        epsilon = 0
         print("The automaton is not deterministic as it contains an epsilon (ε) transition.")
 
     # else the automaton is deterministic
