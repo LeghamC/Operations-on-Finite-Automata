@@ -162,10 +162,10 @@ class FiniteAutomaton:
                 beginning_character = "│ ←→"  # if the state is both terminal and initial
 
             elif state in self.terminal_states:
-                beginning_character = "│ ←─"  # if the state is terminal
+                beginning_character = "│ ←"  # if the state is terminal
 
             elif state in self.initial_states:
-                beginning_character = "│ ─→"  # if the state is initial
+                beginning_character = "│ →"  # if the state is initial
 
             else:
                 beginning_character = "│ "  # the beginning character of the row
