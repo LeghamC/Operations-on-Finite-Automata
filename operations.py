@@ -6,6 +6,8 @@
 # ---------------------------------------------------------------------------------------------------------------
 # IMPORTATIONS OF MODULES
 import automata
+import properties_check
+import useful_methods
 
 '''
  * @brief :Says if an automaton is standard or not
@@ -35,47 +37,6 @@ def is_standard(FA: automata.FiniteAutomaton) -> bool:
 
 
 '''
- * @brief : Standardize an automaton
- * @param FA : The FA that we want to standardize
- * @return SFA: The standardized automaton
- '''
-
-
-def standardization(FA: automata.FiniteAutomaton) -> automata.FiniteAutomaton:
-    """
-        When using this function, we assume that the automaton is not standard and is deterministic.
-        It handles two cases :
-            1. The automaton has more than one initial state
-            2. There are transitions toward the initial sta
-
-        In both cases, we just replace the initial state(s) by a new one and copy the transition of the
-        former initial state(s)
-
-    """
-    if is_standard(FA):  # If the automaton is already standard, we return it as it is
-        return FA
-    else:
-        nb_initial_states = len(FA.initial_states)  # gives the number of initial states
-        FA.states.append('I')  # Add the new initial state to the existing states
-        FA.initial_states.append('I')  # Add I as an initial state
-        new_transitions = {}  # The dictionary of transitions containing I
-
-        for (state, symbol), next_state in FA.transitions.items():
-            # If we have the transition of an initial state we copy the transition with I
-            if state in FA.initial_states:
-                new_transitions[('I', symbol)] = next_state.copy()
-
-        # Add the transitions of all states including the former initial ones
-        for (state, symbol), next_state in FA.transitions.items():
-            new_transitions[(state, symbol)] = next_state.copy()
-
-        FA.transitions = new_transitions  # We replace with our new dictionary
-        FA.initial_states = ['I']  # There is only one state and is I
-
-        return FA
-
-
-'''
  * @brief : Completes an automaton
  * @param FA : The FA that we want to complete
  * @return CDFA: The complete automaton
@@ -83,40 +44,108 @@ def standardization(FA: automata.FiniteAutomaton) -> automata.FiniteAutomaton:
 
 
 def completion(FA):
-    """
-    This function completes an automaton by adding a bin state and transitions to it for every missing transition
-    :param FA: The automaton to complete
-    :return: The completed automaton
-    """
-    # we go through all states to check if they have a transition for every letter of the alphabet
-    for state in FA.states:  # we go through all the states
-        for symbol in FA.alphabet:  # we go through all the symbols of the alphabet
+    if not properties_check.is_complete(FA):
+        # if the bin doesn't exist we create it and create the transitions to itself to complete the bin
+        if "P" not in FA.states:
+            FA.states.append("P")
+            for s in FA.alphabet:
+                FA.transitions[("P", s)] = {"P"}
 
-            # we check if the combination is in the transitions (a.k.a there is a transition linked to the symbol)
-            if (state, symbol) not in FA.transitions:
-
-                # if we found a missing symbol transition, we check if a bin exists
-                if "P" not in FA.states:
-                    # if the bin doesn't exist we create it and create the transitions to itself to complete the bin
-                    FA.states.append("P")
-
-                # Once we made sure a bin exist, we add the missing transition towards the bin.
-                FA.transitions[(state, symbol)] = {"P"}
+        # Now we add the transition to the think state for all states missing it
+        for state in FA.states:
+            for symbol in FA.alphabet:
+                if (state, symbol) not in FA.transitions:
+                    FA.transitions[(state, symbol)] = {"P"}
     return FA
-
-
-# this function isn't great because it only works on standardized FA
-
 
 '''
  * @brief : Determinizes and completes an automaton
  * @param FA : The FA that we want to determinize then complete
  * @return CDFA : The determinized and complete automaton
  '''
+def determinization_and_completion_automaton(FA):
+    # We store the conditions determining if the fa is deterministic or not
+    deterministic_conditions = properties_check.is_deterministic(FA)
 
+    # if the automaton is already deterministic
+    if all(condition == 1 for condition in deterministic_conditions):
+        # we check if it is complete
+        if properties_check.is_complete(FA):
+            print("The automaton is already deterministic and complete.")
+            return FA
+        # else we complete it
+        else:
+            completion(FA)
+            print("The automaton was already deterministic but not complete. Hence, we completed it.")
+            return FA
 
-def determinization_and_completion_of_automaton(FA):
-    pass
+    # else it is not deterministic, and we need to determinize it
+    else:
+        # We create a new FA instance that will become our CDFA to return
+        CDFA = automata.FiniteAutomaton()
+        CDFA.alphabet = FA.alphabet.copy()
+
+        # We keep track of the new states we create
+        temp_new_states_list = []
+        # And we do a mapping of the state sets to the new CDFA states
+        state_mapping = {}
+
+        def state_name(state_set):
+            """Local function to create a more explicit state name (state1_state2)."""
+            # map() is to apply the str function on each iterable
+            return "_".join(map(str, sorted(state_set))) if state_set else "empty"
+
+        # Then we initialize our CDFA with the FA's initial state(s)
+        initial_cdfa_state = frozenset(FA.initial_states)  # We use a frozenset as it is an immutable set
+        initial_cdfa_state_name = state_name(initial_cdfa_state)
+        temp_new_states_list.append(initial_cdfa_state)
+        state_mapping[initial_cdfa_state] = initial_cdfa_state_name
+        CDFA.states.append(initial_cdfa_state_name)
+        CDFA.initial_states.append(initial_cdfa_state_name)
+
+        # We also check if the initial state is terminal
+        # We use & operator to do a bitwise AND (if basic AND then all states will end up terminal)
+        if initial_cdfa_state & set(FA.terminal_states):
+            CDFA.terminal_states.append(initial_cdfa_state_name)
+
+        # We then start creating the CDFA by exploring the transitions of the new states we create
+        while temp_new_states_list:
+            current_cdfa_state = temp_new_states_list.pop(0)
+            current_cdfa_state_name = state_mapping[current_cdfa_state]
+
+            for label in CDFA.alphabet:
+                next_state_set = set()
+
+                for fa_state in current_cdfa_state:
+                    if (fa_state, label) in FA.transitions:
+                        next_state_set.update(FA.transitions[(fa_state, label)])
+
+                # We now create a new state for the CDFA if it does not exist yet
+                next_state_frozen = frozenset(next_state_set)
+                next_state_name = state_name(next_state_frozen)
+
+                if next_state_frozen not in state_mapping:
+                    state_mapping[next_state_frozen] = next_state_name
+                    temp_new_states_list.append(next_state_frozen)
+                    CDFA.states.append(next_state_name)
+
+                    # We now check if the new state is terminal
+                    # We use & operator to do a bitwise AND (if basic AND then all states will end up terminal)
+                    if next_state_frozen & set(FA.terminal_states):
+                        CDFA.terminal_states.append(next_state_name)
+
+                # Finally, we add the transition to the CDFA
+                CDFA.transitions[(state_mapping[current_cdfa_state], label)] = {state_mapping[next_state_frozen]}
+
+        # We now check if our new CDFA is complete
+        if properties_check.is_complete(CDFA):
+            print("The automaton has been determininized and was already complete after determinization.")
+            return CDFA
+        # else we complete it
+        else:
+            completion(CDFA)
+            print("The automaton has been determininized and as it was not complete, we completed it.")
+            return CDFA
 
 
 '''
@@ -136,7 +165,7 @@ def minimization2(CDFA):
 
     minimized = 0
     while not minimized:
-        patterns = [] 
+        patterns = []
         # patterns will contain the pattern for each state. The indexes are equal to the names of the state, the pattern of the state named '0' is at the index 0.
         # At the end, we make new groups, joining the states having the same patterns
 
@@ -157,7 +186,7 @@ def minimization2(CDFA):
             new_group = [i for i, p in enumerate(patterns) if p == pattern]
             if new_group not in next_partitioning :
                 next_partitioning.append(new_group)
-        
+
         if len(current_partitioning) == len(next_partitioning): # If the number of groups is still the same, it means no group have been created, so we're done
             minimized = 1
         else :
@@ -191,10 +220,10 @@ def minimization2(CDFA):
                 starting_state = i
             if next(iter(value)) in current_partitioning[i] :   # value is a set of 1 element, because CDFA is deterministic
                 arriving_state = i
-        
+
         if (starting_state, key[1]) not in MCDFA.transitions :
             MCDFA.transitions[(starting_state, key[1])] = {arriving_state}
-    
+
     return MCDFA
 
 

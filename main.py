@@ -6,12 +6,12 @@
 # ---------------------------------------------------------------------------------------------------------------
 # IMPORTATIONS OF MODULES
 import automata
-import operations
 import properties_check
+import operations
+#import useful_methods
 
-
-user_automaton = input("Enter the number corresponding to the automaton you want to manipulate: ")
-test = automata.FiniteAutomaton()
-test.read_automaton_from_file(f"Automatons/automaton_{user_automaton}.txt")
-test.display_automaton()
-
+if __name__ == '__main__':
+    user_automaton = input("Enter the number corresponding to the automaton you want to manipulate: ")
+    test = automata.FiniteAutomaton()
+    test.read_automaton_from_file(f"Automatons/automaton_{user_automaton}.txt")
+    test.display_automaton()
