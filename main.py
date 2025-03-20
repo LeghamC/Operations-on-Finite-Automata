@@ -19,8 +19,8 @@ if __name__ == '__main__':
     fa.display_automaton()
     print(fa.transitions)
 
-    properties_check.is_deterministic(fa)
-    cdfa = operations.determinization(fa)
+    cdfa = operations.determinization_and_completion_automaton(fa)
+
 
 
     print(cdfa.alphabet)
