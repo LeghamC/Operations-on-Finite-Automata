@@ -173,6 +173,8 @@ class FiniteAutomaton:
             # ----------------------------------------------------------------------------------------------------------
             if beginning_character == "│ ":
                 row = f"{state}".center(size_box - 5)
+            elif beginning_character == "│ ←→":
+                row = f"{state}".center(size_box - 9) + "  "
             else:
                 row = f"{state}".center(size_box - 7) + " "
             # create a new string that will store the row of the current

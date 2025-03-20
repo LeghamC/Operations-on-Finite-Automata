@@ -27,6 +27,8 @@ def retrieve_longest_state(states: list) -> int:
         if type(state) == str:
             if len(state) > longest_state:
                 longest_state = len(state)
+    if longest_state == 1:
+        return 5
     return longest_state
 
 

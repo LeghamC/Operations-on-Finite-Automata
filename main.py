@@ -13,12 +13,10 @@ import properties_check
 
 # user_automaton = input("Enter the number corresponding to the automaton you want to manipulate: ")
 test = automata.FiniteAutomaton()
-test.read_automaton_from_file(f"Automatons/automaton_{31}.txt")
+test.read_automaton_from_file(f"Automatons/automaton_{21}.txt")
 #test.read_automaton_from_file(f"Automatons/automaton_{31}.txt")
 test.display_automaton()
 
 general_functions.merge_initial_states(test)
 test.display_automaton()
-print(type(test.states[0]))
 
-print(general_functions.retrieve_longest_state(test.states))
