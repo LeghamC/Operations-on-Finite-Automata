@@ -8,7 +8,6 @@
 import automata
 import properties_check
 import operations
-import useful_methods
 
 
 if __name__ == '__main__':
@@ -18,5 +17,5 @@ if __name__ == '__main__':
     test = automata.FiniteAutomaton()
     test.read_automaton_from_file(f"Automatons/automaton_{user_automaton}.txt")
     test.display_automaton()
-    operations.determinization_and_completion_automaton(test)
-    test.display_automaton()
+    test2 = operations.determinization_and_completion_automaton(test)
+    test2.display_automaton()

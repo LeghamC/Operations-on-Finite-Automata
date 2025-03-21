@@ -8,7 +8,6 @@
 from inspect import stack
 import automata
 import properties_check
-import useful_methods
 import general_functions
 
 '''
