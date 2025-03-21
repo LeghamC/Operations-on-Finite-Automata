@@ -150,4 +150,3 @@ def merge_initial_states(fa):
         return cdfa
 
 
-

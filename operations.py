@@ -11,31 +11,6 @@ import properties_check
 import useful_methods
 import general_functions
 
-'''
- * @brief :Says if an automaton is standard or not
- * @param FA : The FA that we want to standardize
- * @return bool: True if it is standard. False otherwise.
- '''
-
-
-def is_standard(FA: automata.FiniteAutomaton) -> bool:
-    initial_states = FA.initial_states
-    transitions = FA.transitions
-
-    nb_initial_states = len(initial_states)  # gives the number of initial states
-
-    if nb_initial_states != 1:
-        return False  # If there is more than one initial state, the automata is not standard so we return false
-
-    first_state = initial_states[0]
-
-    for (state, symbol), next_state in transitions.items():  # We go through all the transitions
-        if first_state in next_state:  # If there is a transition towards the initial state, the automaton is not
-            # standard
-            return False
-
-    return True  # If the automaton has only one state and there is no transition towards it, then it is standard and
-    # we return true.
 
 
 '''
@@ -43,7 +18,6 @@ def is_standard(FA: automata.FiniteAutomaton) -> bool:
  * @param FA : The FA that we want to standardize
  * @return SFA: The standardized automaton
  '''
-
 
 def standardization(FA: automata.FiniteAutomaton) -> automata.FiniteAutomaton:
     """
@@ -56,27 +30,24 @@ def standardization(FA: automata.FiniteAutomaton) -> automata.FiniteAutomaton:
         former initial state(s)
 
     """
-    if is_standard(FA):  # If the automaton is already standard, we return it as it is
-        return FA
-    else:
-        nb_initial_states = len(FA.initial_states)  # gives the number of initial states
-        FA.states.append('I')  # Add the new initial state to the existing states
-        FA.initial_states.append('I')  # Add I as an initial state
-        new_transitions = {}  # The dictionary of transitions containing I
+    nb_initial_states = len(FA.initial_states)  # gives the number of initial states
+    FA.states.append('I')  # Add the new initial state to the existing states
+    FA.initial_states.append('I')  # Add I as an initial state
+    new_transitions = {}  # The dictionary of transitions containing I
 
-        for (state, symbol), next_state in FA.transitions.items():
-            # If we have the transition of an initial state we copy the transition with I
-            if state in FA.initial_states:
-                new_transitions[('I', symbol)] = next_state.copy()
+    for (state, symbol), next_state in FA.transitions.items():
+        # If we have the transition of an initial state we copy the transition with I
+        if state in FA.initial_states:
+            new_transitions[('I', symbol)] = next_state.copy()
 
-        # Add the transitions of all states including the former initial ones
-        for (state, symbol), next_state in FA.transitions.items():
-            new_transitions[(state, symbol)] = next_state.copy()
+    # Add the transitions of all states including the former initial ones
+    for (state, symbol), next_state in FA.transitions.items():
+        new_transitions[(state, symbol)] = next_state.copy()
 
-        FA.transitions = new_transitions  # We replace with our new dictionary
-        FA.initial_states = ['I']  # There is only one state and is I
+    FA.transitions = new_transitions  # We replace with our new dictionary
+    FA.initial_states = ['I']  # There is only one state and is I
 
-        return FA
+    return FA
 
 
 '''
@@ -85,21 +56,20 @@ def standardization(FA: automata.FiniteAutomaton) -> automata.FiniteAutomaton:
  * @return CDFA: The complete automaton
  '''
 
-
 def completion(FA):
-    if not properties_check.is_complete(FA):
-        # if the bin doesn't exist we create it and create the transitions to itself to complete the bin
-        if "P" not in FA.states:
-            FA.states.append("P")
-            for s in FA.alphabet:
-                FA.transitions[("P", s)] = {"P"}
+    # if the bin doesn't exist we create it and create the transitions to itself to complete the bin
+    if "P" not in FA.states:
+        FA.states.append("P")
+        for s in FA.alphabet:
+            FA.transitions[("P", s)] = {"P"}
 
-        # Now we add the transition to the think state for all states missing it
-        for state in FA.states:
-            for symbol in FA.alphabet:
-                if (state, symbol) not in FA.transitions:
-                    FA.transitions[(state, symbol)] = {"P"}
+    # Now we add the transition to the think state for all states missing it
+    for state in FA.states:
+        for symbol in FA.alphabet:
+            if (state, symbol) not in FA.transitions:
+                FA.transitions[(state, symbol)] = {"P"}
     return FA
+
 
 '''
  * @brief : Determinizes and completes an automaton
