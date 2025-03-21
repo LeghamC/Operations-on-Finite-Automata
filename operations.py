@@ -142,7 +142,10 @@ def determinization_and_completion_automaton(FA):
         def state_name(state_set):
             """Local function to create a more explicit state name (state1_state2)."""
             # map() is to apply the str function on each iterable
-            return "_".join(map(str, sorted(state_set))) if state_set else "empty"
+            if state_set:
+                return "_".join(map(str, sorted(state_set)))
+            else:
+                return "P"
 
         # Then we initialize our CDFA with the FA's initial state(s)
         initial_cdfa_state = frozenset(FA.initial_states)  # We use a frozenset as it is an immutable set
