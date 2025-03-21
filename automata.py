@@ -117,6 +117,7 @@ class FiniteAutomaton:
             longest_state = general_functions.retrieve_longest_state(self.states)  # get the length of the longest state
             length_table = general_functions.total_table_length(alphabet_length, max_transition_length, longest_state)
 
+
         # of the table in terms of characters
         size_box = length_table // alphabet_length + 1
 
@@ -171,11 +172,13 @@ class FiniteAutomaton:
 
             # ----------------------------------------------------------------------------------------------------------
             if beginning_character == "│ ":
-                row = f"{state}".center(size_box - 5)
+                row = f"{state}".center(size_box - 6) + " "
             elif beginning_character == "│ ←→":
-                row = f"{state}".center(size_box - 9) + "  "
+                row = f"{state}".center(size_box - 10) + "   "
+            elif beginning_character == "│ ←":
+                row = f"{state}".center(size_box - 8) + "  "
             else:
-                row = f"{state}".center(size_box - 7) + " "
+                row = f"{state}".center(size_box - 8) + "  "
             # create a new string that will store the row of the current
             # state, and we convert the state into a string using f"{state}" to be able to concatenate it with
             # other strings
