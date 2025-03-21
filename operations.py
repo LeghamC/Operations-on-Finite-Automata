@@ -10,8 +10,6 @@ import automata
 import properties_check
 import general_functions
 
-
-
 '''
  * @brief : Standardize an automaton
  * @param FA : The FA that we want to standardize
@@ -55,6 +53,7 @@ def standardization(FA: automata.FiniteAutomaton) -> automata.FiniteAutomaton:
  * @return CDFA: The complete automaton
  '''
 
+
 def completion(FA):
     # if the bin doesn't exist we create it and create the transitions to itself to complete the bin
     if "P" not in FA.states:
@@ -75,14 +74,17 @@ def completion(FA):
  * @param FA : The FA that we want to determinize then complete
  * @return CDFA : The determinized and complete automaton
  '''
+
+
 def determinization_and_completion_automaton(FA):
     # We store the conditions determining if the fa is deterministic or not
     deterministic_conditions = properties_check.is_deterministic(FA)
 
     # if the automaton contains an epsilon transition
     if deterministic_conditions[2] == 0:
-        print("The automaton is not deterministic as it contains an epsilon (ε) transition and it cannot be determinized by this method.\n"
-              " You need to use the --- method to determinize an automaton containing epsilon labels.")
+        print(
+            "The automaton is not deterministic as it contains an epsilon (ε) transition and it cannot be determinized by this method.\n"
+            " You need to use the --- method to determinize an automaton containing epsilon labels.")
         return
 
     # if the automaton is already deterministic
@@ -175,14 +177,13 @@ def determinization_and_completion_automaton(FA):
  * @return MCDFA: The minimized CDFA
  '''
 
-def minimization2(CDFA):
 
+def minimization2(CDFA):
     MCDFA = automata.FiniteAutomaton()
     MCDFA.alphabet = CDFA.alphabet
 
-    current_partitioning = [] # list of lists of states representing the groups
-    current_partitioning.append(CDFA.terminal_states)
-    current_partitioning.append([state for state in CDFA.states if state not in CDFA.terminal_states]) # Non-terminal states
+    current_partitioning = [CDFA.terminal_states, [state for state in CDFA.states if
+                                                   state not in CDFA.terminal_states]]  # list of lists of states representing the groups
 
     minimized = 0
     while not minimized:
@@ -192,25 +193,26 @@ def minimization2(CDFA):
 
         for i in range(len(CDFA.states)):
 
-            this_pattern = []   # the pattern of the current state
-            for char in CDFA.alphabet :
+            this_pattern = []  # the pattern of the current state
+            for char in CDFA.alphabet:
                 for j in range(len(current_partitioning)):
-                    if next(iter(CDFA.transitions[(CDFA.states[i], char)])) in current_partitioning[j] :
+                    if next(iter(CDFA.transitions[(CDFA.states[i], char)])) in current_partitioning[j]:
                         this_pattern.append(j)
 
-            this_pattern.append(CDFA.states[i] in CDFA.terminal_states) # 0 or 1 for terminal or not
+            this_pattern.append(CDFA.states[i] in CDFA.terminal_states)  # 0 or 1 for terminal or not
 
             patterns.append(tuple(this_pattern))
 
         next_partitioning = []
         for pattern in patterns:
             new_group = [i for i, p in enumerate(patterns) if p == pattern]
-            if new_group not in next_partitioning :
+            if new_group not in next_partitioning:
                 next_partitioning.append(new_group)
 
-        if len(current_partitioning) == len(next_partitioning): # If the number of groups is still the same, it means no group have been created, so we're done
+        if len(current_partitioning) == len(
+                next_partitioning):  # If the number of groups is still the same, it means no group have been created, so we're done
             minimized = 1
-        else :
+        else:
             current_partitioning = next_partitioning
     # end of while
 
@@ -220,15 +222,13 @@ def minimization2(CDFA):
 
     MCDFA.initial_states = [i for i in MCDFA.states if CDFA.initial_states[0] in current_partitioning[i]]
 
-
     MCDFA.terminal_states = []
 
-    for i in MCDFA.states :
-        for t in CDFA.terminal_states :
-            if i not in MCDFA.terminal_states :
-                if t in current_partitioning[i] :
+    for i in MCDFA.states:
+        for t in CDFA.terminal_states:
+            if i not in MCDFA.terminal_states:
+                if t in current_partitioning[i]:
                     MCDFA.terminal_states.append(i)
-
 
     # Transitions part
     MCDFA.transitions = {}
@@ -236,13 +236,14 @@ def minimization2(CDFA):
     for key, value in CDFA.transitions.items():
 
         # dermining the corresponding state
-        for i in MCDFA.states :
+        for i in MCDFA.states:
             if key[0] in current_partitioning[i]:
                 starting_state = i
-            if next(iter(value)) in current_partitioning[i] :   # value is a set of 1 element, because CDFA is deterministic
+            if next(iter(value)) in current_partitioning[
+                i]:  # value is a set of 1 element, because CDFA is deterministic
                 arriving_state = i
 
-        if (starting_state, key[1]) not in MCDFA.transitions :
+        if (starting_state, key[1]) not in MCDFA.transitions:
             MCDFA.transitions[(starting_state, key[1])] = {arriving_state}
 
     return MCDFA
