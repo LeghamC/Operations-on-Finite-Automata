@@ -109,16 +109,12 @@ class FiniteAutomaton:
         :return: nothing
         """
         alphabet_length = len(self.alphabet)  # get the length of the alphabet
-        print("the alphabet length is :", alphabet_length)
         max_transition_length = retrieve_max_transition_length(self.transitions)  # get the length of the longest
-        print("The max trandition length is", max_transition_length)
         if general_functions.all_int(self.states):
             length_table = general_functions.total_table_length(alphabet_length,
                                                                 max_transition_length, 5)  # get the length
-            print("The length of the table with all int is:",length_table)
         else:
             longest_state = general_functions.retrieve_longest_state(self.states)  # get the length of the longest state
-            print("The longest state is of len: ", longest_state)
             length_table = general_functions.total_table_length(alphabet_length, max_transition_length, longest_state)
 
 
