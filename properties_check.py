@@ -38,7 +38,7 @@ def is_deterministic(FA):
     # check of first condition
     if len(FA.initial_states) != 1:
         initial = 0
-        print("The automaton is not deterministic as we have do not have a single initial state.")
+        print("The automaton is not deterministic as we have do not have a unique initial state.")
 
     # check of second condition
     for (state, label), target_state in FA.transitions.items():
