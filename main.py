@@ -53,7 +53,8 @@ while end == False:
                     end = True
 
             # DETERMINIZATION AND COMPLETION
-            # TODO : Transform de pseudo code into a python code
+            CDFA = a.FiniteAutomaton()
+
 
             if pc.is_an_automaton(FA) == True:
                 CDFA = FA
@@ -64,7 +65,7 @@ while end == False:
                     op.completion(FA)
             else:
                 CDFA = op.determinization_and_completion_of_automaton(FA)
-            CDFA.display_complete_dererministic_automaton()
+            CDFA.display_automaton()
             stop = input(
                 "Do you want to continue and minimize it ? \n If you want to continue press y. If you want to exit press n : ")
             if stop == 'n' or stop == 'N':
@@ -74,7 +75,7 @@ while end == False:
 
             print("Here is your minimized automaton : ")
             MCDFA = op.minimization(CDFA)
-            MCDFA.display_minimal_automaton()
+            MCDFA.display_automaton()
             stop = input(
                 "Do you want to continue test de word recognition ? \n If you want to continue press y. If you want to exit press n : ")
             if stop == 'n' or stop == 'N':
