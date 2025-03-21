@@ -73,9 +73,6 @@ def retrieve_initial_state_asynch(states: list, original_initial_states: list) -
     return initial_states
 
 
-# ---------------------------------------------------------------------------------------------------------------
-
-
 '''
  * @brief : Merge 2 states into 1 when a state transitions to more than one state with the same label
  * @param FA : The fa and the 2 states that we want to merge into one
@@ -153,6 +150,4 @@ def merge_initial_states(fa):
 
     # Finally we update the transitions
     fa.transitions = new_transitions
-
-
 

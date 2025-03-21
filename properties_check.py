@@ -5,17 +5,34 @@
 # Created:     01/03/2025
 # ---------------------------------------------------------------------------------------------------------------
 # IMPORTATIONS OF MODULES
+import automata
+
 
 
 '''
- * @brief : Checks if an FA is standard or not
- * @param FA : The FA that we want to check if is standard or not
- * @return : a boolean  with 1: the automaton is not standard, 0 else
+ * @brief :Says if an automaton is standard or not
+ * @param FA : The FA that we want to standardize
+ * @return bool: True if it is standard. False otherwise.
  '''
 
+def is_standard(FA: automata.FiniteAutomaton) -> bool:
+    initial_states = FA.initial_states
+    transitions = FA.transitions
 
-def is_not_standard(FA):
-    pass
+    nb_initial_states = len(initial_states)  # gives the number of initial states
+
+    if nb_initial_states != 1:
+        return False  # If there is more than one initial state, the automata is not standard so we return false
+
+    first_state = initial_states[0]
+
+    for next_state in transitions.values():  # We go through all the transitions
+        if first_state in next_state:  # If there is a transition towards the initial state, the automaton is not
+            # standard
+            return False
+
+    return True  # If the automaton has only one state and there is no transition towards it, then it is standard and
+    # we return true.
 
 
 '''
@@ -79,3 +96,15 @@ def is_complete(FA):
         print("The automaton is complete")
 
     return complete
+
+
+
+def is_asynchronous(FA):
+        """
+        This function checks if the automaton contains epsilon transitions, if so it is an asynchronous automaton
+        :return: True if the automaton contains epsilon transitions, False otherwise
+        """
+        for transition in FA.transitions:
+            if transition[1] == "ε":
+                return True
+        return False

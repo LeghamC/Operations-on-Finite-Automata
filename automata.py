@@ -6,7 +6,6 @@
 # ---------------------------------------------------------------------------------------------------------------
 # IMPORTATIONS OF MODULES
 
-import properties_check
 import general_functions
 from general_functions import retrieve_max_transition_length
 
@@ -204,30 +203,7 @@ class FiniteAutomaton:
             print("─" * (size_box - 3), end="")
         print("┘")
 
-    '''
-     * @brief : Checks if a FA is standard or not
-     * @param FA : The FA that we want to check if is standard or not
-     * @return bool: True if it is standard. False otherwise.
-     '''
 
-    def is_standard(self) -> bool:
-        initial_states = self.initial_states
-        transitions = self.transitions
-
-        nb_initial_states = len(initial_states)  # gives the number of initial states
-
-        if nb_initial_states != 1:
-            return False  # If there is more than one initial state, the automata is not standard so we return false
-
-        first_state = initial_states[0]
-
-        for (state, symbol), next_state in transitions.items():  # We go through all the transitions
-            if first_state in next_state:  # If there is a transition towards the initial state, the automaton is not
-                # standard
-                return False
-
-        return True  # If the automaton has only one state and there is no transition towards it, then it is standard
-        # and we return true.
 
     def display_complete_dererministic_automaton(self):
         '''
@@ -244,14 +220,3 @@ class FiniteAutomaton:
          * @return : ...
          '''
         pass
-
-    def is_asynchronous(self):
-        """
-        This function checks if the automaton contains epsilon transitions, if so it is an asynchronous automaton
-        :return: True if the automaton contains epsilon transitions, False otherwise
-        """
-        for transition in self.transitions:
-            if transition[1] == "ε":
-                return True
-        return False
-
