@@ -40,9 +40,9 @@ while end == False:
             if want_standard == 'y' or want_standard == 'Y':
                 print("Here is your standardized automaton :")
                 FA = op.standardization(FA)
+                print("Here is your automata : ")
                 FA.display_automaton()
-                stop = input("Do you want to continue and determinize it ? \n If you want to continue press y. If you "
-                             "want to exit press n : ")
+                stop = input("Do you want to continue and determinize it ? \nIf you want to continue press y. If you want to exit press n : ")
                 if stop == 'n' or stop == 'N':
                     end = True
 
