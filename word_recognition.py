@@ -22,22 +22,8 @@ def read_word (word):
  * @param A : automaton that try to recognize a word
  * @return a boolean  with 1: the word is recognized, 0 else
  '''
-def recognize_word (word, A):
-    for initial_state in A.initial_states:
 
-        state = initial_state
-        for letter in word:
-            if (state, letter) in A.transitions:
-                state = A.transitions[(state, letter)]
-            else:
-                break
-        if state in A.terminal_states:
-            return True
-
-    return False
-
-
-def recognize_word_recursive(word, A):
+def recognize_word(word, A):
     for I in A.initial_states:
         if temp_word_recognition(A, word, I, -1):
             return True
@@ -49,18 +35,16 @@ def temp_word_recognition(A, word, state, id):
         if state in A.terminal_states:
             return True
 
-    else:
 
-        if (state, word[id + 1]) and (state, "ε") not in A.transitions:
-            return False
 
+    if (state, "ε") in A.transitions:
         for next_state in A.transitions[state, "ε"]:
             if temp_word_recognition(A, word, next_state, id):
                 return True
 
+    if (state, word[id + 1]) in A.transitions:
         for next_state in A.transitions[state, word[id + 1]]:
             if temp_word_recognition(A, word, next_state, id + 1):
                 return True
-
 
     return False
