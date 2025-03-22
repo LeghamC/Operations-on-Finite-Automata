@@ -207,5 +207,6 @@ def get_execution_trace(num_automaton: int, word_to_test: str, file_name: str):
                   f"recognize the word '{word_to_test}'.\n'.")
     # -------------------------------------- -----------------------------------------------------------
 
-
+# Modify here The order of the parameters is : num_automaton_to_test, the_word_to_test(to be chosen randomly by you)
+# , the destination file
 get_execution_trace(1, "", "execution_traces/test.txt")
