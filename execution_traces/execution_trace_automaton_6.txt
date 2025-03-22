@@ -50,6 +50,23 @@
 [TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
 [USER] 2
 [TERMINAL]
+The automaton is not deterministic as we have do not have a unique initial state.
+The automaton is not deterministic as we have do not have a unique initial state.
+
+The automaton has been determinized and was already complete after determinization.
+┌────────────────────┬────────────────────┬────────────────────┐
+│         S          │         a          │         b          │
+├────────────────────┼────────────────────┼────────────────────┤
+│ →       1_3        │         2          │         0          │
+│ ←        2         │         P          │         P          │
+│ ←        0         │         P          │         P          │
+│          P         │         P          │         P          │
+└────────────────────┴────────────────────┴────────────────────┘
+
+[TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
+[USER] 3
+[TERMINAL]
+The automaton is not deterministic as we have do not have a unique initial state.
 The automaton is not complete as state '0' has no transitions for label 'a'.
 The automaton is not complete as state '0' has no transitions for label 'b'.
 The automaton is not complete as state '1' has no transitions for label 'b'.
@@ -57,34 +74,19 @@ The automaton is not complete as state '2' has no transitions for label 'a'.
 The automaton is not complete as state '2' has no transitions for label 'b'.
 The automaton is not complete as state '3' has no transitions for label 'a'.
 
-The automaton was already deterministic but not complete. Hence, we completed it.
+The automaton you entered was not deterministic. Hence, we determinized and, if needed, completed it before minimizing it.
+The minimized automaton is the following:
+The automaton is not deterministic as we have do not have a unique initial state.
+Correspondence between old and new states :
+0 = ['1_3']
+1 = ['2', '0']
+2 = ['P']
 ┌────────────────────────────┬────────────────────────────┬────────────────────────────┐
 │             S              │             a              │             b              │
 ├────────────────────────────┼────────────────────────────┼────────────────────────────┤
-│ ←            0             │             P              │             P              │
-│              1             │             2              │             P              │
-│ ←            2             │             P              │             P              │
-│              3             │             P              │             0              │
-│ →            I             │             2              │             0              │
-│              P             │             P              │             P              │
-└────────────────────────────┴────────────────────────────┴────────────────────────────┘
-
-[TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
-[USER] 3
-[TERMINAL] Correspondance between old and new states :
-0 = [0, 2]
-1 = [1]
-2 = [3]
-3 = ['I']
-4 = ['P']
-┌────────────────────────────┬────────────────────────────┬────────────────────────────┐
-│             S              │             a              │             b              │
-├────────────────────────────┼────────────────────────────┼────────────────────────────┤
-│ ←            0             │             4              │             4              │
-│              1             │             0              │             4              │
-│              2             │             4              │             0              │
-│ →            3             │             0              │             0              │
-│              4             │             4              │             4              │
+│ →            0             │             1              │             1              │
+│ ←            1             │             2              │             2              │
+│              2             │             2              │             2              │
 └────────────────────────────┴────────────────────────────┴────────────────────────────┘
 
 [TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
