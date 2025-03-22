@@ -6,14 +6,14 @@
 # ---------------------------------------------------------------------------------------------------------------
 # IMPORTATIONS OF MODULES
 import automata
-
-
+from general_functions import display_menu, display_mid_menu
 
 '''
  * @brief :Says if an automaton is standard or not
  * @param FA : The FA that we want to standardize
  * @return bool: True if it is standard. False otherwise.
  '''
+
 
 def is_standard(FA: automata.FiniteAutomaton) -> bool:
     initial_states = FA.initial_states
@@ -98,13 +98,40 @@ def is_complete(FA):
     return complete
 
 
-
 def is_asynchronous(FA):
-        """
+    """
         This function checks if the automaton contains epsilon transitions, if so it is an asynchronous automaton
         :return: True if the automaton contains epsilon transitions, False otherwise
         """
-        for transition in FA.transitions:
-            if transition[1] == "ε":
-                return True
-        return False
+    for transition in FA.transitions:
+        if transition[1] == "ε":
+            return True
+    return False
+
+
+def get_execution_trace(num_automaton: int, file_name: str):
+    """
+
+    :param num_automaton : the number of the corresponding automaton you want to get the trace
+    :param file_name: the file where you want to get the execution trace
+    :return: nothing
+    """
+
+    # Set up the automaton with the corresponding number
+    FA = automata.FiniteAutomaton()
+    FA.read_automaton_from_file(f"Automatons/automaton_{num_automaton}.txt")
+
+    with open(file_name, "w", encoding="utf-8") as trace:
+        menu_str = display_menu()  # get the menu in a variable, it contains the exact one as the one showing on the
+        # terminal
+
+        trace.write(menu_str + "\n")
+        trace.write("[USER] " + str(1) + "\n")
+        trace.write("\n")
+        trace.write("[TERMINAL] Enter the number corresponding to the automaton you want to manipulate or type -1 to exit: \n")
+        trace.write("[USER] " + str(num_automaton) + "\n")
+        trace.write(display_mid_menu() + "\n")
+
+
+get_execution_trace(10, "Automatons/test.txt")
+

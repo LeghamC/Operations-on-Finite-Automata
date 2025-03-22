@@ -1,0 +1,20 @@
+╔════════════════════════════════════════╗
+║        Finite Automata emulator        ║
+╠════════════════════════════════════════╣
+║          Description : Oe tkt          ║
+╠════════════════════════════════════════╣
+║            1. Load Automaton           ║
+║          2. Display Automaton          ║
+╚════════════════════════════════════════╝
+[USER] 1
+
+[TERMINAL] Enter the number corresponding to the automaton you want to manipulate or type -1 to exit: 
+[USER] 10
+╔════════════════════════════════════════╗
+║        Finite Automata emulator        ║
+╠════════════════════════════════════════╣
+║      What do you want to do now ?      ║
+╠════════════════════════════════════════╣
+║        1. Load another Automaton       ║
+║    2. Display the current Automaton    ║
+╚════════════════════════════════════════╝

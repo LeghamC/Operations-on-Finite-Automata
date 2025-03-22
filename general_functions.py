@@ -77,6 +77,8 @@ def retrieve_initial_state_asynch(states: list, original_initial_states: list) -
  * @brief : Merge 2 states into 1 when a state transitions to more than one state with the same label
  * @param FA : The fa and the 2 states that we want to merge into one
  '''
+
+
 def merge(fa, state1, state2):
     # Creation of new merged state
     new_state = f"{state1}_{state2}"
@@ -111,13 +113,15 @@ def merge(fa, state1, state2):
  * @brief : If multiple initial states exist, we merge them into a single initial state
  * @param self : The fa for which we will merge all its initial states
  '''
-def merge_initial_states(fa):
 
+
+def merge_initial_states(fa):
     # We first make a copy of the original initial states
     original_initial_states = set(fa.initial_states)
 
     # Then we create of new unique initial state
-    new_initial_state = "_".join(sorted(map(str, original_initial_states))) # map() is to apply the str function on each iterable
+    new_initial_state = "_".join(
+        sorted(map(str, original_initial_states)))  # map() is to apply the str function on each iterable
     fa.states.append(new_initial_state)
     # We replace the original initial states by our new unique one
     fa.initial_states = [new_initial_state]
@@ -147,10 +151,8 @@ def merge_initial_states(fa):
         if state in original_initial_states:
             fa.states.remove(state)
 
-
     # Finally we update the transitions
     fa.transitions = new_transitions
-
 
 
 def display_menu():
@@ -171,3 +173,32 @@ def display_menu():
         print(f"║ {option:^39}║")
     print(f"╚{border}╝")
 
+    menu_str = f"╔{border}╗" + "\n" + f"║{title:^40}║" + "\n" + f"╠{border}╣" + "\n" + f"║{description:^40}║" + "\n" + f"╠{border}╣" + "\n"
+    for option in menu_options:
+        menu_str += f"║ {option:^39}║" + "\n"
+    menu_str += f"╚{border}╝"
+    return menu_str
+
+def display_mid_menu():
+    title = "Finite Automata emulator"
+    description = "What do you want to do now ?"
+    menu_options = [
+        "1. Load another Automaton",
+        "2. Display the current Automaton",
+    ]
+
+    border = "═" * 40
+    print(f"╔{border}╗")
+    print(f"║{title:^40}║")
+    print(f"╠{border}╣")
+    print(f"║{description:^40}║")
+    print(f"╠{border}╣")
+    for option in menu_options:
+        print(f"║ {option:^39}║")
+    print(f"╚{border}╝")
+
+    menu_str = f"╔{border}╗" + "\n" + f"║{title:^40}║" + "\n" + f"╠{border}╣" + "\n" + f"║{description:^40}║" + "\n" + f"╠{border}╣" + "\n"
+    for option in menu_options:
+        menu_str += f"║ {option:^39}║" + "\n"
+    menu_str += f"╚{border}╝"
+    return menu_str
