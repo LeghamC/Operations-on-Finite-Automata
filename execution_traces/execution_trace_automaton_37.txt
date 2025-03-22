@@ -14,7 +14,6 @@
 [TERMINAL] Enter the number corresponding to the automaton you want to manipulate or type -1 to exit: 
 [USER] 37
 
-[TERMINAL] Here is the display of the automaton you are manipulating: 
 ┌────────────────────────────┬────────────────────────────┬────────────────────────────┐
 │             S              │             a              │             b              │
 ├────────────────────────────┼────────────────────────────┼────────────────────────────┤
@@ -51,6 +50,8 @@
 └────────────────────────────┴────────────────────────────┴────────────────────────────┘
 [TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
 [USER] 2
+[TERMINAL] The automaton is not complete as state '2' has no transitions for label 'a'.
+The automaton is not complete as state '4' has no transitions for label 'b'
 
 The automaton was already deterministic but not complete. Hence, we completed it.
 ┌────────────────────────────┬────────────────────────────┬────────────────────────────┐
@@ -66,6 +67,14 @@ The automaton was already deterministic but not complete. Hence, we completed it
 └────────────────────────────┴────────────────────────────┴────────────────────────────┘
 [TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
 [USER] 3
+[TERMINAL] Correspondance between old and new states :
+0 = [0, 3]
+1 = [1]
+2 = [2]
+3 = [4]
+4 = ['I']
+5 = ['P']
+
 ┌────────────────────────────┬────────────────────────────┬────────────────────────────┐
 │             S              │             a              │             b              │
 ├────────────────────────────┼────────────────────────────┼────────────────────────────┤
