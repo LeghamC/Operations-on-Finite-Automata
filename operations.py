@@ -210,13 +210,16 @@ def minimization(CDFA):
             new_group = [CDFA.states[i] for i, p in enumerate(patterns) if p == pattern]
             if new_group not in next_partitioning:
                 next_partitioning.append(new_group)
-
-        if len(current_partitioning) == len(
-                next_partitioning):  # If the number of groups is still the same, it means no group have been created, so we're done
+        
+        if len(current_partitioning) == len(next_partitioning):  # If the number of groups is still the same, it means no group have been created, so we're done
             minimized = 1
         else:
             current_partitioning = next_partitioning
     # end of while
+
+    if len(current_partitioning) == len(CDFA.states):
+        print("The automaton is already minimal")
+        return CDFA
 
     # We now have found the minimal automaton, we have to build it
 
@@ -247,10 +250,6 @@ def minimization(CDFA):
 
         if (starting_state, key[1]) not in MCDFA.transitions:
             MCDFA.transitions[(starting_state, key[1])] = {arriving_state}
-
-    print("Correspondance between old and new states :")
-    for i in MCDFA.states:
-        print(f"{i} = {current_partitioning[i]}")
 
     print("Correspondance between old and new states :")
     for i in MCDFA.states:
@@ -375,10 +374,6 @@ def determinization_asynchronous(FA: automata.FiniteAutomaton):
     DFA.states = [i for i in range(len(list_of_new_state))]
 
     DFA.initial_states = [old_new[tuple([i for i in FA.initial_states])]]
-
-    print(list_of_new_state)
-    print(old_new)
-    print(transitions)
 
     # Terminal states
     for state in list_of_new_state:
