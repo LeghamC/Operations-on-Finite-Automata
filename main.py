@@ -79,5 +79,4 @@ def main():
                 FA = OP.determinize_and_complete(FA)
                 print("The deterministic and completed version of the automaton is the following: ")
                 FA.display_automaton()
-
                 pass
