@@ -28,7 +28,7 @@ if __name__ == '__main__':
             FA.display_automaton()
 
             #STANDARDIZATION ON DEMAND
-            if op.is_standard(FA) == True:
+            if pc.is_standard(FA) == True:
                 stop = input(
                     "The automaton is already standard. Do you want to continue and determinize it ? \nIf you want "
                     "to continue press y. If you want to exit press n : ")
