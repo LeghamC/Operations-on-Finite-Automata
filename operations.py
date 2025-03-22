@@ -77,7 +77,7 @@ def completion(FA):
  '''
 
 
-def determinization_and_completion_automaton(FA):
+def determinization_and_completion_automaton(FA) -> automata.FiniteAutomaton:
     # We store the conditions determining if the fa is deterministic or not
     deterministic_conditions = properties_check.is_deterministic(FA)
 

@@ -20,7 +20,7 @@ if __name__ == '__main__':
     test = automata.FiniteAutomaton()
     test.read_automaton_from_file(f"Automatons/automaton_{user_automaton}.txt")
     test.display_automaton()
-    test2 = operations.determinization_and_completion_automaton(test)
+    test2 = operations.determinization_asynchronous(test)
     if test2 == None:
         print("The automaton contains epsilon and cannot be displayed for the moment")
     else:
