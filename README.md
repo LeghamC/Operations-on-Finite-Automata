@@ -24,7 +24,10 @@ You can either enter the number corresponding to th operation you want to perfor
 
 ## Features
 ### Standardization
-This function standardizes a non-standard funtcion and display it. If the automaton is already in standard form, the program will inform the user
+This function standardizes a non-standard funtcion and display it. If the automaton is already in standard form, the program will inform the user.
+
+### Determinization and Completion
+This part of the code aims to determinize and complete the automaton. If the choosen automaton is deterministic, it will then check if it also complete. If it is the case, it will notify the user. Otherwise, it will complete the automaton. If the automaton is not deterministic, it will be both determinized *and* completed. After these operations, the resulting automaton will be displayed.
 
 
 
