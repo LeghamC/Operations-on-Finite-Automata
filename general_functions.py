@@ -179,12 +179,11 @@ def display_menu():
     description = "Description : Operations-on-Finite-Automata Project"
     menu_options = [
         "1. Standardize the automaton",
-        "2. Determinize and complete a synchronous automaton",
-        "3. Determinize an asynchronous automaton",
-        "4. Minimize the automaton",
-        "5. Word recognition",
-        "6. Get the automaton recognizing the complementary language of the current automaton",
-        "7. Word recognition of the complementary language",
+        "2. Determinize and complete an automaton (synchronous or asynchronous)",
+        "3. Minimize the automaton",
+        "4. Word recognition",
+        "5. Get the automaton recognizing the complementary language of the current automaton",
+        "6. Word recognition of the complementary language",
         "0. Back to the main menu"
     ]
 
@@ -209,12 +208,11 @@ def display_mid_menu():
     description = "What do you want to do now ?"
     menu_options = [
         "1. Standardize the automaton",
-        "2. Determinize and complete a synchronous automaton",
-        "3. Determinize an asynchronous automaton",
-        "4. Minimize the automaton",
-        "5. Word recognition",
-        "6. Get the automaton recognizing the complementary language of the current automaton",
-        "7. Word recognition of the complementary language",
+        "2. Determinize and complete an automaton (synchronous or asynchronous)",
+        "3. Minimize the automaton",
+        "4. Word recognition",
+        "5. Get the automaton recognizing the complementary language of the current automaton",
+        "6. Word recognition of the complementary language",
         "0. Back to the main menu"
     ]
 

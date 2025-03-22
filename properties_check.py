@@ -45,11 +45,10 @@ def is_deterministic(FA):
     """We have to check 3 conditions to know if an automaton is deterministic :
             1. Only one initial state
             2. No two transitions of same label from same state
-            3. No epsilon (ε) transition"""
+            3. No epsilon (ε) transition however we won't check this condition as we have another function for that"""
 
     initial = 1
     transitions = 1
-    epsilon = 1
 
     # check of first condition
     if len(FA.initial_states) != 1:
@@ -63,13 +62,8 @@ def is_deterministic(FA):
             print(
                 f"The automaton is not deterministic as state '{state}' has multiple transitions for label '{label}'.")
 
-    # check of third condition
-    if any(label == 'ε' for (_, label) in FA.transitions.keys()):
-        epsilon = 0
-        print("The automaton is not deterministic as it contains an epsilon (ε) transition.")
 
-
-    return [initial, transitions, epsilon]
+    return [initial, transitions]
 
 
 '''
