@@ -126,22 +126,14 @@ def get_execution_trace(num_automaton: int, file_name: str):
         # terminal
 
         trace.write(menu_str + "\n")
+        trace.write("[TERMINAL] Enter the number corresponding to the operation you want to do: \n")
         trace.write("[USER] " + str(1) + "\n")
         trace.write("\n")
-        trace.write("[TERMINAL] Enter the number corresponding to the automaton you want to manipulate or type -1 to exit: \n")
+        trace.write("[TERMINAL] Enter the number corresponding to the automaton you want to manipulate: \n")
         trace.write("[USER] " + str(num_automaton) + "\n")
         trace.write(display_mid_menu() + "\n")
 
-        while True:
-            print("\nSelect the operation you want to do on the automaton:")
-            print("1. Standardize the automaton")
-            print("2. Determinize and complete the automaton")
-            print("3. Minimize the automaton")
-            print("4. Word recognition")
-            print("5. Get the automaton recognizing the complementary language of the current automaton")
-            print("0. Back to the main menu")
-
-        choice = int(input("Enter the number corresponding to the operation you want to do: "))
+    trace.close()
 
 
 get_execution_trace(10, "Automatons/test.txt")

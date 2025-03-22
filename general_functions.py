@@ -159,23 +159,27 @@ def display_menu():
     title = "Finite Automata emulator"
     description = "Description : Oe tkt"
     menu_options = [
-        "1. Load Automaton",
-        "2. Display Automaton",
+        "1. Standardize the automaton",
+        "2. Determinize and complete the automaton",
+        "3. Minimize the automaton",
+        "4. Word recognition",
+        "5. Get the automaton recognizing the complementary language of the current automaton",
+        "0. Back to the main menu"
     ]
 
-    border = "═" * 40
+    border = "═" * 100
     print(f"╔{border}╗")
-    print(f"║{title:^40}║")
+    print(f"║{title:^100}║")
     print(f"╠{border}╣")
-    print(f"║{description:^40}║")
+    print(f"║{description:^100}║")
     print(f"╠{border}╣")
     for option in menu_options:
-        print(f"║ {option:^39}║")
+        print(f"║ {option:^99}║")
     print(f"╚{border}╝")
 
-    menu_str = f"╔{border}╗" + "\n" + f"║{title:^40}║" + "\n" + f"╠{border}╣" + "\n" + f"║{description:^40}║" + "\n" + f"╠{border}╣" + "\n"
+    menu_str = f"╔{border}╗" + "\n" + f"║{title:^100}║" + "\n" + f"╠{border}╣" + "\n" + f"║{description:^100}║" + "\n" + f"╠{border}╣" + "\n"
     for option in menu_options:
-        menu_str += f"║ {option:^39}║" + "\n"
+        menu_str += f"║ {option:^99}║" + "\n"
     menu_str += f"╚{border}╝"
     return menu_str
 
@@ -183,22 +187,26 @@ def display_mid_menu():
     title = "Finite Automata emulator"
     description = "What do you want to do now ?"
     menu_options = [
-        "1. Load another Automaton",
-        "2. Display the current Automaton",
+        "1. Standardize the automaton",
+        "2. Determinize and complete the automaton",
+        "3. Minimize the automaton",
+        "4. Word recognition",
+        "5. Get the automaton recognizing the complementary language of the current automaton",
+        "0. Back to the main menu"
     ]
 
-    border = "═" * 40
+    border = "═" * 100
     print(f"╔{border}╗")
-    print(f"║{title:^40}║")
+    print(f"║{title:^100}║")
     print(f"╠{border}╣")
-    print(f"║{description:^40}║")
+    print(f"║{description:^100}║")
     print(f"╠{border}╣")
     for option in menu_options:
-        print(f"║ {option:^39}║")
+        print(f"║ {option:^99}║")
     print(f"╚{border}╝")
 
-    menu_str = f"╔{border}╗" + "\n" + f"║{title:^40}║" + "\n" + f"╠{border}╣" + "\n" + f"║{description:^40}║" + "\n" + f"╠{border}╣" + "\n"
+    menu_str = f"╔{border}╗" + "\n" + f"║{title:^100}║" + "\n" + f"╠{border}╣" + "\n" + f"║{description:^100}║" + "\n" + f"╠{border}╣" + "\n"
     for option in menu_options:
-        menu_str += f"║ {option:^39}║" + "\n"
+        menu_str += f"║ {option:^99}║" + "\n"
     menu_str += f"╚{border}╝"
     return menu_str

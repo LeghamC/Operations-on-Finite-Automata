@@ -1,20 +1,29 @@
-╔════════════════════════════════════════╗
-║        Finite Automata emulator        ║
-╠════════════════════════════════════════╣
-║          Description : Oe tkt          ║
-╠════════════════════════════════════════╣
-║            1. Load Automaton           ║
-║          2. Display Automaton          ║
-╚════════════════════════════════════════╝
+╔════════════════════════════════════════════════════════════════════════════════════════════════════╗
+║                                      Finite Automata emulator                                      ║
+╠════════════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                        Description : Oe tkt                                        ║
+╠════════════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                    1. Standardize the automaton                                    ║
+║                              2. Determinize and complete the automaton                             ║
+║                                      3. Minimize the automaton                                     ║
+║                                         4. Word recognition                                        ║
+║        5. Get the automaton recognizing the complementary language of the current automaton        ║
+║                                      0. Back to the main menu                                      ║
+╚════════════════════════════════════════════════════════════════════════════════════════════════════╝
+[TERMINAL] Enter the number corresponding to the operation you want to do: 
 [USER] 1
 
-[TERMINAL] Enter the number corresponding to the automaton you want to manipulate or type -1 to exit: 
+[TERMINAL] Enter the number corresponding to the automaton you want to manipulate: 
 [USER] 10
-╔════════════════════════════════════════╗
-║        Finite Automata emulator        ║
-╠════════════════════════════════════════╣
-║      What do you want to do now ?      ║
-╠════════════════════════════════════════╣
-║        1. Load another Automaton       ║
-║    2. Display the current Automaton    ║
-╚════════════════════════════════════════╝
+╔════════════════════════════════════════════════════════════════════════════════════════════════════╗
+║                                      Finite Automata emulator                                      ║
+╠════════════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                    What do you want to do now ?                                    ║
+╠════════════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                    1. Standardize the automaton                                    ║
+║                              2. Determinize and complete the automaton                             ║
+║                                      3. Minimize the automaton                                     ║
+║                                         4. Word recognition                                        ║
+║        5. Get the automaton recognizing the complementary language of the current automaton        ║
+║                                      0. Back to the main menu                                      ║
+╚════════════════════════════════════════════════════════════════════════════════════════════════════╝
