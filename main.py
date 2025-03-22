@@ -71,7 +71,7 @@ def main():
 
                     # if the automaton is deterministic but not complete
                     else:
-                        OP.completion(CDFA_A)
+                        CDFA_A = OP.completion(CDFA_A)
                         print("\nThe automaton was already deterministic but not complete. Hence, we completed it.")
                         CDFA_A.display_automaton()
 
@@ -89,7 +89,7 @@ def main():
 
                     # if the automaton is deterministic but not complete
                     else:
-                        OP.completion(FA)
+                        FA = OP.completion(FA)
                         print("\nThe automaton was already deterministic but not complete. Hence, we completed it.")
                         FA.display_automaton()
 
@@ -101,13 +101,12 @@ def main():
                     # We now have the determinized our automaton but we need to check if it complete
 
                     if PC.is_complete(CDFA_S):
-                        if PC.is_complete(CDFA_S):
-                            print("\nThe automaton has been determininized and was already complete after determinization.")
-                            CDFA_S.display_automaton()
+                        print("\nThe automaton has been determinized and was already complete after determinization.")
+                        CDFA_S.display_automaton()
 
                     else:
-                        OP.completion(CDFA_S)
-                        print("\nThe automaton has been determininized and as it was not complete, we completed it.")
+                        CDFA_S = OP.completion(CDFA_S)
+                        print("\nThe automaton has been determinized and as it was not complete, we completed it.")
                         CDFA_S.display_automaton()
 
 
