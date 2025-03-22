@@ -51,6 +51,11 @@
 └────────────────────────────┴────────────────────────────┴────────────────────────────┘
 [TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
 [USER] 2
+[TERMINAL]
+The automaton is not complete as state '0' has no transitions for label 'b'.
+The automaton is not complete as state '2' has no transitions for label 'b'.
+The automaton is not complete as state '4' has no transitions for label 'b'.
+The automaton is not complete as state 'I' has no transitions for label 'b'.
 
 The automaton was already deterministic but not complete. Hence, we completed it.
 ┌────────────────────────────┬────────────────────────────┬────────────────────────────┐
@@ -64,8 +69,11 @@ The automaton was already deterministic but not complete. Hence, we completed it
 │ →            I             │             1              │             P              │
 │              P             │             P              │             P              │
 └────────────────────────────┴────────────────────────────┴────────────────────────────┘
+
 [TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
 [USER] 3
+[TERMINAL] The automaton is already minimal
+
 ┌────────────────────────────┬────────────────────────────┬────────────────────────────┐
 │             S              │             a              │             b              │
 ├────────────────────────────┼────────────────────────────┼────────────────────────────┤
@@ -84,21 +92,10 @@ The automaton was already deterministic but not complete. Hence, we completed it
 [USER] abba
 [TERMINAL] The automaton does not recognize the word 'abba'.
 
-The automaton recognizing the complementary language of the current automaton is the following:
-┌────────────────────────────┬────────────────────────────┬────────────────────────────┐
-│             S              │             a              │             b              │
-├────────────────────────────┼────────────────────────────┼────────────────────────────┤
-│              0             │             1              │             P              │
-│ ←            1             │             2              │             2              │
-│ ←            2             │             3              │             P              │
-│ ←            3             │             4              │             4              │
-│ ←            4             │             0              │             P              │
-│ ←→           I             │             1              │             P              │
-│ ←            P             │             P              │             P              │
-└────────────────────────────┴────────────────────────────┴────────────────────────────┘
 
 [TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
 [USER] 5
+[TERMINAL] The automaton recognizing the complementary language of the current automaton is the following:
 ┌────────────────────────────┬────────────────────────────┬────────────────────────────┐
 │             S              │             a              │             b              │
 ├────────────────────────────┼────────────────────────────┼────────────────────────────┤
@@ -114,5 +111,6 @@ The automaton recognizing the complementary language of the current automaton is
 
 [TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
 [USER] 6
-[TERMINAL] Enter a word you want to read : 
+[TERMINAL] Enter a word you want to read :
+[USER] abba
 The automaton recognizing the complementary language of the current automaton recognizes the word 'abba'.

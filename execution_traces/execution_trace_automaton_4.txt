@@ -14,7 +14,7 @@
 [TERMINAL] Enter the number corresponding to the automaton you want to manipulate or type -1 to exit: 
 [USER] 4
 
-[TERMINAL] Here is the display of the automaton you are manipulating: 
+[TERMINAL] Here is the display of the automaton you are manipulating:
 ┌─────────────────────────────────────────────────────┬─────────────────────────────────────────────────────┐
 │                          S                          │                          a                          │
 ├─────────────────────────────────────────────────────┼─────────────────────────────────────────────────────┤
@@ -34,14 +34,11 @@
 ║                          6. Word recognition of the complementary language                         ║
 ║                                      0. Back to the main menu                                      ║
 ╚════════════════════════════════════════════════════════════════════════════════════════════════════╝
+
 [USER] 1
-[TERMINAL] The standardized version of the automaton is the following: 
-┌─────────────────────────────────────────────────────┬─────────────────────────────────────────────────────┐
-│                          S                          │                          a                          │
-├─────────────────────────────────────────────────────┼─────────────────────────────────────────────────────┤
-│ →                        0                          │                          1                          │
-│                          1                          │                        _____                        │
-└─────────────────────────────────────────────────────┴─────────────────────────────────────────────────────┘
+[TERMINAL] The automaton is already standard.
+
+
 [TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
 [USER] 2
 
@@ -55,6 +52,8 @@ The automaton was already deterministic but not complete. Hence, we completed it
 └─────────────────────────────────────────────────────┴─────────────────────────────────────────────────────┘
 [TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
 [USER] 3
+[TERMINAL] Correspondance between old and new states :
+0 = [0, 1, 'P']
 ┌─────────────────────────────────────────────────────┬─────────────────────────────────────────────────────┐
 │                          S                          │                          a                          │
 ├─────────────────────────────────────────────────────┼─────────────────────────────────────────────────────┤
@@ -67,17 +66,10 @@ The automaton was already deterministic but not complete. Hence, we completed it
 [USER] ab
 [TERMINAL] The automaton does not recognize the word 'ab'.
 
-The automaton recognizing the complementary language of the current automaton is the following:
-┌─────────────────────────────────────────────────────┬─────────────────────────────────────────────────────┐
-│                          S                          │                          a                          │
-├─────────────────────────────────────────────────────┼─────────────────────────────────────────────────────┤
-│ ←→                       0                          │                          1                          │
-│ ←                        1                          │                          P                          │
-│ ←                        P                          │                          P                          │
-└─────────────────────────────────────────────────────┴─────────────────────────────────────────────────────┘
 
 [TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
 [USER] 5
+[TERMINAL] The automaton recognizing the complementary language of the current automaton is the following:
 ┌─────────────────────────────────────────────────────┬─────────────────────────────────────────────────────┐
 │                          S                          │                          a                          │
 ├─────────────────────────────────────────────────────┼─────────────────────────────────────────────────────┤
@@ -89,5 +81,6 @@ The automaton recognizing the complementary language of the current automaton is
 
 [TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
 [USER] 6
-[TERMINAL] Enter a word you want to read : 
-The automaton recognizing the complementary language of the current automaton does not recognize the word 'ab'.
+[TERMINAL] Enter a word you want to read :
+[USER] ab
+[TERMINAL] The automaton recognizing the complementary language of the current automaton does not recognize the word 'ab'.
