@@ -6,6 +6,13 @@
 # ---------------------------------------------------------------------------------------------------------------
 
 def total_table_length(alphabet_length: int, max_transition_length: int, longest_state: int) -> int:
+    """
+    This function calculates the total length of the table that will be displayed
+    :param alphabet_length: the length of the alphabet given in parameter
+    :param max_transition_length: the length of the longest transition
+    :param longest_state: the length of the longest state
+    :return: the total length of the table
+    """
     nb_character_state = alphabet_length * 5
     nb_character_state_cube_left_top_corner = longest_state * longest_state
     nb_character_transition = round_up(max_transition_length * 4)
@@ -13,6 +20,11 @@ def total_table_length(alphabet_length: int, max_transition_length: int, longest
 
 
 def retrieve_max_transition_length(dict: dict) -> int:
+    """
+    This function retrieves the length of the longest transition
+    :param dict: the dictionary of transitions
+    :return: the length of the longest transition
+    """
     max_transition_length = 5
     for key, value in dict.items():
         current_length = len(value)
@@ -22,6 +34,11 @@ def retrieve_max_transition_length(dict: dict) -> int:
 
 
 def retrieve_longest_state(states: list) -> int:
+    """
+    This function retrieves the length of the longest state
+    :param states: the list of states
+    :return: the length of the longest state
+    """
     longest_state = 0
     for state in states:
         if type(state) == str:
@@ -33,6 +50,11 @@ def retrieve_longest_state(states: list) -> int:
 
 
 def all_int(list: list) -> int:
+    """
+    This function checks if all the elements of a list are integers
+    :param list: the list to check
+    :return: 1 if all the elements are integers, 0 otherwise
+    """
     yes = 1
     for item in list:
         if type(item) != int:
@@ -41,6 +63,11 @@ def all_int(list: list) -> int:
 
 
 def round_up(number) -> int:
+    """
+    This function rounds up a number it is used for the display of the table
+    :param number: the number to round up
+    :return: the rounded up number
+    """
     if number == int(number):
         return number
     else:
@@ -80,6 +107,13 @@ def retrieve_initial_state_asynch(states: list, original_initial_states: list) -
 
 
 def merge(fa, state1, state2):
+    """
+    This function merges two states into one
+    :param fa: the finite automaton in which we want to merge the states
+    :param state1: the first state to merge
+    :param state2: the second state to merge
+    :return:
+    """
     # Creation of new merged state
     new_state = f"{state1}_{state2}"
     if new_state not in fa.states:
@@ -116,6 +150,11 @@ def merge(fa, state1, state2):
 
 
 def merge_initial_states(fa):
+    """
+    This function merges all the initial states of a finite automaton into one
+    :param fa: the finite automaton in which we want to merge the initial states
+    :return:
+    """
 
     # We first make a copy of the original initial states
     original_initial_states = set(fa.initial_states)
@@ -162,25 +201,6 @@ def merge_initial_states(fa):
  '''
 def display_menu():
     title = "Finite Automata emulator"
-    description = ("Description : This program is made so that you can use various operations on finite automata.\n"
-                   " So, which operation do you want to perform on the automaton?")
-    menu_options = [
-        "1. Load Automaton",
-        "2. Display Automaton",
-    ]
-
-    border = "═" * 40
-    print(f"╔{border}╗")
-    print(f"║{title:^40}║")
-    print(f"╠{border}╣")
-    print(f"║{description:^40}║")
-    print(f"╠{border}╣")
-    for option in menu_options:
-        print(f"║ {option:^39}║")
-    print(f"╚{border}╝")
-
-def display_menu():
-    title = "Finite Automata emulator"
     description = "Description : Operations-on-Finite-Automata Project"
     menu_options = [
         "1. Standardize the automaton",
@@ -209,6 +229,10 @@ def display_menu():
     return menu_str
 
 def display_mid_menu():
+    """
+    This function displays the menu which is different from the main menu
+    :return:
+    """
     title = "Finite Automata emulator"
     description = "What do you want to do now ?"
     menu_options = [
