@@ -1,53 +1,81 @@
 ╔════════════════════════════════════════════════════════════════════════════════════════════════════╗
 ║                                      Finite Automata emulator                                      ║
 ╠════════════════════════════════════════════════════════════════════════════════════════════════════╣
-║                                        Description : Oe tkt                                        ║
+║                        Description : Operations-on-Finite-Automata Project                         ║
 ╠════════════════════════════════════════════════════════════════════════════════════════════════════╣
 ║                                    1. Standardize the automaton                                    ║
-║                              2. Determinize and complete the automaton                             ║
+║               2. Determinize and complete an automaton (synchronous or asynchronous)               ║
 ║                                      3. Minimize the automaton                                     ║
 ║                                         4. Word recognition                                        ║
 ║        5. Get the automaton recognizing the complementary language of the current automaton        ║
+║                          6. Word recognition of the complementary language                         ║
 ║                                      0. Back to the main menu                                      ║
 ╚════════════════════════════════════════════════════════════════════════════════════════════════════╝
-[TERMINAL] Enter the number corresponding to the operation you want to do: 
+[TERMINAL] Enter the number corresponding to the automaton you want to manipulate or type -1 to exit: 
 [USER] 1
 
-[TERMINAL] Enter the number corresponding to the automaton you want to manipulate: 
-[USER] 10
+[TERMINAL] Here is the display of the automaton you are manipulating: 
+┌─────────────────────────────────────────────────────┬─────────────────────────────────────────────────────┐
+│                          S                          │                          a                          │
+├─────────────────────────────────────────────────────┼─────────────────────────────────────────────────────┤
+│ ←→                       0                          │                        _____                        │
+└─────────────────────────────────────────────────────┴─────────────────────────────────────────────────────┘
 ╔════════════════════════════════════════════════════════════════════════════════════════════════════╗
 ║                                      Finite Automata emulator                                      ║
 ╠════════════════════════════════════════════════════════════════════════════════════════════════════╣
 ║                                    What do you want to do now ?                                    ║
 ╠════════════════════════════════════════════════════════════════════════════════════════════════════╣
 ║                                    1. Standardize the automaton                                    ║
-║                              2. Determinize and complete the automaton                             ║
+║               2. Determinize and complete an automaton (synchronous or asynchronous)               ║
 ║                                      3. Minimize the automaton                                     ║
 ║                                         4. Word recognition                                        ║
 ║        5. Get the automaton recognizing the complementary language of the current automaton        ║
+║                          6. Word recognition of the complementary language                         ║
 ║                                      0. Back to the main menu                                      ║
 ╚════════════════════════════════════════════════════════════════════════════════════════════════════╝
+[USER] 1
+[TERMINAL] The standardized version of the automaton is the following: 
+┌─────────────────────────────────────────────────────┬─────────────────────────────────────────────────────┐
+│                          S                          │                          a                          │
+├─────────────────────────────────────────────────────┼─────────────────────────────────────────────────────┤
+│ ←→                       0                          │                        _____                        │
+└─────────────────────────────────────────────────────┴─────────────────────────────────────────────────────┘
+[TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
+[USER] 2
+[BACKGROUND] Checks if the automaton is asynchronous or not as we have different function depending on that
+PUT HERE THE PART WHEN WE DECIDE WHAT TO DO WITH THE DERTERMINIZATION
 
-[USER] I chose to display the automaton
-[TERMINAL] Here is the display of the automaton you are manipulating: 
-┌────────────────────────────┬────────────────────────────┬────────────────────────────┐
-│             S              │             a              │             b              │
-├────────────────────────────┼────────────────────────────┼────────────────────────────┤
-│ ←→           0             │             1              │           _____            │
-│              1             │             2              │             2              │
-│              2             │             3              │           _____            │
-│              3             │             4              │             4              │
-│              4             │             0              │           _____            │
-└────────────────────────────┴────────────────────────────┴────────────────────────────┘
-╔════════════════════════════════════════════════════════════════════════════════════════════════════╗
-║                                      Finite Automata emulator                                      ║
-╠════════════════════════════════════════════════════════════════════════════════════════════════════╣
-║                                        Description : Oe tkt                                        ║
-╠════════════════════════════════════════════════════════════════════════════════════════════════════╣
-║                                    1. Standardize the automaton                                    ║
-║                              2. Determinize and complete the automaton                             ║
-║                                      3. Minimize the automaton                                     ║
-║                                         4. Word recognition                                        ║
-║        5. Get the automaton recognizing the complementary language of the current automaton        ║
-║                                      0. Back to the main menu                                      ║
-╚════════════════════════════════════════════════════════════════════════════════════════════════════╝
+[TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
+[USER] 3
+The automaton you entered was deterministic but not complete.Hence, we completed it before minimizing it.
+The minimized automaton is the following: 
+┌─────────────────────────────────────────────────────┬─────────────────────────────────────────────────────┐
+│                          S                          │                          a                          │
+├─────────────────────────────────────────────────────┼─────────────────────────────────────────────────────┤
+│ ←→                       0                          │                          P                          │
+│                          P                          │                          P                          │
+└─────────────────────────────────────────────────────┴─────────────────────────────────────────────────────┘
+
+[TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
+[USER] 4
+[TERMINAL] Enter a word you want to read : 
+[USER] 
+[TERMINAL] The automaton recognizes the word ''.
+
+ATTENTION YOU HAVE TO COPY WHAT IS RIGHT AFTER AND PASTE IT AFTER THE USER 5
+The automaton recognizing the complementary language of the current automaton is the following: 
+┌─────────────────────────────────────────────────────┬─────────────────────────────────────────────────────┐
+│                          S                          │                          a                          │
+├─────────────────────────────────────────────────────┼─────────────────────────────────────────────────────┤
+│ →                        0                          │                          P                          │
+│ ←                        P                          │                          P                          │
+└─────────────────────────────────────────────────────┴─────────────────────────────────────────────────────┘
+
+[TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
+[USER] 5
+
+[TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
+[USER] 6
+[TERMINAL] Enter a word you want to read : 
+The automaton recognizing the complementary language of the current automaton does not recognize the word ''.
+'.
