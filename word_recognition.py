@@ -13,7 +13,7 @@
  * @return : string given by the user
 '''
 def read_word ():
-    word = input("Enter a word you want to read : ")
+    word = input("\nEnter a word you want to read : ")
     return word
 
 

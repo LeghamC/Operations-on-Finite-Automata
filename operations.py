@@ -337,18 +337,19 @@ def determinization_asynchronous(FA: automata.FiniteAutomaton):
             new_arrival_state = []
 
             for state in total_eps_closure:
-                if (state, char) in FA.transitions.keys() :
-                    for s in FA.transitions[(state, char)] :
-                        if s not in new_arrival_state :
+                if (state, char) in FA.transitions.keys():
+                    for s in FA.transitions[(state, char)]:
+                        if s not in new_arrival_state:
                             new_arrival_state.append(s)
             if len(new_arrival_state) != 0:
                 transitions[(current_state, char)] = {tuple(new_arrival_state)}
 
             already_in = 0
             for state in states_to_process:
-                if set(state) == set(new_arrival_state): # The use of set is to make for example two groups (1, 2, 3) and (2, 3, 1) being equal
+                if set(state) == set(
+                        new_arrival_state):  # The use of set is to make for example two groups (1, 2, 3) and (2, 3, 1) being equal
                     already_in = 1
-            if not already_in :
+            if not already_in:
                 for state in list_of_new_state:
                     if set(state) == set(new_arrival_state):
                         already_in = 1
@@ -356,12 +357,11 @@ def determinization_asynchronous(FA: automata.FiniteAutomaton):
             if (not already_in) and (len(new_arrival_state) != 0):
                 states_to_process.add(tuple(new_arrival_state))
 
-                if not(tuple(new_arrival_state) in old_new.keys()):
+                if not (tuple(new_arrival_state) in old_new.keys()):
                     old_new[tuple(new_arrival_state)] = j
                     j += 1
 
         # end of while
-
 
     DFA.states = [i for i in range(len(list_of_new_state))]
 

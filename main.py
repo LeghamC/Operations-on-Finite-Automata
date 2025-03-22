@@ -119,7 +119,7 @@ def main():
 
                 # If the automaton is already deterministic and complete, we minimize it
                 if all(condition == 1 for condition in deterministic_conditions) and complete == 1:
-                    MCDFA = OP.minimization2(FA)
+                    MCDFA = OP.minimization(FA)
                     MCDFA.display_automaton()
 
                 elif all(condition == 1 for condition in deterministic_conditions) and complete == 0:
@@ -127,7 +127,7 @@ def main():
                           "Hence, we completed it before minimizing it."
                           "\nThe minimized automaton is the following: ")
                     CDFA = OP.determinization_and_completion_automaton(FA)
-                    MCDFA = OP.minimization2(CDFA)
+                    MCDFA = OP.minimization(CDFA)
                     MCDFA.display_automaton()
 
                 else:
@@ -135,7 +135,7 @@ def main():
                           "it before minimizing it."
                           "\n The minimized automaton is the following: ")
                     CDFA = OP.determinization_and_completion_automaton(FA)
-                    MCDFA = OP.minimization2(CDFA)
+                    MCDFA = OP.minimization(CDFA)
                     MCDFA.display_automaton()
 
             # 5. Word recognition
