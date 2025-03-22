@@ -1,8 +1,10 @@
 # Operations-on-Finite-Automata
 Project of Finite Automata and Regular Expressions, P2-S4
 
-## Introduction
-...
+
+## Introduction 
+
+
 
 ## Usage
 
@@ -21,7 +23,10 @@ Once you choosed your automaton, you can perform one of the following operations
 You can either enter the number corresponding to th operation you want to perform or return to the maine menu at any time
 
 ## Features
-...
+### Standardization
+This function standardizes a non-standard funtcion and display it. If the automaton is already in standard form, the program will inform the user
+
+
 
 ## Authors
 Lélia GHEZALI, Killian KOULOURATH, Noah JEANDEAU, Idrissa BARRY, Yannis BENHAMED-AUBRY
