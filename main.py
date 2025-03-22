@@ -5,10 +5,14 @@
 # Created:     01/03/2025
 # ---------------------------------------------------------------------------------------------------------------
 # IMPORTATIONS OF MODULES
+#from IPython.core.display_functions import display
+
 import automata
+import operations
 import properties_check
 import operations
 
+from word_recognition import recognize_word
 
 if __name__ == '__main__':
 
