@@ -84,21 +84,16 @@ def determinization_and_completion_automaton(FA) -> automata.FiniteAutomaton:
 
     # if the automaton contains an epsilon transition
     if deterministic_conditions[2] == 0:
-        print(
-            "The automaton is not deterministic as it contains an epsilon (ε) transition and it cannot be determinized by this method.\n"
-            " You need to use the --- method to determinize an automaton containing epsilon labels.")
         return
 
     # if the automaton is already deterministic
     if all(condition == 1 for condition in deterministic_conditions):
         # we check if it is complete
         if properties_check.is_complete(FA):
-            print("The automaton is already deterministic and complete.")
             return FA
         # else we complete it
         else:
             completion(FA)
-            print("The automaton was already deterministic but not complete. Hence, we completed it.")
             return FA
 
     # else it is not deterministic, and we need to determinize it
@@ -164,12 +159,10 @@ def determinization_and_completion_automaton(FA) -> automata.FiniteAutomaton:
 
         # We now check if our new CDFA is complete
         if properties_check.is_complete(CDFA):
-            print("The automaton has been determininized and was already complete after determinization.")
             return CDFA
         # else we complete it
         else:
             completion(CDFA)
-            print("The automaton has been determininized and as it was not complete, we completed it.")
             return CDFA
 
 
@@ -212,12 +205,15 @@ def minimization(CDFA):
             if new_group not in next_partitioning:
                 next_partitioning.append(new_group)
 
-        if len(current_partitioning) == len(
-                next_partitioning):  # If the number of groups is still the same, it means no group have been created, so we're done
+        if len(current_partitioning) == len(next_partitioning):  # If the number of groups is still the same, it means no group have been created, so we're done
             minimized = 1
         else:
             current_partitioning = next_partitioning
     # end of while
+
+    if len(current_partitioning) == len(CDFA.states):
+        print("The automaton is already minimal")
+        return CDFA
 
     # We now have found the minimal automaton, we have to build it
 
@@ -248,10 +244,6 @@ def minimization(CDFA):
 
         if (starting_state, key[1]) not in MCDFA.transitions:
             MCDFA.transitions[(starting_state, key[1])] = {arriving_state}
-
-    print("Correspondance between old and new states :")
-    for i in MCDFA.states:
-        print(f"{i} = {current_partitioning[i]}")
 
     print("Correspondance between old and new states :")
     for i in MCDFA.states:
@@ -342,23 +334,23 @@ def determinization_asynchronous(FA: automata.FiniteAutomaton):
             total_eps_closure += epsilon_closure(FA, s)
         total_eps_closure = list(set(total_eps_closure))
 
-
         for char in DFA.alphabet:
             new_arrival_state = []
 
             for state in total_eps_closure:
-                if (state, char) in FA.transitions.keys() :
-                    for s in FA.transitions[(state, char)] :
-                        if s not in new_arrival_state :
+                if (state, char) in FA.transitions.keys():
+                    for s in FA.transitions[(state, char)]:
+                        if s not in new_arrival_state:
                             new_arrival_state.append(s)
             if len(new_arrival_state) != 0:
                 transitions[(current_state, char)] = {tuple(new_arrival_state)}
 
             already_in = 0
             for state in states_to_process:
-                if set(state) == set(new_arrival_state): # The use of set is to make for example two groups (1, 2, 3) and (2, 3, 1) being equal
+                if set(state) == set(
+                        new_arrival_state):  # The use of set is to make for example two groups (1, 2, 3) and (2, 3, 1) being equal
                     already_in = 1
-            if not already_in :
+            if not already_in:
                 for state in list_of_new_state:
                     if set(state) == set(new_arrival_state):
                         already_in = 1
@@ -366,12 +358,11 @@ def determinization_asynchronous(FA: automata.FiniteAutomaton):
             if (not already_in) and (len(new_arrival_state) != 0):
                 states_to_process.add(tuple(new_arrival_state))
 
-                if not(tuple(new_arrival_state) in old_new.keys()):
+                if not (tuple(new_arrival_state) in old_new.keys()):
                     old_new[tuple(new_arrival_state)] = j
                     j += 1
 
         # end of while
-
 
     DFA.states = [i for i in range(len(list_of_new_state))]
 
@@ -389,6 +380,9 @@ def determinization_asynchronous(FA: automata.FiniteAutomaton):
 
     # Transitions
     for (start, char), arrival in transitions.items():
-        DFA.transitions[(old_new[tuple(start)], char)] = {old_new[next(iter(arrival))]}
+        for ns in list_of_new_state:
+            if set(ns) == set(next(iter(arrival))):
+                corresp_arrival = ns
+        DFA.transitions[(old_new[tuple(start)], char)] = {old_new[corresp_arrival]}
 
     return DFA

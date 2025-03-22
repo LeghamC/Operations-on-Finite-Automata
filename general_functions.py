@@ -116,6 +116,7 @@ def merge(fa, state1, state2):
 
 
 def merge_initial_states(fa):
+
     # We first make a copy of the original initial states
     original_initial_states = set(fa.initial_states)
 
@@ -151,24 +152,49 @@ def merge_initial_states(fa):
         if state in original_initial_states:
             fa.states.remove(state)
 
+
     # Finally we update the transitions
     fa.transitions = new_transitions
 
 
+'''
+ * @brief : Nice looking display for the menu
+ '''
 def display_menu():
     title = "Finite Automata emulator"
-    description = "Description : Oe tkt"
+    description = ("Description : This program is made so that you can use various operations on finite automata.\n"
+                   " So, which operation do you want to perform on the automaton?")
+    menu_options = [
+        "1. Load Automaton",
+        "2. Display Automaton",
+    ]
+
+    border = "═" * 40
+    print(f"╔{border}╗")
+    print(f"║{title:^40}║")
+    print(f"╠{border}╣")
+    print(f"║{description:^40}║")
+    print(f"╠{border}╣")
+    for option in menu_options:
+        print(f"║ {option:^39}║")
+    print(f"╚{border}╝")
+
+def display_menu():
+    title = "Finite Automata emulator"
+    description = "Description : Operations-on-Finite-Automata Project"
     menu_options = [
         "1. Standardize the automaton",
-        "2. Determinize and complete the automaton",
-        "3. Minimize the automaton",
-        "4. Word recognition",
-        "5. Get the automaton recognizing the complementary language of the current automaton",
+        "2. Determinize and complete a synchronous automaton",
+        "3. Determinize an asynchronous automaton",
+        "4. Minimize the automaton",
+        "5. Word recognition",
+        "6. Get the automaton recognizing the complementary language of the current automaton",
+        "7. Word recognition of the complementary language",
         "0. Back to the main menu"
     ]
 
     border = "═" * 100
-    print(f"╔{border}╗")
+    print(f"\n╔{border}╗")
     print(f"║{title:^100}║")
     print(f"╠{border}╣")
     print(f"║{description:^100}║")
@@ -188,15 +214,17 @@ def display_mid_menu():
     description = "What do you want to do now ?"
     menu_options = [
         "1. Standardize the automaton",
-        "2. Determinize and complete the automaton",
-        "3. Minimize the automaton",
-        "4. Word recognition",
-        "5. Get the automaton recognizing the complementary language of the current automaton",
+        "2. Determinize and complete a synchronous automaton",
+        "3. Determinize an asynchronous automaton",
+        "4. Minimize the automaton",
+        "5. Word recognition",
+        "6. Get the automaton recognizing the complementary language of the current automaton",
+        "7. Word recognition of the complementary language",
         "0. Back to the main menu"
     ]
 
     border = "═" * 100
-    print(f"╔{border}╗")
+    print(f"\n╔{border}╗")
     print(f"║{title:^100}║")
     print(f"╠{border}╣")
     print(f"║{description:^100}║")
