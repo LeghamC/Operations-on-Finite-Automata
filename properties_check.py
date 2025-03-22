@@ -7,6 +7,7 @@
 # IMPORTATIONS OF MODULES
 import automata
 from general_functions import display_menu, display_mid_menu
+import operations
 
 '''
  * @brief :Says if an automaton is standard or not
@@ -107,34 +108,4 @@ def is_asynchronous(FA):
         if transition[1] == "ε":
             return True
     return False
-
-
-def get_execution_trace(num_automaton: int, file_name: str):
-    """
-
-    :param num_automaton : the number of the corresponding automaton you want to get the trace
-    :param file_name: the file where you want to get the execution trace
-    :return: nothing
-    """
-
-    # Set up the automaton with the corresponding number
-    FA = automata.FiniteAutomaton()
-    FA.read_automaton_from_file(f"Automatons/automaton_{num_automaton}.txt")
-
-    with open(file_name, "w", encoding="utf-8") as trace:
-        menu_str = display_menu()  # get the menu in a variable, it contains the exact one as the one showing on the
-        # terminal
-
-        trace.write(menu_str + "\n")
-        trace.write("[TERMINAL] Enter the number corresponding to the operation you want to do: \n")
-        trace.write("[USER] " + str(1) + "\n")
-        trace.write("\n")
-        trace.write("[TERMINAL] Enter the number corresponding to the automaton you want to manipulate: \n")
-        trace.write("[USER] " + str(num_automaton) + "\n")
-        trace.write(display_mid_menu() + "\n")
-
-    trace.close()
-
-
-get_execution_trace(10, "Automatons/test.txt")
 

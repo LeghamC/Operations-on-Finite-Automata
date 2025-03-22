@@ -27,3 +27,27 @@
 ║        5. Get the automaton recognizing the complementary language of the current automaton        ║
 ║                                      0. Back to the main menu                                      ║
 ╚════════════════════════════════════════════════════════════════════════════════════════════════════╝
+
+[USER] I chose to display the automaton
+[TERMINAL] Here is the display of the automaton you are manipulating: 
+┌────────────────────────────┬────────────────────────────┬────────────────────────────┐
+│             S              │             a              │             b              │
+├────────────────────────────┼────────────────────────────┼────────────────────────────┤
+│ ←→           0             │             1              │           _____            │
+│              1             │             2              │             2              │
+│              2             │             3              │           _____            │
+│              3             │             4              │             4              │
+│              4             │             0              │           _____            │
+└────────────────────────────┴────────────────────────────┴────────────────────────────┘
+╔════════════════════════════════════════════════════════════════════════════════════════════════════╗
+║                                      Finite Automata emulator                                      ║
+╠════════════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                        Description : Oe tkt                                        ║
+╠════════════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                    1. Standardize the automaton                                    ║
+║                              2. Determinize and complete the automaton                             ║
+║                                      3. Minimize the automaton                                     ║
+║                                         4. Word recognition                                        ║
+║        5. Get the automaton recognizing the complementary language of the current automaton        ║
+║                                      0. Back to the main menu                                      ║
+╚════════════════════════════════════════════════════════════════════════════════════════════════════╝
