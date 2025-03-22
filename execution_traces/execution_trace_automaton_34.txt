@@ -61,40 +61,31 @@ The automaton was already deterministic but not complete. Hence, we completed it
 │              P             │             P              │             P              │
 └────────────────────────────┴────────────────────────────┴────────────────────────────┘
 
-The automaton has been determininized and was already complete after determinization.
-┌────────────────────────────┬────────────────────────────┬────────────────────────────┐
-│             S              │             a              │             b              │
-├────────────────────────────┼────────────────────────────┼────────────────────────────┤
-│ →            0             │             P              │             P              │
-│              P             │             P              │             P              │
-└────────────────────────────┴────────────────────────────┴────────────────────────────┘
+
+
 [TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
 [USER] 3
-The automaton is not deterministic as state '0' has multiple transitions for label 'ε'.
-The automaton is not deterministic as state '3' has multiple transitions for label 'ε'.
-The automaton is not deterministic as state '5' has multiple transitions for label 'ε'.
-The automaton is not complete as state '0' has no transitions for label 'a'.
-The automaton is not complete as state '0' has no transitions for label 'b'.
-The automaton is not complete as state '1' has no transitions for label 'b'.
+
+The automaton you selected was asynchronous. Hence, we determinized it using the asynchronous method.
+The automaton is not complete as state '1' has no transitions for label 'a'.
 The automaton is not complete as state '2' has no transitions for label 'a'.
 The automaton is not complete as state '3' has no transitions for label 'a'.
-The automaton is not complete as state '3' has no transitions for label 'b'.
-The automaton is not complete as state '4' has no transitions for label 'a'.
-The automaton is not complete as state '5' has no transitions for label 'a'.
-The automaton is not complete as state '5' has no transitions for label 'b'.
-The automaton is not complete as state '6' has no transitions for label 'a'.
-The automaton is not complete as state '6' has no transitions for label 'b'.
-The automaton is not deterministic as state '0' has multiple transitions for label 'ε'.
-The automaton is not deterministic as state '3' has multiple transitions for label 'ε'.
-The automaton is not deterministic as state '5' has multiple transitions for label 'ε'.
-The automaton you entered was not deterministic. Hence, we determinized and if needed completedit before minimizing it.
+
+The automaton was asynchronous, determinized, but not complete. Hence, we completed it before minimization.
+
+The minimized automaton is the following:
 Correspondence between old and new states :
-0 = ['0', 'P']
- The minimized automaton is the following: 
+0 = [0]
+1 = [1]
+2 = [2, 3]
+3 = ['P']
 ┌────────────────────────────┬────────────────────────────┬────────────────────────────┐
 │             S              │             a              │             b              │
 ├────────────────────────────┼────────────────────────────┼────────────────────────────┤
-│ →            0             │             0              │             0              │
+│ →            0             │             1              │             2              │
+│              1             │             3              │             2              │
+│ ←            2             │             3              │             2              │
+│              3             │             3              │             3              │
 └────────────────────────────┴────────────────────────────┴────────────────────────────┘
 
 [TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
@@ -124,5 +115,5 @@ The automaton recognizing the complementary language of the current automaton is
 [TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
 [USER] 6
 [TERMINAL] Enter a word you want to read : 
-The automaton recognizing the complementary language of the current automaton recognizes theword ''.
+The automaton recognizing the complementary language of the current automaton recognizes the word ''.
 '.
