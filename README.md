@@ -15,10 +15,14 @@ At the beginning, you will be asked to enter the number of an automaton (between
 ### Choosing on Operation
 Once you choosed your automaton, you can perform one of the following operations: 
   1. Standardization
-  2. Determinization and Completion
-  3. Minimization
-  4. Word Recognition
-  5. Complementary Language
+  2. Determinization and Completion 
+    a. For Synchronous Automaton
+    b. For Asynchronous Automaton
+  4. Minimization
+  5. Word Recognition
+  6. Complementary Language
+     a. Get the Automaton
+     b. Word Recognition of the Complementary Language
 
 You can either enter the number corresponding to the operation you want to perform or return to the main menu at any time
 
