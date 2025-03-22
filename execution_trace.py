@@ -210,4 +210,4 @@ def get_execution_trace(num_automaton: int, word_to_test: str, file_name: str):
 
 # Modify here The order of the parameters is : num_automaton_to_test, the_word_to_test(to be chosen randomly by you)
 # , the destination file
-get_execution_trace(31, "ab", "execution_traces/execution_trace_automaton_31.txt")
+get_execution_trace(33, "ab", "execution_traces/execution_trace_automaton_33.txt")

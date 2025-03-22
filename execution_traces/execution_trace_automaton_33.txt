@@ -50,20 +50,7 @@
 
 [TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
 [USER] 2
-
-The automaton you selected was asynchronous. Hence, we determinized it using the asynchronous method.
-The automaton is not complete as state '1' has no transitions for label 'b'.
-The automaton is not complete as state '2' has no transitions for label 'a'.
-The automaton is not complete as state '3' has no transitions for label 'a'.
-The automaton is not complete as state '3' has no transitions for label 'b'.
-The automaton is not complete as state '4' has no transitions for label 'a'.
-The automaton is not complete as state '5' has no transitions for label 'b'.
-The automaton is not complete as state '6' has no transitions for label 'a'.
-The automaton is not complete as state '6' has no transitions for label 'b'.
-The automaton is not complete as state '7' has no transitions for label 'a'.
-The automaton is not complete as state '7' has no transitions for label 'b'.
-The automaton is not complete as state '7' has no transitions for label 'c'.
-
+[TERMINAL] The automaton you selected was asynchronous. Hence, we determinized it using the asynchronous method.
 The automaton was already deterministic but not complete. Hence, we completed it.
 ┌───────────────────┬───────────────────┬───────────────────┬───────────────────┐
 │         S         │         a         │         b         │         c         │
@@ -79,77 +66,37 @@ The automaton was already deterministic but not complete. Hence, we completed it
 │         P         │         P         │         P         │         P         │
 └───────────────────┴───────────────────┴───────────────────┴───────────────────┘
 
-The automaton has been determininized and was already complete after determinization.
-┌───────────────────┬───────────────────┬───────────────────┬───────────────────┐
-│         S         │         a         │         b         │         c         │
-├───────────────────┼───────────────────┼───────────────────┼───────────────────┤
-│ →       0         │         P         │         P         │         P         │
-│         P         │         P         │         P         │         P         │
-└───────────────────┴───────────────────┴───────────────────┴───────────────────┘
-[TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
+[TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do:
 [USER] 3
-The automaton is not deterministic as state '0' has multiple transitions for label 'ε'.
-The automaton is not deterministic as state '1' has multiple transitions for label 'ε'.
-The automaton is not deterministic as state '7' has multiple transitions for label 'ε'.
-The automaton is not complete as state '0' has no transitions for label 'a'.
-The automaton is not complete as state '0' has no transitions for label 'b'.
-The automaton is not complete as state '0' has no transitions for label 'c'.
-The automaton is not complete as state '1' has no transitions for label 'a'.
-The automaton is not complete as state '1' has no transitions for label 'b'.
-The automaton is not complete as state '1' has no transitions for label 'c'.
-The automaton is not complete as state '2' has no transitions for label 'b'.
-The automaton is not complete as state '2' has no transitions for label 'c'.
-The automaton is not complete as state '3' has no transitions for label 'a'.
-The automaton is not complete as state '3' has no transitions for label 'b'.
-The automaton is not complete as state '3' has no transitions for label 'c'.
-The automaton is not complete as state '4' has no transitions for label 'a'.
-The automaton is not complete as state '4' has no transitions for label 'c'.
-The automaton is not complete as state '5' has no transitions for label 'a'.
-The automaton is not complete as state '5' has no transitions for label 'b'.
-The automaton is not complete as state '6' has no transitions for label 'a'.
-The automaton is not complete as state '6' has no transitions for label 'b'.
-The automaton is not complete as state '6' has no transitions for label 'c'.
-The automaton is not complete as state '7' has no transitions for label 'a'.
-The automaton is not complete as state '7' has no transitions for label 'b'.
-The automaton is not complete as state '7' has no transitions for label 'c'.
-The automaton is not complete as state '8' has no transitions for label 'b'.
-The automaton is not complete as state '8' has no transitions for label 'c'.
-The automaton is not complete as state '9' has no transitions for label 'a'.
-The automaton is not complete as state '9' has no transitions for label 'c'.
-The automaton is not complete as state '10' has no transitions for label 'a'.
-The automaton is not complete as state '10' has no transitions for label 'b'.
-The automaton is not complete as state '10' has no transitions for label 'c'.
-The automaton is not complete as state '11' has no transitions for label 'a'.
-The automaton is not complete as state '11' has no transitions for label 'b'.
-The automaton is not complete as state '12' has no transitions for label 'a'.
-The automaton is not complete as state '12' has no transitions for label 'b'.
-The automaton is not complete as state '12' has no transitions for label 'c'.
-
-The automaton you entered was not deterministic. Hence, we determinized and if needed completedit before minimizing it.
- The minimized automaton is the following:
-The automaton is not deterministic as state '0' has multiple transitions for label 'ε'.
-The automaton is not deterministic as state '1' has multiple transitions for label 'ε'.
-The automaton is not deterministic as state '7' has multiple transitions for label 'ε'.
+The minimized automaton is the following:
 Correspondence between old and new states :
-0 = ['0', 'P']
+0 = [0]
+1 = [1, 5]
+2 = [2]
+3 = [3, 6]
+4 = [4]
+5 = [7]
+6 = ['P']
 ┌───────────────────┬───────────────────┬───────────────────┬───────────────────┐
 │         S         │         a         │         b         │         c         │
 ├───────────────────┼───────────────────┼───────────────────┼───────────────────┤
-│ →       0         │         0         │         0         │         0         │
+│ ←→      0         │         1         │         2         │         3         │
+│ ←       1         │         1         │         6         │         3         │
+│ ←       2         │         6         │         4         │         3         │
+│ ←       3         │         6         │         6         │         3         │
+│         4         │         6         │         4         │         5         │
+│ ←       5         │         6         │         6         │         6         │
+│         6         │         6         │         6         │         6         │
 └───────────────────┴───────────────────┴───────────────────┴───────────────────┘
 
 [TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
 [USER] 4
 [TERMINAL] Enter a word you want to read : 
-[USER]
-[TERMINAL] The automaton recognizes the word ''.
-
-
-
+[USER] ab
+[TERMINAL] The automaton does not recognize the word 'ab'.
 
 [TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
 [USER] 5
-
 The automaton recognizing the complementary language of the current automaton is the following:
 ┌───────────────────┬───────────────────┬───────────────────┬───────────────────┐
 │         S         │         a         │         b         │         c         │
@@ -172,5 +119,4 @@ The automaton recognizing the complementary language of the current automaton is
 [TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
 [USER] 6
 [TERMINAL] Enter a word you want to read : 
-The automaton recognizing the complementary language of the current automaton recognizes theword ''.
-'.
+The automaton recognizing the complementary language of the current automaton does not recognize the word 'ab'.
