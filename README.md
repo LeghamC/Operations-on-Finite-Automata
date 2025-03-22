@@ -19,11 +19,12 @@ Once you choosed your automaton, you can perform one of the following operations
   3. Minimization
   4. Word Recognition
   5. Complementary Language
+
 You can either enter the number corresponding to the operation you want to perform or return to the main menu at any time
 
 ## Features
 ### Standardization
-This function standardizes a non-standard funtcion and display it. If the automaton is already in standard form, the program will inform the user.
+This function standardizes a non-standard function and display it. If the automaton is already in standard form, the program will inform the user.
 
 ### Determinization and Completion
 This part of the code aims to determinize and complete the automaton. If the choosen automaton is deterministic, it will then check if it also complete. If it is the case, it will notify the user. Otherwise, it will complete the automaton. If the automaton is not deterministic, it will be both determinized *and* completed. After these operations, the resulting automaton will be displayed.
