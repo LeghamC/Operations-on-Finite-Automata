@@ -176,7 +176,7 @@ def display_menu():
 
 def display_menu():
     title = "Finite Automata emulator"
-    description = "Description : Operations-on-Finate-Automata Project"
+    description = "Description : Operations-on-Finite-Automata Project"
     menu_options = [
         "1. Standardize the automaton",
         "2. Determinize and complete a synchronous automaton",
@@ -184,6 +184,7 @@ def display_menu():
         "4. Minimize the automaton",
         "5. Word recognition",
         "6. Get the automaton recognizing the complementary language of the current automaton",
+        "7. Word recognition of the complementary language",
         "0. Back to the main menu"
     ]
 
@@ -213,6 +214,7 @@ def display_mid_menu():
         "4. Minimize the automaton",
         "5. Word recognition",
         "6. Get the automaton recognizing the complementary language of the current automaton",
+        "7. Word recognition of the complementary language",
         "0. Back to the main menu"
     ]
 

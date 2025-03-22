@@ -152,6 +152,15 @@ def main():
                 print("\nThe automaton recognizing the complementary language of the current automaton is the following: ")
                 CFA.display_automaton()
 
+            # 7 Word recognition of the complementary language
+            elif choice == 7:
+                word = WR.read_word()
+                CFA = OP.complementary_automaton(FA)
+                if WR.recognize_word(CFA, word):
+                    print(f"\nThe automaton recognizing the complementary language of the current automaton recognizes the word '{word}'.")
+                else:
+                    print(f"\nThe automaton recognizing the complementary language of the current automaton does not recognize the word '{word}'.")
+
 
         # If the user wants to exit the program
         restart = input("\nDo you want to test a different automaton? (y/n): ").strip().lower()
