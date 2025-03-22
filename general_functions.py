@@ -77,6 +77,8 @@ def retrieve_initial_state_asynch(states: list, original_initial_states: list) -
  * @brief : Merge 2 states into 1 when a state transitions to more than one state with the same label
  * @param FA : The fa and the 2 states that we want to merge into one
  '''
+
+
 def merge(fa, state1, state2):
     # Creation of new merged state
     new_state = f"{state1}_{state2}"
@@ -111,13 +113,16 @@ def merge(fa, state1, state2):
  * @brief : If multiple initial states exist, we merge them into a single initial state
  * @param self : The fa for which we will merge all its initial states
  '''
+
+
 def merge_initial_states(fa):
 
     # We first make a copy of the original initial states
     original_initial_states = set(fa.initial_states)
 
     # Then we create of new unique initial state
-    new_initial_state = "_".join(sorted(map(str, original_initial_states))) # map() is to apply the str function on each iterable
+    new_initial_state = "_".join(
+        sorted(map(str, original_initial_states)))  # map() is to apply the str function on each iterable
     fa.states.append(new_initial_state)
     # We replace the original initial states by our new unique one
     fa.initial_states = [new_initial_state]

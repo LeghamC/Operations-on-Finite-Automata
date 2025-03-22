@@ -6,14 +6,15 @@
 # ---------------------------------------------------------------------------------------------------------------
 # IMPORTATIONS OF MODULES
 import automata
-
-
+from general_functions import display_menu, display_mid_menu
+import operations
 
 '''
  * @brief :Says if an automaton is standard or not
  * @param FA : The FA that we want to standardize
  * @return bool: True if it is standard. False otherwise.
  '''
+
 
 def is_standard(FA: automata.FiniteAutomaton) -> bool:
     initial_states = FA.initial_states
@@ -84,13 +85,13 @@ def is_complete(FA):
     return complete
 
 
-
 def is_asynchronous(FA):
-        """
+    """
         This function checks if the automaton contains epsilon transitions, if so it is an asynchronous automaton
         :return: True if the automaton contains epsilon transitions, False otherwise
         """
-        for transition in FA.transitions:
-            if transition[1] == "ε":
-                return True
-        return False
+    for transition in FA.transitions:
+        if transition[1] == "ε":
+            return True
+    return False
+

@@ -16,6 +16,7 @@ import general_functions
  * @return SFA: The standardized automaton
  '''
 
+
 def standardization(FA: automata.FiniteAutomaton) -> automata.FiniteAutomaton:
     """
         When using this function, we assume that the automaton is not standard and is deterministic.
