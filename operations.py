@@ -82,21 +82,16 @@ def determinization_and_completion_automaton(FA):
 
     # if the automaton contains an epsilon transition
     if deterministic_conditions[2] == 0:
-        print(
-            "The automaton is not deterministic as it contains an epsilon (ε) transition and it cannot be determinized by this method.\n"
-            " You need to use the --- method to determinize an automaton containing epsilon labels.")
         return
 
     # if the automaton is already deterministic
     if all(condition == 1 for condition in deterministic_conditions):
         # we check if it is complete
         if properties_check.is_complete(FA):
-            print("The automaton is already deterministic and complete.")
             return FA
         # else we complete it
         else:
             completion(FA)
-            print("The automaton was already deterministic but not complete. Hence, we completed it.")
             return FA
 
     # else it is not deterministic, and we need to determinize it
@@ -162,12 +157,10 @@ def determinization_and_completion_automaton(FA):
 
         # We now check if our new CDFA is complete
         if properties_check.is_complete(CDFA):
-            print("The automaton has been determininized and was already complete after determinization.")
             return CDFA
         # else we complete it
         else:
             completion(CDFA)
-            print("The automaton has been determininized and as it was not complete, we completed it.")
             return CDFA
 
 
