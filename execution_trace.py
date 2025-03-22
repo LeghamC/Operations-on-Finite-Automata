@@ -101,7 +101,7 @@ def get_execution_trace(num_automaton: int, word_to_test: str, file_name: str):
 
     # else the automaton was not deterministic, and we determinize it
     else:
-        CDFA_S = A.FiniteAutomaton()
+        CDFA_S = automata.FiniteAutomaton()
         CDFA_S = operations.determinization_and_completion_automaton(FA)
 
         # We now have the determinized our automaton but we need to check if it complete
