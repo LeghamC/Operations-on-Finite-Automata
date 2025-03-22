@@ -32,6 +32,8 @@ This part of the code aims to determinize and complete the automaton. If the cho
 ### Minimization
 The program will check if the given automaton is minimized and notify the user if it already is. If not, it will minimize the automaton and display the updated version
 
+### Word Recognition
+If this operation is choosen, the user will be asked to enter a word. The program will then diplay whether the word is recognized by the automaton or not.
 
 
 ## Authors
