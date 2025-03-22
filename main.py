@@ -57,57 +57,51 @@ def main():
             elif choice == 2:
 
                 # We check if the automaton we want to determinize is synchronous or asynchronous
-                if (PC.is_asynchronous(FA)):
-                    print("\nThe automaton you selected was asynchronous. Hence, we determinized it using the asynchronous method.")
+                if PC.is_asynchronous(FA):
+                    print(
+                        "\nThe automaton you selected was asynchronous. Hence, we determinized it using the "
+                        "asynchronous method.")
 
-                    # We determinize the asynchronous automaton
+                    # Determinize the asynchronous automaton
                     CDFA_A = OP.determinization_asynchronous(FA)
 
-                    # We now check if it also needs to be completed
+                    # Check if it needs to be completed
                     complete_A = PC.is_complete(CDFA_A)
                     if complete_A == 1:
                         print("\nThe automaton is already deterministic and complete.")
                         CDFA_A.display_automaton()
-
-                    # if the automaton is deterministic but not complete
                     else:
-                        CDFA_A = OP.completion(CDFA_A)
+                        OP.completion(CDFA_A)
                         print("\nThe automaton was already deterministic but not complete. Hence, we completed it.")
                         CDFA_A.display_automaton()
 
-
-                # Else we want to determinize and complete a synchronous automaton
-                deterministic_conditions = PC.is_deterministic(FA)
-
-
-                # if the automaton is already deterministic
-                if all(condition == 1 for condition in deterministic_conditions):
-                    complete_S = PC.is_complete(FA)
-                    if complete_S == 1:
-                        print("\nThe automaton is already deterministic and complete.")
-                        FA.display_automaton()
-
-                    # if the automaton is deterministic but not complete
-                    else:
-                        FA = OP.completion(FA)
-                        print("\nThe automaton was already deterministic but not complete. Hence, we completed it.")
-                        FA.display_automaton()
-
-                # else the automaton was not deterministic, and we determinize it
                 else:
-                    CDFA_S = A.FiniteAutomaton()
-                    CDFA_S = OP.determinization_and_completion_automaton(FA)
+                    # Check if the automaton is already deterministic
+                    deterministic_conditions = PC.is_deterministic(FA)
 
-                    # We now have the determinized our automaton but we need to check if it complete
-
-                    if PC.is_complete(CDFA_S):
-                        print("\nThe automaton has been determinized and was already complete after determinization.")
-                        CDFA_S.display_automaton()
-
+                    if all(condition == 1 for condition in deterministic_conditions):
+                        # Automaton is already deterministic
+                        complete_S = PC.is_complete(FA)
+                        if complete_S == 1:
+                            print("\nThe automaton is already deterministic and complete.")
+                            FA.display_automaton()
+                        else:
+                            OP.completion(FA)
+                            print("\nThe automaton was already deterministic but not complete. Hence, we completed it.")
+                            FA.display_automaton()
                     else:
-                        CDFA_S = OP.completion(CDFA_S)
-                        print("\nThe automaton has been determinized and as it was not complete, we completed it.")
-                        CDFA_S.display_automaton()
+                        # Determinize and complete the synchronous automaton
+                        CDFA_S = OP.determinization_and_completion_automaton(
+                            FA)
+
+                        if PC.is_complete(CDFA_S):
+                            print(
+                                "\nThe automaton has been determinized and was already complete after determinization.")
+                            CDFA_S.display_automaton()
+                        else:
+                            OP.completion(CDFA_S)
+                            print("\nThe automaton has been determinized and as it was not complete, we completed it.")
+                            CDFA_S.display_automaton()
 
 
 
