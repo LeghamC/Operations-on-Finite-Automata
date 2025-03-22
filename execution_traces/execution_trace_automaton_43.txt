@@ -14,7 +14,6 @@
 [TERMINAL] Enter the number corresponding to the automaton you want to manipulate or type -1 to exit: 
 [USER] 43
 
-[TERMINAL] Here is the display of the automaton you are manipulating: 
 ┌────────────────────────────┬────────────────────────────┬────────────────────────────┐
 │             S              │             a              │             b              │
 ├────────────────────────────┼────────────────────────────┼────────────────────────────┤
@@ -61,7 +60,13 @@ The automaton has been determininized and was already complete after determiniza
 [TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
 [USER] 3
 The automaton you entered was not deterministic. Hence, we determinized and if needed completedit before minimizing it.
- The minimized automaton is the following: 
+ The minimized automaton is the following:
+The automaton is not deterministic as state 'I' has multiple transitions for label 'b'.
+The automaton is not deterministic as state '0' has multiple transitions for label 'b'.
+Correspondance between old and new states :
+0 = ['I', '0']
+1 = ['0_1']
+2 = ['0_2', '0_1_2']
 ┌────────────────────────────┬────────────────────────────┬────────────────────────────┐
 │             S              │             a              │             b              │
 ├────────────────────────────┼────────────────────────────┼────────────────────────────┤

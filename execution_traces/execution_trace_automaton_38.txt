@@ -14,7 +14,6 @@
 [TERMINAL] Enter the number corresponding to the automaton you want to manipulate or type -1 to exit: 
 [USER] 38
 
-[TERMINAL] Here is the display of the automaton you are manipulating: 
 ┌────────────────────────────┬────────────────────────────┬────────────────────────────┐
 │             S              │             a              │             b              │
 ├────────────────────────────┼────────────────────────────┼────────────────────────────┤
