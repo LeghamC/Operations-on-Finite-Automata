@@ -12,14 +12,20 @@
 ║                                      0. Back to the main menu                                      ║
 ╚════════════════════════════════════════════════════════════════════════════════════════════════════╝
 [TERMINAL] Enter the number corresponding to the automaton you want to manipulate or type -1 to exit: 
-[USER] 8
+[USER] 13
 
 [TERMINAL] Here is the display of the automaton you are manipulating: 
 ┌─────────────────────────────────────────────────────┬─────────────────────────────────────────────────────┐
 │                          S                          │                          a                          │
 ├─────────────────────────────────────────────────────┼─────────────────────────────────────────────────────┤
 │ ←                        0                          │                          0                          │
-│ →                        1                          │                          0                          │
+│ →                        1                          │                          2                          │
+│                          2                          │                          3                          │
+│ ←                        3                          │                          4                          │
+│ ←                        4                          │                          5                          │
+│ ←                        5                          │                          6                          │
+│ ←                        6                          │                          7                          │
+│ ←                        7                          │                          0                          │
 └─────────────────────────────────────────────────────┴─────────────────────────────────────────────────────┘
 ╔════════════════════════════════════════════════════════════════════════════════════════════════════╗
 ║                                      Finite Automata emulator                                      ║
@@ -40,7 +46,13 @@
 │                          S                          │                          a                          │
 ├─────────────────────────────────────────────────────┼─────────────────────────────────────────────────────┤
 │ ←                        0                          │                          0                          │
-│ →                        1                          │                          0                          │
+│ →                        1                          │                          2                          │
+│                          2                          │                          3                          │
+│ ←                        3                          │                          4                          │
+│ ←                        4                          │                          5                          │
+│ ←                        5                          │                          6                          │
+│ ←                        6                          │                          7                          │
+│ ←                        7                          │                          0                          │
 └─────────────────────────────────────────────────────┴─────────────────────────────────────────────────────┘
 [TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
 [USER] 2
@@ -50,7 +62,13 @@ The automaton is already deterministic and complete.
 │                          S                          │                          a                          │
 ├─────────────────────────────────────────────────────┼─────────────────────────────────────────────────────┤
 │ ←                        0                          │                          0                          │
-│ →                        1                          │                          0                          │
+│ →                        1                          │                          2                          │
+│                          2                          │                          3                          │
+│ ←                        3                          │                          4                          │
+│ ←                        4                          │                          5                          │
+│ ←                        5                          │                          6                          │
+│ ←                        6                          │                          7                          │
+│ ←                        7                          │                          0                          │
 └─────────────────────────────────────────────────────┴─────────────────────────────────────────────────────┘
 [TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
 [USER] 3
@@ -58,21 +76,28 @@ The automaton is already deterministic and complete.
 │                          S                          │                          a                          │
 ├─────────────────────────────────────────────────────┼─────────────────────────────────────────────────────┤
 │ ←                        0                          │                          0                          │
-│ →                        1                          │                          0                          │
+│ →                        1                          │                          2                          │
+│                          2                          │                          0                          │
 └─────────────────────────────────────────────────────┴─────────────────────────────────────────────────────┘
 
 [TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
 [USER] 4
 [TERMINAL] Enter a word you want to read : 
-[USER] ab
-[TERMINAL] The automaton does not recognize the word 'ab'.
+[USER] abba
+[TERMINAL] The automaton does not recognize the word 'abba'.
 
 The automaton recognizing the complementary language of the current automaton is the following:
 ┌─────────────────────────────────────────────────────┬─────────────────────────────────────────────────────┐
 │                          S                          │                          a                          │
 ├─────────────────────────────────────────────────────┼─────────────────────────────────────────────────────┤
 │                          0                          │                          0                          │
-│ ←→                       1                          │                          0                          │
+│ ←→                       1                          │                          2                          │
+│ ←                        2                          │                          3                          │
+│                          3                          │                          4                          │
+│                          4                          │                          5                          │
+│                          5                          │                          6                          │
+│                          6                          │                          7                          │
+│                          7                          │                          0                          │
 └─────────────────────────────────────────────────────┴─────────────────────────────────────────────────────┘
 
 [TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
@@ -81,11 +106,17 @@ The automaton recognizing the complementary language of the current automaton is
 │                          S                          │                          a                          │
 ├─────────────────────────────────────────────────────┼─────────────────────────────────────────────────────┤
 │                          0                          │                          0                          │
-│ ←→                       1                          │                          0                          │
+│ ←→                       1                          │                          2                          │
+│ ←                        2                          │                          3                          │
+│                          3                          │                          4                          │
+│                          4                          │                          5                          │
+│                          5                          │                          6                          │
+│                          6                          │                          7                          │
+│                          7                          │                          0                          │
 └─────────────────────────────────────────────────────┴─────────────────────────────────────────────────────┘
 
 
 [TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
 [USER] 6
 [TERMINAL] Enter a word you want to read : 
-The automaton recognizing the complementary language of the current automaton does not recognize the word 'ab'.
+The automaton recognizing the complementary language of the current automaton does not recognize the word 'abba'.
