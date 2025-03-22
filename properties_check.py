@@ -91,10 +91,6 @@ def is_complete(FA):
                 complete = 0
                 print(f"The automaton is not complete as state '{state}' has no transitions for label '{symbol}'.")
 
-    # else the automaton is complete
-    if complete == 1:
-        print("The automaton is complete")
-
     return complete
 
 
