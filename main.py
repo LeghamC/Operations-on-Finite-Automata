@@ -19,6 +19,11 @@ def main():
         GF.display_menu()
         user_automaton = int(input("\nEnter the number corresponding to the automaton you want to manipulate or type -1 to exit: "))
 
+        # We check if the user entered a valid number
+        while user_automaton not in range(1, 45) and user_automaton != -1:
+            print("\nYou entered an invalid number. As there are 44 automata, you need to enter a number between 1 and 44.")
+            user_automaton = int(input("\nEnter the number corresponding to the automaton you want to manipulate or type -1 to exit: "))
+
         # If the user wants to exit
         if user_automaton == -1:
             print("\nYou chose to exit the program. Goodbye! :)")
