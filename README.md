@@ -3,8 +3,7 @@ Project of Finite Automata and Regular Expressions, P2-S4
 
 
 ## Introduction 
-
-
+  This project aims to apply our knowledge of finite automata to create a program that allows users to perform various operations on a given automaton. As students, we designed this tool to standardize, determinize, minimize, and recognize words to better understand the key concepts in automata theory.
 
 ## Usage
 
