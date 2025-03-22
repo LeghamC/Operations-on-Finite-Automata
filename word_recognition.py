@@ -35,7 +35,11 @@ def temp_word_recognition(A, word, state, id):
     if id >= len(word) - 1:
         if state in A.terminal_states:
             return True
-
+    else :
+        if (state, word[id + 1]) in A.transitions:
+            for next_state in A.transitions[state, word[id + 1]]:
+                if temp_word_recognition(A, word, next_state, id + 1):
+                    return True
 
 
     if (state, "ε") in A.transitions:
@@ -43,9 +47,6 @@ def temp_word_recognition(A, word, state, id):
             if temp_word_recognition(A, word, next_state, id):
                 return True
 
-    if (state, word[id + 1]) in A.transitions:
-        for next_state in A.transitions[state, word[id + 1]]:
-            if temp_word_recognition(A, word, next_state, id + 1):
-                return True
+
 
     return False

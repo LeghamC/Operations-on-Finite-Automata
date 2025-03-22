@@ -19,6 +19,11 @@ def main():
         GF.display_menu()
         user_automaton = int(input("\nEnter the number corresponding to the automaton you want to manipulate or type -1 to exit: "))
 
+        # We check if the user entered a valid number
+        while user_automaton not in range(1, 45) and user_automaton != -1:
+            print("\nYou entered an invalid number. As there are 44 automata, you need to enter a number between 1 and 44.")
+            user_automaton = int(input("\nEnter the number corresponding to the automaton you want to manipulate or type -1 to exit: "))
+
         # If the user wants to exit
         if user_automaton == -1:
             print("\nYou chose to exit the program. Goodbye! :)")
@@ -97,8 +102,9 @@ def main():
                 # if the automaton does not contain an epsilon transition
                 if deterministic_conditions[2] == 1:
                     print(
-                        "The automaton does not contain an epsilon (ε) transition hence it should not be determinized by this method.\n"
+                        "\nThe automaton does not contain an epsilon (ε) transition hence it should not be determinized by this method.\n"
                         "You need to use the determinization_and_completion_automaton (2) method to determinize an automaton containing epsilon labels.")
+                    break
 
                 else:
                     CDFA = OP.determinization_asynchronous(FA)
@@ -141,7 +147,7 @@ def main():
             # 5. Word recognition
             elif choice == 5:
                 word = WR.read_word()
-                if WR.recognize_word(FA, word):
+                if WR.recognize_word(word, FA):
                     print(f"\nThe automaton recognizes the word '{word}'.")
                 else:
                     print(f"\nThe automaton does not recognize the word '{word}'.")
@@ -156,7 +162,7 @@ def main():
             elif choice == 7:
                 word = WR.read_word()
                 CFA = OP.complementary_automaton(FA)
-                if WR.recognize_word(CFA, word):
+                if WR.recognize_word(word, CFA):
                     print(f"\nThe automaton recognizing the complementary language of the current automaton recognizes the word '{word}'.")
                 else:
                     print(f"\nThe automaton recognizing the complementary language of the current automaton does not recognize the word '{word}'.")
@@ -171,4 +177,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
