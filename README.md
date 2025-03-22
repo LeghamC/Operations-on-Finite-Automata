@@ -29,9 +29,8 @@ You can either enter the number corresponding to the operation you want to perfo
 ## Features
 
 ### Display Automaton
-This feature aloows to have a look to the automaton at each stage of its transformation. 
-
-![image](https://github.com/user-attachments/assets/e253b3ef-d107-4e4b-951b-54af40fd372a)
+This feature allows to have a look to the automaton at each stage of its transformation. 
+![image](https://github.com/user-attachments/assets/884dc197-1a8d-478b-8bf9-f3227ab41a3c)
 
 The S column represents the states. The arrows indicates whether a state is an initial state (->), a terminal state (<-) or both (<->). We also have as many columns as there are letters in the alphabet, where we put the next state for each transition.
 
