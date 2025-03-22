@@ -33,7 +33,7 @@ if __name__ == '__main__':
                     "The automaton is already standard. Do you want to continue and determinize it ? \nIf you want "
                     "to continue press y. If you want to exit press n : ")
                 if stop == 'n' or stop == 'N':
-                    end = True
+                    pass
             else:
                 want_standard = input("The automaton is not standard. Do you want to standardize it ? Press y for yes, "
                                       "n for no :")
@@ -44,13 +44,13 @@ if __name__ == '__main__':
                     FA.display_automaton()
                     stop = input("Do you want to continue and determinize it ? \nIf you want to continue press y. If you want to exit press n : ")
                     if stop == 'n' or stop == 'N':
-                        end = True
+                        pass
 
                 else:
                     stop = input(
                         "Do you want to continue and determinize it ? \n If you want to continue press y. If you want to exit press n : ")
                     if stop == 'n' or stop == 'N':
-                        end = True
+                        pass
 
                 # DETERMINIZATION AND COMPLETION
                 CDFA = a.FiniteAutomaton()
@@ -69,7 +69,7 @@ if __name__ == '__main__':
                 stop = input(
                     "Do you want to continue and minimize it ? \n If you want to continue press y. If you want to exit press n : ")
                 if stop == 'n' or stop == 'N':
-                    end = True
+                    pass
 
                 #MINIMIZATION
 
@@ -79,7 +79,7 @@ if __name__ == '__main__':
                 stop = input(
                     "Do you want to continue test de word recognition ? \n If you want to continue press y. If you want to exit press n : ")
                 if stop == 'n' or stop == 'N':
-                    end = True
+                    pass
 
                 #WORD RECONGNITION
 
@@ -90,7 +90,7 @@ if __name__ == '__main__':
                 top = input(
                     "Do you want to continue test complementary language ? \n If you want to continue press y. If you want to exit press n : ")
                 if stop == 'n' or stop == 'N':
-                    end = True
+                    pass
 
                 #COMPLEMENTARY LANGUAGE
 
@@ -103,7 +103,7 @@ if __name__ == '__main__':
 
                 top = input("Should we test a different automaton ? If you want to restart press y else press n :")
                 if stop == 'n' or stop == 'N':
-                    end = True
+                    pass
                 else:
                     print(f"Your last automaton was the number {user_automaton}")
 
