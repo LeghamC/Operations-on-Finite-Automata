@@ -44,14 +44,25 @@ This part of the code aims to determinize and complete the automaton. If the cho
 The program will check if the given automaton is minimized and notify the user if it already is. If not, it will minimize the automaton and display the updated version
 
 ### Word Recognition
-If this operation is choosen, the user will be asked to enter a word. The program will then diplay whether the word is recognized by the automaton or not.
-**Remark:** If you want to enter ε (the empty word) you just need to press enter. 
+If this operation is choosen, the user will be asked to enter a word. The program will then diplay whether the word is recognized by the automaton or not.  
+_**Remark:** If you want to only enter ε (the empty word) you just need to press *enter*._
 
 
 ### Complementary Language
 Similarly to word recognition, the user will enter a word, but this time the program will check if the word is recognized by the complementary language. In other words, it performs the opposite of word recognition. For example, if the word recognition returns that the word is accepted, the complementary language will return that the word is not accepted.
 
 
+## Additional Feature
+### Execution Trace  
+
+In order to trace the behavior of an automan through all the operations, we create a function that automatizes the process. This function is accessible in the IDE (**I**ntegrated **D**evelopment **E**nvironment) of the execution_trace.py file.
+To use it, simply call the function as the following : "*get_execution_trace(int, word, filename")*".
+Where :  
+  - int is the number of the automaton you want to trace,
+  - word is the word you want to test,
+  - filename is the file where the execution trace will be saved.
+ 
+_**Remark :** If you want to only test the empty word, you have to do it in the main._
 
 
 ## Authors
