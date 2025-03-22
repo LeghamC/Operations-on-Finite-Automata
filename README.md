@@ -15,20 +15,28 @@ At the beginning, you will be asked to enter the number of an automaton (between
 ### Choosing on Operation
 Once you choosed your automaton, you can perform one of the following operations: 
   1. Standardization
-  2. Determinization and Completion 
-    a. For Synchronous Automaton
-    b. For Asynchronous Automaton
-  4. Minimization
-  5. Word Recognition
-  6. Complementary Language
+  2. Determinization and Completion
+     1. For Synchronous Automaton
+     2. For Asynchronous Automaton
+  6. Minimization
+  7. Word Recognition
+  8. Complementary Language
      a. Get the Automaton
      b. Word Recognition of the Complementary Language
 
 You can either enter the number corresponding to the operation you want to perform or return to the main menu at any time
 
 ## Features
+
+### Display Automaton
+This feature aloows to have a look to the automaton at each stage of its transformation. 
+
+![image](https://github.com/user-attachments/assets/e253b3ef-d107-4e4b-951b-54af40fd372a)
+
+The S column represents the states. The arrows indicates whether a state is an initial state (->), a terminal state (<-) or both (<->). We also have as many columns as there are letters in the alphabet, where we put the next state for each transition.
+
 ### Standardization
-This function standardizes a non-standard function and display it. If the automaton is already in standard form, the program will inform the user.
+This function standardizes a non-standard function and display it. If the automaton is already in standard form, the program will inform the user. 
 
 ### Determinization and Completion
 This part of the code aims to determinize and complete the automaton. If the choosen automaton is deterministic, it will then check if it also complete. If it is the case, it will notify the user. Otherwise, it will complete the automaton. If the automaton is not deterministic, it will be both determinized *and* completed. After these operations, the resulting automaton will be displayed.
@@ -41,6 +49,7 @@ If this operation is choosen, the user will be asked to enter a word. The progra
 
 ### Complementary Language
 Similarly to word recognition, the user will enter a word, but this time the program will check if the word is recognized by the complementary language. In other words, it performs the opposite of word recognition. For example, if the word recognition returns that the word is accepted, the complementary language will return that the word is not accepted.
+
 
 
 

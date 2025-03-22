@@ -82,10 +82,6 @@ def determinization_and_completion_automaton(FA) -> automata.FiniteAutomaton:
     # We store the conditions determining if the fa is deterministic or not
     deterministic_conditions = properties_check.is_deterministic(FA)
 
-    # if the automaton contains an epsilon transition
-    if deterministic_conditions[2] == 0:
-        return
-
     # if the automaton is already deterministic
     if all(condition == 1 for condition in deterministic_conditions):
         # we check if it is complete
@@ -212,7 +208,7 @@ def minimization(CDFA):
     # end of while
 
     if len(current_partitioning) == len(CDFA.states):
-        print("The automaton is already minimal")
+        print("\nThe automaton is already minimal")
         return CDFA
 
     # We now have found the minimal automaton, we have to build it

@@ -56,18 +56,34 @@ def main():
             # 2. Determinization and completion
             elif choice == 2:
 
-                # We stock the conditions of determinism of the automaton (respected or not)
+                # We check if the automaton we want to determinize is synchronous or asynchronous
+                if (PC.is_asynchronous(FA)):
+                    print("\nThe automaton you selected was asynchronous. Hence, we determinized it using the asynchronous method.")
+
+                    # We determinize the asynchronous automaton
+                    CDFA_A = OP.determinization_asynchronous(FA)
+
+                    # We now check if it also needs to be completed
+                    complete_A = PC.is_complete(CDFA_A)
+                    if complete_A == 1:
+                        print("\nThe automaton is already deterministic and complete.")
+                        CDFA_A.display_automaton()
+
+                    # if the automaton is deterministic but not complete
+                    else:
+                        OP.completion(CDFA_A)
+                        print("\nThe automaton was already deterministic but not complete. Hence, we completed it.")
+                        CDFA_A.display_automaton()
+
+
+                # Else we want to determinize and complete a synchronous automaton
                 deterministic_conditions = PC.is_deterministic(FA)
 
-                # if the automaton contains an epsilon transition
-                if deterministic_conditions[2] == 0:
-                    print("The automaton is not deterministic as it contains an epsilon (ε) transition and it cannot be determinized by this method.\n"
-                          "You need to use the determinization_asynchronous (3) method to determinize an automaton containing epsilon labels.")
 
                 # if the automaton is already deterministic
                 if all(condition == 1 for condition in deterministic_conditions):
-                    complete = PC.is_complete(FA)
-                    if complete == 1:
+                    complete_S = PC.is_complete(FA)
+                    if complete_S == 1:
                         print("\nThe automaton is already deterministic and complete.")
                         FA.display_automaton()
 
@@ -79,44 +95,27 @@ def main():
 
                 # else the automaton was not deterministic, and we determinize it
                 else:
-                    CDFA = A.FiniteAutomaton()
-                    CDFA = OP.determinization_and_completion_automaton(FA)
+                    CDFA_S = A.FiniteAutomaton()
+                    CDFA_S = OP.determinization_and_completion_automaton(FA)
 
-                    # We now have the determinizaed automaton but we need to check if it complete
+                    # We now have the determinized our automaton but we need to check if it complete
 
-                    if PC.is_complete(CDFA):
-                        if PC.is_complete(CDFA):
+                    if PC.is_complete(CDFA_S):
+                        if PC.is_complete(CDFA_S):
                             print("\nThe automaton has been determininized and was already complete after determinization.")
-                            CDFA.display_automaton()
+                            CDFA_S.display_automaton()
 
                     else:
-                        OP.completion(CDFA)
+                        OP.completion(CDFA_S)
                         print("\nThe automaton has been determininized and as it was not complete, we completed it.")
-                        CDFA.display_automaton()
-
-            # 3. Determinization_asynchronous
-            elif choice == 3:
-
-                deterministic_conditions = PC.is_deterministic(FA)
-
-                # if the automaton does not contain an epsilon transition
-                if deterministic_conditions[2] == 1:
-                    print(
-                        "\nThe automaton does not contain an epsilon (ε) transition hence it should not be determinized by this method.\n"
-                        "You need to use the determinization_and_completion_automaton (2) method to determinize an automaton containing epsilon labels.")
-                    break
-
-                else:
-                    CDFA = OP.determinization_asynchronous(FA)
-                    print("\nThe determinized asynchronous automaton is the following: ")
-                    CDFA.display_automaton()
+                        CDFA_S.display_automaton()
 
 
 
-            # 4. Minimization
+            # 3. Minimization
             # We must have a deterministic and complete automaton to minimize it
 
-            elif choice == 4:
+            elif choice == 3:
 
                 # We check if the automaton is deterministic and complete
                 deterministic_conditions = PC.is_deterministic(FA)
@@ -144,22 +143,25 @@ def main():
                     MCDFA = OP.minimization(CDFA)
                     MCDFA.display_automaton()
 
-            # 5. Word recognition
-            elif choice == 5:
+
+            # 4. Word recognition
+            elif choice == 4:
                 word = WR.read_word()
                 if WR.recognize_word(word, FA):
                     print(f"\nThe automaton recognizes the word '{word}'.")
                 else:
                     print(f"\nThe automaton does not recognize the word '{word}'.")
 
-            # 6. Complementary language
-            elif choice == 6:
+
+            # 5. Complementary language
+            elif choice == 5:
                 CFA = OP.complementary_automaton(FA)
                 print("\nThe automaton recognizing the complementary language of the current automaton is the following: ")
                 CFA.display_automaton()
 
-            # 7 Word recognition of the complementary language
-            elif choice == 7:
+
+            # 6 Word recognition of the complementary language
+            elif choice == 6:
                 word = WR.read_word()
                 CFA = OP.complementary_automaton(FA)
                 if WR.recognize_word(word, CFA):
