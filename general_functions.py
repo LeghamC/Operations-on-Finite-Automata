@@ -231,4 +231,3 @@ def display_mid_menu():
         menu_str += f"║ {option:^99}║" + "\n"
     menu_str += f"╚{border}╝"
     return menu_str
-

@@ -41,7 +41,6 @@ def is_standard(FA: automata.FiniteAutomaton) -> bool:
  * @return : a boolean  with 1: the automaton is deterministic, 0 else
  '''
 
-
 def is_deterministic(FA):
     """We have to check 3 conditions to know if an automaton is deterministic :
             1. Only one initial state
