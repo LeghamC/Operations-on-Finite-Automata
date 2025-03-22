@@ -376,6 +376,10 @@ def determinization_asynchronous(FA: automata.FiniteAutomaton):
 
     DFA.initial_states = [old_new[tuple([i for i in FA.initial_states])]]
 
+    print(list_of_new_state)
+    print(old_new)
+    print(transitions)
+
     # Terminal states
     for state in list_of_new_state:
         terminal = 0
@@ -388,6 +392,9 @@ def determinization_asynchronous(FA: automata.FiniteAutomaton):
 
     # Transitions
     for (start, char), arrival in transitions.items():
-        DFA.transitions[(old_new[tuple(start)], char)] = {old_new[next(iter(arrival))]}
+        for ns in list_of_new_state:
+            if set(ns) == set(next(iter(arrival))):
+                corresp_arrival = ns
+        DFA.transitions[(old_new[tuple(start)], char)] = {old_new[corresp_arrival]}
 
     return DFA
