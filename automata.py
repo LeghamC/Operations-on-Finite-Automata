@@ -118,7 +118,6 @@ class FiniteAutomaton:
             longest_state = general_functions.retrieve_longest_state(self.states)  # get the length of the longest state
             length_table = general_functions.total_table_length(alphabet_length, max_transition_length, longest_state)
 
-
         # of the table in terms of characters
         size_box = length_table // alphabet_length + 1
 
@@ -221,7 +220,6 @@ class FiniteAutomaton:
             longest_state = general_functions.retrieve_longest_state(self.states)  # get the length of the longest state
             length_table = general_functions.total_table_length(alphabet_length, max_transition_length, longest_state)
 
-
         # of the table in terms of characters
         size_box = length_table // alphabet_length + 1
 
@@ -262,7 +260,7 @@ class FiniteAutomaton:
             # --------------------------------------------------------------------------------------------------------------
             for state in self.states:  # iterate through the states
 
-                # check if the state is terminal, initial, both or none ----------------------------------------------------
+                # check if the state is terminal, initial, both or none ------------------------------------------------
                 if state in self.terminal_states and state in self.initial_states:
                     beginning_character = "│ ←→"  # if the state is both terminal and initial
 
@@ -289,7 +287,8 @@ class FiniteAutomaton:
                 # other strings
 
                 for symbol in self.alphabet:  # iterate through the alphabet
-                    next_states = self.transitions.get((state, symbol), set())  # get the next states of the current state
+                    next_states = self.transitions.get((state, symbol),
+                                                       set())  # get the next states of the current state
                     if next_states:  # if there are next states, we add them to the row
                         curr_state_str = ",".join(str(state) for state in next_states)  # convert the next states into a
                         # string
@@ -310,19 +309,3 @@ class FiniteAutomaton:
                 output_file.write("┴")
                 output_file.write("─" * (size_box - 3))
             output_file.write("┘" + "\n")
-
-    def display_complete_dererministic_automaton(self):
-        '''
-         * @brief : Displays the CDFA with indications of initial states, terminal states, and the transition table.
-         * @param CDFA : The FA that we want to display
-         * @return : ...
-         '''
-        pass
-
-    def display_minimal_automaton(self):
-        '''
-         * @brief : Displays the MCDFA with indications of initial states, terminal states, and the transition table.
-         * @param MCDFA : The MCDFA that we want to display
-         * @return : ...
-         '''
-        pass

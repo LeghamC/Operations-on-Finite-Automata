@@ -36,15 +36,16 @@ def get_execution_trace(num_automaton: int, word_to_test: str, file_name: str):
     with open(file_name, "a", encoding="utf-8") as trace:
         trace.write(mid_menu_str + "\n")
         trace.write("[USER] 1\n")
-        if properties_check.is_standard(FA):
-            print("\nThe automaton is already standard.")
-    if not properties_check.is_standard(FA):
+    if properties_check.is_standard(FA):
+        with open(file_name, "a", encoding="utf-8") as trace:
+            trace.write("[TERMINAL] The automaton is already standard.\n\n")
+        trace.close()
+    else:
         FA = operations.standardization(FA)
-    trace.close()
+        with open(file_name, "a", encoding="utf-8") as trace:
+            trace.write("[TERMINAL] The standardized version of the automaton is the following: \n")
+            FA.display_automaton_redirected(file_name)
 
-    with open(file_name, "a", encoding="utf-8") as trace:
-        trace.write("[TERMINAL] The standardized version of the automaton is the following: \n")
-    FA.display_automaton_redirected(file_name)
     trace.close()
     # ------------------------------------------------------------------
 
@@ -200,13 +201,15 @@ def get_execution_trace(num_automaton: int, word_to_test: str, file_name: str):
     if WR.recognize_word(word_to_test, CFA):
         with open(file_name, "a", encoding="utf-8") as trace:
             trace.write(f"The automaton recognizing the complementary language of the current automaton recognizes the"
-                  f"word '{word_to_test}'.\n'.")
+                        f"word '{word_to_test}'.\n'.")
     else:
         with open(file_name, "a", encoding="utf-8") as trace:
             trace.write(f"The automaton recognizing the complementary language of the current automaton does not "
-                  f"recognize the word '{word_to_test}'.\n'.")
+                        f"recognize the word '{word_to_test}'.\n'.")
     # -------------------------------------- -----------------------------------------------------------
+
 
 # Modify here The order of the parameters is : num_automaton_to_test, the_word_to_test(to be chosen randomly by you)
 # , the destination file
-get_execution_trace(1, "", "execution_traces/test.txt")
+get_execution_trace(32, "ab", "execution_traces/execution_trace_automaton_32.txt")
+

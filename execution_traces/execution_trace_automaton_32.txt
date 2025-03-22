@@ -1,0 +1,138 @@
+╔════════════════════════════════════════════════════════════════════════════════════════════════════╗
+║                                      Finite Automata emulator                                      ║
+╠════════════════════════════════════════════════════════════════════════════════════════════════════╣
+║                        Description : Operations-on-Finite-Automata Project                         ║
+╠════════════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                    1. Standardize the automaton                                    ║
+║               2. Determinize and complete an automaton (synchronous or asynchronous)               ║
+║                                      3. Minimize the automaton                                     ║
+║                                         4. Word recognition                                        ║
+║        5. Get the automaton recognizing the complementary language of the current automaton        ║
+║                          6. Word recognition of the complementary language                         ║
+║                                      0. Back to the main menu                                      ║
+╚════════════════════════════════════════════════════════════════════════════════════════════════════╝
+[TERMINAL] Enter the number corresponding to the automaton you want to manipulate or type -1 to exit: 
+[USER] 32
+
+[TERMINAL] Here is the display of the automaton you are manipulating: 
+┌───────────────────┬───────────────────┬───────────────────┬───────────────────┐
+│         S         │         a         │         b         │         c         │
+├───────────────────┼───────────────────┼───────────────────┼───────────────────┤
+│ →       0         │       _____       │       _____       │       _____       │
+│         1         │       _____       │       _____       │       _____       │
+│         2         │       _____       │       _____       │       _____       │
+│         3         │       _____       │         4         │       _____       │
+│         4         │       _____       │       _____       │       _____       │
+│         5         │       _____       │       _____       │       _____       │
+│         6         │         7         │       _____       │       _____       │
+│         7         │       _____       │       _____       │       _____       │
+│         8         │       _____       │       _____       │         9         │
+│         9         │       _____       │       _____       │       _____       │
+│         10        │       _____       │       _____       │       _____       │
+│         11        │       _____       │       _____       │       _____       │
+│         12        │        13         │       _____       │       _____       │
+│         13        │       _____       │       _____       │       _____       │
+│         14        │       _____       │       _____       │       _____       │
+│         15        │       _____       │        16         │       _____       │
+│         16        │       _____       │       _____       │       _____       │
+│         17        │       _____       │       _____       │       _____       │
+│         18        │       _____       │       _____       │        19         │
+│         19        │       _____       │       _____       │       _____       │
+│         20        │       _____       │       _____       │       _____       │
+│ ←       21        │       _____       │       _____       │       _____       │
+└───────────────────┴───────────────────┴───────────────────┴───────────────────┘
+╔════════════════════════════════════════════════════════════════════════════════════════════════════╗
+║                                      Finite Automata emulator                                      ║
+╠════════════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                    What do you want to do now ?                                    ║
+╠════════════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                    1. Standardize the automaton                                    ║
+║               2. Determinize and complete an automaton (synchronous or asynchronous)               ║
+║                                      3. Minimize the automaton                                     ║
+║                                         4. Word recognition                                        ║
+║        5. Get the automaton recognizing the complementary language of the current automaton        ║
+║                          6. Word recognition of the complementary language                         ║
+║                                      0. Back to the main menu                                      ║
+╚════════════════════════════════════════════════════════════════════════════════════════════════════╝
+[USER] 1
+[TERMINAL] The automaton is already standard.
+
+[TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
+[USER] 2
+[TERMINAL] The automaton you selected was asynchronous. Hence, we determinized it using the asynchronous method.
+
+The automaton was already deterministic but not complete. Hence, we completed it.
+┌───────────────────┬───────────────────┬───────────────────┬───────────────────┐
+│         S         │         a         │         b         │         c         │
+├───────────────────┼───────────────────┼───────────────────┼───────────────────┤
+│ ←→      0         │         1         │         2         │         3         │
+│ ←       1         │         6         │         P         │         3         │
+│ ←       2         │         P         │         4         │         3         │
+│ ←       3         │         P         │         P         │         5         │
+│         4         │         P         │         4         │         7         │
+│ ←       5         │         P         │         P         │         5         │
+│ ←       6         │         6         │         P         │         5         │
+│ ←       7         │         P         │         P         │         P         │
+│         P         │         P         │         P         │         P         │
+└───────────────────┴───────────────────┴───────────────────┴───────────────────┘
+
+The automaton has been determininized and was already complete after determinization.
+┌───────────────────┬───────────────────┬───────────────────┬───────────────────┐
+│         S         │         a         │         b         │         c         │
+├───────────────────┼───────────────────┼───────────────────┼───────────────────┤
+│ →       0         │         P         │         P         │         P         │
+│         P         │         P         │         P         │         P         │
+└───────────────────┴───────────────────┴───────────────────┴───────────────────┘
+[TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
+[USER] 3
+The automaton you entered was not deterministic. Hence, we determinized and if needed completedit before minimizing it.
+ The minimized automaton is the following: 
+┌───────────────────┬───────────────────┬───────────────────┬───────────────────┐
+│         S         │         a         │         b         │         c         │
+├───────────────────┼───────────────────┼───────────────────┼───────────────────┤
+│ →       0         │         0         │         0         │         0         │
+└───────────────────┴───────────────────┴───────────────────┴───────────────────┘
+
+[TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
+[USER] 4
+[TERMINAL] Enter a word you want to read : 
+[USER] ab
+[TERMINAL] The automaton does not recognize the word 'ab'.
+
+ATTENTION YOU HAVE TO COPY WHAT IS RIGHT AFTER AND PASTE IT AFTER THE USER 5
+The automaton recognizing the complementary language of the current automaton is the following: 
+┌───────────────────┬───────────────────┬───────────────────┬───────────────────┐
+│         S         │         a         │         b         │         c         │
+├───────────────────┼───────────────────┼───────────────────┼───────────────────┤
+│ ←→      0         │       _____       │       _____       │       _____       │
+│ ←       1         │       _____       │       _____       │       _____       │
+│ ←       2         │       _____       │       _____       │       _____       │
+│ ←       3         │       _____       │         4         │       _____       │
+│ ←       4         │       _____       │       _____       │       _____       │
+│ ←       5         │       _____       │       _____       │       _____       │
+│ ←       6         │         7         │       _____       │       _____       │
+│ ←       7         │       _____       │       _____       │       _____       │
+│ ←       8         │       _____       │       _____       │         9         │
+│ ←       9         │       _____       │       _____       │       _____       │
+│ ←       10        │       _____       │       _____       │       _____       │
+│ ←       11        │       _____       │       _____       │       _____       │
+│ ←       12        │        13         │       _____       │       _____       │
+│ ←       13        │       _____       │       _____       │       _____       │
+│ ←       14        │       _____       │       _____       │       _____       │
+│ ←       15        │       _____       │        16         │       _____       │
+│ ←       16        │       _____       │       _____       │       _____       │
+│ ←       17        │       _____       │       _____       │       _____       │
+│ ←       18        │       _____       │       _____       │        19         │
+│ ←       19        │       _____       │       _____       │       _____       │
+│ ←       20        │       _____       │       _____       │       _____       │
+│         21        │       _____       │       _____       │       _____       │
+└───────────────────┴───────────────────┴───────────────────┴───────────────────┘
+
+[TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
+[USER] 5
+
+[TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
+[USER] 6
+[TERMINAL] Enter a word you want to read : 
+The automaton recognizing the complementary language of the current automaton does not recognize the word 'ab'.
+'.

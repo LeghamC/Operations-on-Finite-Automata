@@ -56,13 +56,13 @@ Similarly to word recognition, the user will enter a word, but this time the pro
 ### Execution Trace  
 
 In order to trace the behavior of an automan through all the operations, we create a function that automatizes the process. This function is accessible in the IDE (**I**ntegrated **D**evelopment **E**nvironment) of the execution_trace.py file.
-To use it, simply call the function as the following : "*get_execution_trace(int, word, filename")*".
+To use it, simply call the function as the following : "*get_execution_trace(int, word, filename")*". For the purposes of the project, we already generated all the execution traces of all automata.
 Where :  
   - *int* is the number of the automaton you want to trace,
   - *word* is the word you want to test,
   - *filename* is the file where the execution trace will be saved.
  
-_**Remark :** If you want to only test the empty word, you have to do it in the main._
+_**Remark :** If you want to only test the empty word, you have to do it in the main._  
 
 
 ## Authors

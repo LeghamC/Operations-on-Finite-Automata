@@ -241,7 +241,7 @@ def minimization(CDFA):
         if (starting_state, key[1]) not in MCDFA.transitions:
             MCDFA.transitions[(starting_state, key[1])] = {arriving_state}
 
-    print("Correspondance between old and new states :")
+    print("Correspondence between old and new states :")
     for i in MCDFA.states:
         print(f"{i} = {current_partitioning[i]}")
 
