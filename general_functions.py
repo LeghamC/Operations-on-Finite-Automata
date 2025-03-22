@@ -151,3 +151,83 @@ def merge_initial_states(fa):
     # Finally we update the transitions
     fa.transitions = new_transitions
 
+
+'''
+ * @brief : Nice looking display for the menu
+ '''
+def display_menu():
+    title = "Finite Automata emulator"
+    description = ("Description : This program is made so that you can use various operations on finite automata.\n"
+                   " So, which operation do you want to perform on the automaton?")
+    menu_options = [
+        "1. Load Automaton",
+        "2. Display Automaton",
+    ]
+
+    border = "═" * 40
+    print(f"╔{border}╗")
+    print(f"║{title:^40}║")
+    print(f"╠{border}╣")
+    print(f"║{description:^40}║")
+    print(f"╠{border}╣")
+    for option in menu_options:
+        print(f"║ {option:^39}║")
+    print(f"╚{border}╝")
+
+def display_menu():
+    title = "Finite Automata emulator"
+    description = "Description : Operations-on-Finate-Automata Project"
+    menu_options = [
+        "1. Standardize the automaton",
+        "2. Determinize and complete a synchronous automaton",
+        "3. Determinize an asynchronous automaton",
+        "4. Minimize the automaton",
+        "5. Word recognition",
+        "6. Get the automaton recognizing the complementary language of the current automaton",
+        "0. Back to the main menu"
+    ]
+
+    border = "═" * 100
+    print(f"\n╔{border}╗")
+    print(f"║{title:^100}║")
+    print(f"╠{border}╣")
+    print(f"║{description:^100}║")
+    print(f"╠{border}╣")
+    for option in menu_options:
+        print(f"║ {option:^99}║")
+    print(f"╚{border}╝")
+
+    menu_str = f"╔{border}╗" + "\n" + f"║{title:^100}║" + "\n" + f"╠{border}╣" + "\n" + f"║{description:^100}║" + "\n" + f"╠{border}╣" + "\n"
+    for option in menu_options:
+        menu_str += f"║ {option:^99}║" + "\n"
+    menu_str += f"╚{border}╝"
+    return menu_str
+
+def display_mid_menu():
+    title = "Finite Automata emulator"
+    description = "What do you want to do now ?"
+    menu_options = [
+        "1. Standardize the automaton",
+        "2. Determinize and complete a synchronous automaton",
+        "3. Determinize an asynchronous automaton",
+        "4. Minimize the automaton",
+        "5. Word recognition",
+        "6. Get the automaton recognizing the complementary language of the current automaton",
+        "0. Back to the main menu"
+    ]
+
+    border = "═" * 100
+    print(f"\n╔{border}╗")
+    print(f"║{title:^100}║")
+    print(f"╠{border}╣")
+    print(f"║{description:^100}║")
+    print(f"╠{border}╣")
+    for option in menu_options:
+        print(f"║ {option:^99}║")
+    print(f"╚{border}╝")
+
+    menu_str = f"╔{border}╗" + "\n" + f"║{title:^100}║" + "\n" + f"╠{border}╣" + "\n" + f"║{description:^100}║" + "\n" + f"╠{border}╣" + "\n"
+    for option in menu_options:
+        menu_str += f"║ {option:^99}║" + "\n"
+    menu_str += f"╚{border}╝"
+    return menu_str

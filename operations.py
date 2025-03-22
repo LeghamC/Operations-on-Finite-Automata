@@ -83,21 +83,16 @@ def determinization_and_completion_automaton(FA) -> automata.FiniteAutomaton:
 
     # if the automaton contains an epsilon transition
     if deterministic_conditions[2] == 0:
-        print(
-            "The automaton is not deterministic as it contains an epsilon (ε) transition and it cannot be determinized by this method.\n"
-            " You need to use the --- method to determinize an automaton containing epsilon labels.")
         return
 
     # if the automaton is already deterministic
     if all(condition == 1 for condition in deterministic_conditions):
         # we check if it is complete
         if properties_check.is_complete(FA):
-            print("The automaton is already deterministic and complete.")
             return FA
         # else we complete it
         else:
             completion(FA)
-            print("The automaton was already deterministic but not complete. Hence, we completed it.")
             return FA
 
     # else it is not deterministic, and we need to determinize it
@@ -163,12 +158,10 @@ def determinization_and_completion_automaton(FA) -> automata.FiniteAutomaton:
 
         # We now check if our new CDFA is complete
         if properties_check.is_complete(CDFA):
-            print("The automaton has been determininized and was already complete after determinization.")
             return CDFA
         # else we complete it
         else:
             completion(CDFA)
-            print("The automaton has been determininized and as it was not complete, we completed it.")
             return CDFA
 
 
@@ -210,7 +203,7 @@ def minimization(CDFA):
             new_group = [CDFA.states[i] for i, p in enumerate(patterns) if p == pattern]
             if new_group not in next_partitioning:
                 next_partitioning.append(new_group)
-        
+
         if len(current_partitioning) == len(next_partitioning):  # If the number of groups is still the same, it means no group have been created, so we're done
             minimized = 1
         else:
@@ -339,7 +332,6 @@ def determinization_asynchronous(FA: automata.FiniteAutomaton):
         for s in current_state:
             total_eps_closure += epsilon_closure(FA, s)
         total_eps_closure = list(set(total_eps_closure))
-
 
         for char in DFA.alphabet:
             new_arrival_state = []
