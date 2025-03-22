@@ -45,6 +45,8 @@ The program will check if the given automaton is minimized and notify the user i
 
 ### Word Recognition
 If this operation is choosen, the user will be asked to enter a word. The program will then diplay whether the word is recognized by the automaton or not.
+**Remark:** If you want to enter ε (the empty word) you just need to press enter. 
+
 
 ### Complementary Language
 Similarly to word recognition, the user will enter a word, but this time the program will check if the word is recognized by the complementary language. In other words, it performs the opposite of word recognition. For example, if the word recognition returns that the word is accepted, the complementary language will return that the word is not accepted.
