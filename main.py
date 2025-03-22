@@ -109,32 +109,53 @@ def main():
             # We must have a deterministic and complete automaton to minimize it
 
             elif choice == 3:
+                # Check if the automaton is asynchronous
+                if PC.is_asynchronous(FA):
+                    print("\nThe automaton you selected was asynchronous. Hence, we determinized it using the asynchronous method.")
 
-                # We check if the automaton is deterministic and complete
-                deterministic_conditions = PC.is_deterministic(FA)
-                complete = PC.is_complete(FA)
+                    # Determinize the asynchronous automaton
+                    CDFA = OP.determinization_asynchronous(FA)
 
+                    # Ensure the automaton is complete before minimization
+                    if not PC.is_complete(CDFA):
+                        CDFA = OP.completion(CDFA)
+                        print("\nThe automaton was asynchronous, determinized, but not complete. Hence, we completed it before minimization.")
 
-                # If the automaton is already deterministic and complete, we minimize it
-                if all(condition == 1 for condition in deterministic_conditions) and complete == 1:
-                    MCDFA = OP.minimization(FA)
-                    MCDFA.display_automaton()
-
-                elif all(condition == 1 for condition in deterministic_conditions) and complete == 0:
-                    print("\nThe automaton you entered was deterministic but not complete."
-                          "Hence, we completed it before minimizing it."
-                          "\nThe minimized automaton is the following: ")
-                    CDFA = OP.determinization_and_completion_automaton(FA)
+                    # Minimize the completed deterministic automaton
+                    print("\nThe minimized automaton is the following:")
                     MCDFA = OP.minimization(CDFA)
                     MCDFA.display_automaton()
+
 
                 else:
-                    print("\nThe automaton you entered was not deterministic. Hence, we determinized and if needed completed"
-                          "it before minimizing it."
-                          "\n The minimized automaton is the following: ")
-                    CDFA = OP.determinization_and_completion_automaton(FA)
-                    MCDFA = OP.minimization(CDFA)
-                    MCDFA.display_automaton()
+                    # Handle synchronous automaton minimization
+                    deterministic_conditions = PC.is_deterministic(FA)
+                    complete = PC.is_complete(FA)
+
+                    # If the automaton is already deterministic and complete, minimize directly
+                    if all(condition == 1 for condition in deterministic_conditions) and complete == 1:
+                        print("\nThe automaton is already deterministic and complete. Minimizing directly:")
+                        MCDFA = OP.minimization(FA)
+                        MCDFA.display_automaton()
+
+
+                    # If the automaton is deterministic but not complete, complete before minimization
+                    elif all(condition == 1 for condition in deterministic_conditions) and complete == 0:
+                        print("\nThe automaton you entered was deterministic but not complete."
+                              " Hence, we completed it before minimizing it."
+                              "\nThe minimized automaton is the following: ")
+                        CDFA = OP.completion(FA)
+                        MCDFA = OP.minimization(CDFA)
+                        MCDFA.display_automaton()
+
+                    # If the automaton is not deterministic, determinize, complete, and minimize it
+                    else:
+                        print("\nThe automaton you entered was not deterministic. Hence, we determinized and, if needed, completed"
+                              " it before minimizing it."
+                              "\nThe minimized automaton is the following: ")
+                        CDFA = OP.determinization_and_completion_automaton(FA)
+                        MCDFA = OP.minimization(CDFA)
+                        MCDFA.display_automaton()
 
 
             # 4. Word recognition
