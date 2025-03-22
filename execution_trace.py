@@ -53,9 +53,74 @@ def get_execution_trace(num_automaton: int, word_to_test: str, file_name: str):
         trace.write(
             "[TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: \n")
         trace.write("[USER] 2" + "\n")
-        trace.write("[BACKGROUND] Checks if the automaton is asynchronous or not as we have different function "
-                    "depending on that\n")
-        trace.write("PUT HERE THE PART WHEN WE DECIDE WHAT TO DO WITH THE DERTERMINIZATION\n\n")
+    trace.close()
+
+    if properties_check.is_asynchronous(FA):
+        with open(file_name, "a", encoding="utf-8") as trace:
+            trace.write("\nThe automaton you selected was asynchronous. Hence, we determinized it using the "
+                        "asynchronous method.\n")
+        # We determinize the asynchronous automaton
+        trace.close()
+        CDFA_A = operations.determinization_asynchronous(FA)
+
+        # We now check if it also needs to be completed
+        complete_A = properties_check.is_complete(CDFA_A)
+        if complete_A == 1:
+            with open(file_name, "a", encoding="utf-8") as trace:
+                trace.write("\nThe automaton is already deterministic and complete.\n")
+            trace.close()
+            CDFA_A.display_automaton_redirected(file_name)
+
+        # if the automaton is deterministic but not complete
+        else:
+            operations.completion(CDFA_A)
+            with open(file_name, "a", encoding="utf-8") as trace:
+                trace.write("\nThe automaton was already deterministic but not complete. Hence, we completed it.\n")
+            trace.close()
+            CDFA_A.display_automaton_redirected(file_name)
+
+    # Else we want to determinize and complete a synchronous automaton
+    deterministic_conditions = properties_check.is_deterministic(FA)
+
+    # if the automaton is already deterministic
+    if all(condition == 1 for condition in deterministic_conditions):
+        complete_S = properties_check.is_complete(FA)
+        if complete_S == 1:
+            with open(file_name, "a", encoding="utf-8") as trace:
+                trace.write("\nThe automaton is already deterministic and complete.\n")
+            trace.close()
+            FA.display_automaton_redirected(file_name)
+
+        # if the automaton is deterministic but not complete
+        else:
+            operations.completion(FA)
+            with open(file_name, "a", encoding="utf-8") as trace:
+                trace.write("\nThe automaton was already deterministic but not complete. Hence, we completed it.\n")
+            trace.close()
+            FA.display_automaton_redirected(file_name)
+
+    # else the automaton was not deterministic, and we determinize it
+    else:
+        CDFA_S = A.FiniteAutomaton()
+        CDFA_S = operations.determinization_and_completion_automaton(FA)
+
+        # We now have the determinized our automaton but we need to check if it complete
+
+        if properties_check.is_complete(CDFA_S):
+            if properties_check.is_complete(CDFA_S):
+                with open(file_name, "a", encoding="utf-8") as trace:
+                    trace.write("\nThe automaton has been determininized and was already complete after "
+                                "determinization.\n")
+                trace.close()
+                CDFA_S.display_automaton_redirected(file_name)
+
+        else:
+            operations.completion(CDFA_S)
+            with open(file_name, "a", encoding="utf-8") as trace:
+                trace.write("\nThe automaton has been determininized and as it was not complete, we completed it.\n")
+            trace.close()
+            CDFA_S.display_automaton_redirected(file_name)
+
     trace.close()
     # ------------------------------------------------------------------
 
