@@ -9,11 +9,12 @@
 
 '''
  * @brief : Reads a string/word from the user and stores it
- * @param word : string/word given by the user
- * @return :
+ * @param word :
+ * @return : string given by the user
 '''
-def read_word (word):
-    pass
+def read_word ():
+    word = input("Enter a word you want to read : ")
+    return word
 
 
 '''

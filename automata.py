@@ -6,7 +6,6 @@
 # ---------------------------------------------------------------------------------------------------------------
 # IMPORTATIONS OF MODULES
 
-import properties_check
 import general_functions
 from general_functions import retrieve_max_transition_length
 
@@ -26,7 +25,8 @@ class FiniteAutomaton:
         self.terminal_states = []  # The terminal states of the automaton
         self.transitions = {}  # The transitions of the automaton : each key is a tuple (state, symbol) and the value
         # is the next state which is stored in an array. The key represents the current state and the symbol that is
-        # read to go to the next state
+        # read to go to the next state. Key's value is stored as set containing the next states.
+        self.epsilon_closure = {}  # we will use it when doing the determinization of the automaton containing epsilon
 
     # ---------------------------------------------------------------------------------------------------------------
 
@@ -45,7 +45,7 @@ class FiniteAutomaton:
 
             # store the alphabet
             nb_elem_alphabet = first_lines[0].strip()  # .strip() removes the '\n' character, we get as a result a
-            # string that contains the number of the symbols in the alphabet
+            # string that contains the number of symbols in the alphabet
 
             if int(nb_elem_alphabet) == 0:  # Special case for the empty automaton
                 self.alphabet.append("a")
@@ -86,6 +86,8 @@ class FiniteAutomaton:
                     current_transition = line.strip().split()  # remove the '\n' character and split the different
                     # strings into a list
 
+                    # We should put here the verification for ε transitions
+
                     current_state = int(current_transition[0])  # retrieve the current state which is always the first
                     # element
 
@@ -108,7 +110,14 @@ class FiniteAutomaton:
         """
         alphabet_length = len(self.alphabet)  # get the length of the alphabet
         max_transition_length = retrieve_max_transition_length(self.transitions)  # get the length of the longest
-        length_table = general_functions.total_table_length(alphabet_length, max_transition_length)  # get the length
+        if general_functions.all_int(self.states):
+            length_table = general_functions.total_table_length(alphabet_length,
+                                                                max_transition_length, 5)  # get the length
+        else:
+            longest_state = general_functions.retrieve_longest_state(self.states)  # get the length of the longest state
+            length_table = general_functions.total_table_length(alphabet_length, max_transition_length, longest_state)
+
+
         # of the table in terms of characters
         size_box = length_table // alphabet_length + 1
 
@@ -150,21 +159,28 @@ class FiniteAutomaton:
 
             # check if the state is terminal, initial, both or none ----------------------------------------------------
             if state in self.terminal_states and state in self.initial_states:
-                beginning_character = "│↔"  # if the state is both terminal and initial
+                beginning_character = "│ ←→"  # if the state is both terminal and initial
 
             elif state in self.terminal_states:
-                beginning_character = "│←"  # if the state is terminal
+                beginning_character = "│ ←"  # if the state is terminal
 
             elif state in self.initial_states:
-                beginning_character = "│→"  # if the state is initial
+                beginning_character = "│ →"  # if the state is initial
 
             else:
                 beginning_character = "│ "  # the beginning character of the row
 
             # ----------------------------------------------------------------------------------------------------------
-
-            row = f"{state}".ljust(size_box - 5)  # create a new string that will store the row of the current
-            # state and we convert the state into a string using f"{state}" to be able to concatenate it with
+            if beginning_character == "│ ":
+                row = f"{state}".center(size_box - 6) + " "
+            elif beginning_character == "│ ←→":
+                row = f"{state}".center(size_box - 10) + "   "
+            elif beginning_character == "│ ←":
+                row = f"{state}".center(size_box - 8) + "  "
+            else:
+                row = f"{state}".center(size_box - 8) + "  "
+            # create a new string that will store the row of the current
+            # state, and we convert the state into a string using f"{state}" to be able to concatenate it with
             # other strings
 
             for symbol in self.alphabet:  # iterate through the alphabet
@@ -190,6 +206,8 @@ class FiniteAutomaton:
             print("─" * (size_box - 3), end="")
         print("┘")
 
+
+
     def display_complete_dererministic_automaton(self):
         '''
          * @brief : Displays the CDFA with indications of initial states, terminal states, and the transition table.
@@ -205,4 +223,3 @@ class FiniteAutomaton:
          * @return : ...
          '''
         pass
-

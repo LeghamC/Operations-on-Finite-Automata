@@ -1,0 +1,33 @@
+README : THIS IS A FIRST TEMPLATE FOR THE EXECUTION TRACE IT MAY CHANGE OVER TIME
+
+----------------------------------------
+PUT HERE THE FINAL DISPLAY OF THE MENU
+----------------------------------------
+For the moment it is like this :
+╔════════════════════════════════════════╗
+║        Finite Automata emulator        ║
+╠════════════════════════════════════════╣
+║          Description : Oe tkt          ║
+╠════════════════════════════════════════╣
+║            1. Load Automaton           ║
+║          2. Display Automaton          ║
+╚════════════════════════════════════════╝
+
+[USER INPUT] 1
+
+[TERMINAL] Enter the number corresponding to the automaton you want to manipulate:
+
+[USER INPUT] 8
+
+[TERMINAL] DISPLAY THE AUTOMATON
+[TERMINAL] WHAT FUNCTION DOES THE USER WANT TO PERFORM
+
+[USER INPUT] PUT THE NOMBER CORRESPONDING TO THE FUNCTION
+
+[PROCESS] EXPLAIN BRIEFLY WHAT IS HAPPENING IN THE BACK (example : CHECK THAT THE AUTOMATON IS COMPLETE AND DETERMINED BEFORE MINIMIZING)
+
+[TERMINAL] PUT HERE THE RESULT OF THE PEROFRMED FUNCTION
+----------------------------------------
+PUT HERE WHAT THE TERMINAL RETURNS
+----------------------------------------
+
