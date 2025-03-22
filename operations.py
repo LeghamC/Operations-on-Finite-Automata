@@ -66,6 +66,7 @@ def completion(FA):
         for symbol in FA.alphabet:
             if (state, symbol) not in FA.transitions:
                 FA.transitions[(state, symbol)] = {"P"}
+
     return FA
 
 
@@ -76,7 +77,7 @@ def completion(FA):
  '''
 
 
-def determinization_and_completion_automaton(FA):
+def determinization_and_completion_automaton(FA) -> automata.FiniteAutomaton:
     # We store the conditions determining if the fa is deterministic or not
     deterministic_conditions = properties_check.is_deterministic(FA)
 
@@ -177,13 +178,14 @@ def determinization_and_completion_automaton(FA):
  * @return MCDFA: The minimized CDFA
  '''
 
-
-def minimization2(CDFA):
+def minimization(CDFA):
     MCDFA = automata.FiniteAutomaton()
     MCDFA.alphabet = CDFA.alphabet
 
-    current_partitioning = [CDFA.terminal_states, [state for state in CDFA.states if
-                                                   state not in CDFA.terminal_states]]  # list of lists of states representing the groups
+    current_partitioning = []  # list of lists of states representing the groups
+    current_partitioning.append(CDFA.terminal_states)
+    current_partitioning.append(
+        [state for state in CDFA.states if state not in CDFA.terminal_states])  # Non-terminal states
 
     minimized = 0
     while not minimized:
@@ -205,7 +207,7 @@ def minimization2(CDFA):
 
         next_partitioning = []
         for pattern in patterns:
-            new_group = [i for i, p in enumerate(patterns) if p == pattern]
+            new_group = [CDFA.states[i] for i, p in enumerate(patterns) if p == pattern]
             if new_group not in next_partitioning:
                 next_partitioning.append(new_group)
 
@@ -246,6 +248,14 @@ def minimization2(CDFA):
         if (starting_state, key[1]) not in MCDFA.transitions:
             MCDFA.transitions[(starting_state, key[1])] = {arriving_state}
 
+    print("Correspondance between old and new states :")
+    for i in MCDFA.states:
+        print(f"{i} = {current_partitioning[i]}")
+
+    print("Correspondance between old and new states :")
+    for i in MCDFA.states:
+        print(f"{i} = {current_partitioning[i]}")
+
     return MCDFA
 
 
@@ -275,28 +285,25 @@ def complementary_automaton(A: automata.FiniteAutomaton):
     return B
 
 
-def epsilon_closure(FA: automata.FiniteAutomaton, state: int) -> str:
+def epsilon_closure(FA: automata.FiniteAutomaton, state: int) -> list:
     """
     This function computes the epsilon closure of a state given in parameter in a finite automaton
     :param FA: The finite automaton in which we want to compute the epsilon closure
     :param state: The state for which we want to compute the epsilon closure
-    :return: The epsilon closure of the given state as a string
+    :return: The epsilon closure of the given state as a list
     """
-    closure = set()  # set of states reachable from the given state with only epsilon transitions
+    closure = []
     stack_state = {state}  # stack of states to explore
 
-    while stack_state:  # while there are states to explore
+    while stack_state :
         current_state = stack_state.pop()  # we take the last state added to the stack
         if current_state not in closure:  # if the state is not already in the closure
-            closure.add(current_state)  # we add it
-            reachable_states = FA.transitions.get((current_state, "ε"), set())  # we get the states reachable with
-            # epsilon
-            stack_state.update(reachable_states)  # we add the states reachable with
-            # epsilon from the current state
-    str_states = ""
-    for state in closure:
-        str_states += str(state)
-    return str_states
+            closure.append(current_state)
+            if (current_state, "ε") in FA.transitions.keys():
+                reachable_states = FA.transitions[(current_state, "ε")] # we get the states reachable with epsilon
+                stack_state.update(reachable_states) # we add the states reachable with epsilon from the current state
+
+    return closure
 
 
 def determinization_asynchronous(FA: automata.FiniteAutomaton):
@@ -308,43 +315,79 @@ def determinization_asynchronous(FA: automata.FiniteAutomaton):
     :return: the determined asynchronous automaton
     """
 
-    # ------------------------------------------------------------------------------------------------------------------
-    # First compute all the epsilon closure of this asynchronous automaton
-    # ------------------------------------------------------------------------------------------------------------------
-    new_set_of_states = set()  # we create a set that will contain all the new states
 
-    for state in FA.states:  # we compute the epsilon closure of each state
-        closure_current_state = epsilon_closure(FA, state)
-        new_set_of_states.add(closure_current_state)  # after computing a new epsilon closure we add it to the set of
-        # states
+    DFA = automata.FiniteAutomaton()
+    DFA.alphabet = FA.alphabet
 
-    new_set_of_states = general_functions.order_set_of_string(new_set_of_states)  # convert the set of new states
-    # into an ordered list. We could avoid doing this, but it's just to better understand the final determined automaton
-    return new_set_of_states
+    list_of_new_state = []
+    old_new = {}
+    transitions = {}
 
-    # ------------------------------------------------------------------------------------------------------------------
-    # Change the initial states
-    # ------------------------------------------------------------------------------------------------------------------
-    # now that we retrieved all the new states, we can compute the initial states
-    # if we have several initial states, we need to combine them
+    states_to_process = set()
 
-    """
-    # ------------------------------------------------------------------------------------------------------------------
-    # Second, we now need to retrieve the old transitions taking into account the epsilon closures
-    # ------------------------------------------------------------------------------------------------------------------
-    transitions_copy = {}  # make a copy of all the transitions using the copy function that can
-    # be applied to dictionaries
+    states_to_process.add(tuple([i for i in FA.initial_states]))
 
-    for states in new_set_of_states:  # iterate through all the new states we have get, state is a string
-        transitions_with_closure = set()
-        for chr_state in states:  # iterate through each character of the string state
-            for symbol in FA.alphabet:  # iterate through all the symbols in the alphabet
-                current_state = int(chr_state)  # convert the current state into a string
-                # create a set that will contain all the transitions from the current state that
-                # use the current symbol
-                if (current_state, symbol) not in transitions_copy:
-                    nex_states = FA.transitions.get((current_state, symbol), set())  # here next_states is of type set
-        transitions_copy[states, symbol] = nex_states
-    """
+    j = 0
+    while len(states_to_process) != 0:
+        current_state = states_to_process.pop()
+        list_of_new_state.append(current_state)
+        if not(current_state in old_new.keys()):
+            old_new[current_state] = j
+            j += 1
 
-    return new_set_of_states
+
+        total_eps_closure = []
+        for s in current_state:
+            total_eps_closure += epsilon_closure(FA, s)
+        total_eps_closure = list(set(total_eps_closure))
+
+
+        for char in DFA.alphabet:
+            new_arrival_state = []
+
+            for state in total_eps_closure:
+                if (state, char) in FA.transitions.keys() :
+                    for s in FA.transitions[(state, char)] :
+                        if s not in new_arrival_state :
+                            new_arrival_state.append(s)
+            if len(new_arrival_state) != 0:
+                transitions[(current_state, char)] = {tuple(new_arrival_state)}
+
+            already_in = 0
+            for state in states_to_process:
+                if set(state) == set(new_arrival_state): # The use of set is to make for example two groups (1, 2, 3) and (2, 3, 1) being equal
+                    already_in = 1
+            if not already_in :
+                for state in list_of_new_state:
+                    if set(state) == set(new_arrival_state):
+                        already_in = 1
+
+            if (not already_in) and (len(new_arrival_state) != 0):
+                states_to_process.add(tuple(new_arrival_state))
+
+                if not(tuple(new_arrival_state) in old_new.keys()):
+                    old_new[tuple(new_arrival_state)] = j
+                    j += 1
+
+        # end of while
+
+
+    DFA.states = [i for i in range(len(list_of_new_state))]
+
+    DFA.initial_states = [old_new[tuple([i for i in FA.initial_states])]]
+
+    # Terminal states
+    for state in list_of_new_state:
+        terminal = 0
+        for S in state:
+            for s in epsilon_closure(FA, S):
+                if s in FA.terminal_states:
+                    terminal = 1
+        if terminal:
+            DFA.terminal_states.append(old_new[tuple(state)])
+
+    # Transitions
+    for (start, char), arrival in transitions.items():
+        DFA.transitions[(old_new[tuple(start)], char)] = {old_new[next(iter(arrival))]}
+
+    return DFA
