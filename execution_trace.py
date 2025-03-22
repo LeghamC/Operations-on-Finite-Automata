@@ -143,4 +143,4 @@ def get_execution_trace(num_automaton: int, word_to_test: str, file_name: str):
     # -------------------------------------- -----------------------------------------------------------
 
 
-get_execution_trace(1, "", "Automatons/test.txt")
+get_execution_trace(1, "", "execution_traces/test.txt")
