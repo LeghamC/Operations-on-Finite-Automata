@@ -54,13 +54,12 @@
 The automaton is not complete as state '0' has no transitions for label 'b'.
 The automaton is not complete as state '2' has no transitions for label 'b'.
 The automaton is not complete as state '4' has no transitions for label 'b'.
-The automaton is not complete as state 'I' has no transitions for label 'b'.
 
 The automaton was already deterministic but not complete. Hence, we completed it.
 ┌────────────────────────────┬────────────────────────────┬────────────────────────────┐
 │             S              │             a              │             b              │
 ├────────────────────────────┼────────────────────────────┼────────────────────────────┤
-│ ←            0             │             1              │             P              │
+│ ←→           0             │             1              │             P              │
 │              1             │             2              │             2              │
 │              2             │             3              │             P              │
 │              3             │             4              │             4              │
@@ -81,7 +80,6 @@ The automaton was already deterministic but not complete. Hence, we completed it
 │              2             │             3              │             P              │
 │              3             │             4              │             4              │
 │              4             │             0              │             P              │
-│ →            I             │             1              │             P              │
 │              P             │             P              │             P              │
 └────────────────────────────┴────────────────────────────┴────────────────────────────┘
 
