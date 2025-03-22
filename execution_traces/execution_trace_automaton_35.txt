@@ -1,0 +1,143 @@
+╔════════════════════════════════════════════════════════════════════════════════════════════════════╗
+║                                      Finite Automata emulator                                      ║
+╠════════════════════════════════════════════════════════════════════════════════════════════════════╣
+║                        Description : Operations-on-Finite-Automata Project                         ║
+╠════════════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                    1. Standardize the automaton                                    ║
+║               2. Determinize and complete an automaton (synchronous or asynchronous)               ║
+║                                      3. Minimize the automaton                                     ║
+║                                         4. Word recognition                                        ║
+║        5. Get the automaton recognizing the complementary language of the current automaton        ║
+║                          6. Word recognition of the complementary language                         ║
+║                                      0. Back to the main menu                                      ║
+╚════════════════════════════════════════════════════════════════════════════════════════════════════╝
+[TERMINAL] Enter the number corresponding to the automaton you want to manipulate or type -1 to exit: 
+[USER] 35
+
+┌────────────────────────────┬────────────────────────────┬────────────────────────────┐
+│             S              │             a              │             b              │
+├────────────────────────────┼────────────────────────────┼────────────────────────────┤
+│ →            0             │           _____            │           _____            │
+│              1             │             2              │           _____            │
+│              2             │           _____            │             3              │
+│              3             │           _____            │           _____            │
+│              4             │           _____            │           _____            │
+│              5             │             6              │           _____            │
+│              6             │           _____            │             7              │
+│              7             │           _____            │           _____            │
+│              8             │             9              │           _____            │
+│              9             │           _____            │           _____            │
+│ ←            10            │           _____            │           _____            │
+└────────────────────────────┴────────────────────────────┴────────────────────────────┘
+╔════════════════════════════════════════════════════════════════════════════════════════════════════╗
+║                                      Finite Automata emulator                                      ║
+╠════════════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                    What do you want to do now ?                                    ║
+╠════════════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                    1. Standardize the automaton                                    ║
+║               2. Determinize and complete an automaton (synchronous or asynchronous)               ║
+║                                      3. Minimize the automaton                                     ║
+║                                         4. Word recognition                                        ║
+║        5. Get the automaton recognizing the complementary language of the current automaton        ║
+║                          6. Word recognition of the complementary language                         ║
+║                                      0. Back to the main menu                                      ║
+╚════════════════════════════════════════════════════════════════════════════════════════════════════╝
+[USER] 1
+[TERMINAL] The automaton is already standard.
+
+[TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
+[USER] 2
+
+The automaton you selected was asynchronous. Hence, we determinized it using the asynchronous method.
+The automaton you selected was asynchronous. Hence, we determinized it using the asynchronous method.
+The automaton is not complete as state '0' has no transitions for label 'b'.
+The automaton is not complete as state '1' has no transitions for label 'a'.
+The automaton is not complete as state '2' has no transitions for label 'b'.
+The automaton is not complete as state '3' has no transitions for label 'a'.
+The automaton is not complete as state '4' has no transitions for label 'b'
+
+The automaton was already deterministic but not complete. Hence, we completed it.
+┌────────────────────────────┬────────────────────────────┬────────────────────────────┐
+│             S              │             a              │             b              │
+├────────────────────────────┼────────────────────────────┼────────────────────────────┤
+│ →            0             │             1              │             P              │
+│ ←            1             │             P              │             2              │
+│ ←            2             │             3              │             P              │
+│ ←            3             │             P              │             4              │
+│              4             │             3              │             P              │
+│              P             │             P              │             P              │
+└────────────────────────────┴────────────────────────────┴────────────────────────────┘
+
+The automaton has been determininized and was already complete after determinization.
+┌────────────────────────────┬────────────────────────────┬────────────────────────────┐
+│             S              │             a              │             b              │
+├────────────────────────────┼────────────────────────────┼────────────────────────────┤
+│ →            0             │             P              │             P              │
+│              P             │             P              │             P              │
+└────────────────────────────┴────────────────────────────┴────────────────────────────┘
+[TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
+[USER] 3
+[TERMINAL] The automaton is not deterministic as state '0' has multiple transitions for label 'ε'.
+The automaton is not deterministic as state '4' has multiple transitions for label 'ε'.
+The automaton is not deterministic as state '7' has multiple transitions for label 'ε'.
+The automaton is not complete as state '0' has no transitions for label 'a'.
+The automaton is not complete as state '0' has no transitions for label 'b'.
+The automaton is not complete as state '1' has no transitions for label 'b'.
+The automaton is not complete as state '2' has no transitions for label 'a'.
+The automaton is not complete as state '3' has no transitions for label 'a'.
+The automaton is not complete as state '3' has no transitions for label 'b'.
+The automaton is not complete as state '4' has no transitions for label 'a'.
+The automaton is not complete as state '4' has no transitions for label 'b'.
+The automaton is not complete as state '5' has no transitions for label 'b'.
+The automaton is not complete as state '6' has no transitions for label 'a'.
+The automaton is not complete as state '7' has no transitions for label 'a'.
+The automaton is not complete as state '7' has no transitions for label 'b'.
+The automaton is not complete as state '8' has no transitions for label 'b'.
+The automaton is not complete as state '9' has no transitions for label 'a'.
+The automaton is not complete as state '9' has no transitions for label 'b'.
+The automaton is not complete as state '10' has no transitions for label 'a'.
+The automaton is not complete as state '10' has no transitions for label 'b'.
+
+The automaton you entered was not deterministic. Hence, we determinized and if needed completedit before minimizing it.
+ The minimized automaton is the following:
+The automaton is not deterministic as state '0' has multiple transitions for label 'ε'.
+The automaton is not deterministic as state '4' has multiple transitions for label 'ε'.
+The automaton is not deterministic as state '7' has multiple transitions for label 'ε'.
+Correspondence between old and new states :
+0 = ['0', 'P']
+┌────────────────────────────┬────────────────────────────┬────────────────────────────┐
+│             S              │             a              │             b              │
+├────────────────────────────┼────────────────────────────┼────────────────────────────┤
+│ →            0             │             0              │             0              │
+└────────────────────────────┴────────────────────────────┴────────────────────────────┘
+
+[TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
+[USER] 4
+[TERMINAL] Enter a word you want to read : 
+[USER] bababbab
+[TERMINAL] The automaton does not recognize the word 'bababbab'.
+
+[TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
+[USER] 5
+The automaton recognizing the complementary language of the current automaton is the following:
+┌────────────────────────────┬────────────────────────────┬────────────────────────────┐
+│             S              │             a              │             b              │
+├────────────────────────────┼────────────────────────────┼────────────────────────────┤
+│ ←→           0             │           _____            │           _____            │
+│ ←            1             │             2              │           _____            │
+│ ←            2             │           _____            │             3              │
+│ ←            3             │           _____            │           _____            │
+│ ←            4             │           _____            │           _____            │
+│ ←            5             │             6              │           _____            │
+│ ←            6             │           _____            │             7              │
+│ ←            7             │           _____            │           _____            │
+│ ←            8             │             9              │           _____            │
+│ ←            9             │           _____            │           _____            │
+│              10            │           _____            │           _____            │
+└────────────────────────────┴────────────────────────────┴────────────────────────────┘
+
+[TERMINAL] Displays the menu again in order for the user to choose the operation he wants to do: 
+[USER] 6
+[TERMINAL] Enter a word you want to read : 
+The automaton recognizing the complementary language of the current automaton does not recognize the word 'bababbab'.
+'.
