@@ -97,8 +97,9 @@ def main():
                 # if the automaton does not contain an epsilon transition
                 if deterministic_conditions[2] == 1:
                     print(
-                        "The automaton does not contain an epsilon (ε) transition hence it should not be determinized by this method.\n"
+                        "\nThe automaton does not contain an epsilon (ε) transition hence it should not be determinized by this method.\n"
                         "You need to use the determinization_and_completion_automaton (2) method to determinize an automaton containing epsilon labels.")
+                    break
 
                 else:
                     CDFA = OP.determinization_asynchronous(FA)
@@ -141,7 +142,7 @@ def main():
             # 5. Word recognition
             elif choice == 5:
                 word = WR.read_word()
-                if WR.recognize_word(FA, word):
+                if WR.recognize_word(word, FA):
                     print(f"\nThe automaton recognizes the word '{word}'.")
                 else:
                     print(f"\nThe automaton does not recognize the word '{word}'.")
@@ -156,7 +157,7 @@ def main():
             elif choice == 7:
                 word = WR.read_word()
                 CFA = OP.complementary_automaton(FA)
-                if WR.recognize_word(CFA, word):
+                if WR.recognize_word(word, CFA):
                     print(f"\nThe automaton recognizing the complementary language of the current automaton recognizes the word '{word}'.")
                 else:
                     print(f"\nThe automaton recognizing the complementary language of the current automaton does not recognize the word '{word}'.")
