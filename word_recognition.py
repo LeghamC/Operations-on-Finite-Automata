@@ -4,12 +4,9 @@
 # Purpose:     Project word recognition file - reading of a word and indication of if is recognized or not
 # Created:     01/03/2025
 # ---------------------------------------------------------------------------------------------------------------
-# IMPORTATIONS OF MODULES
-
 
 '''
  * @brief : Reads a string/word from the user and stores it
- * @param word :
  * @return : string given by the user
 '''
 def read_word ():
@@ -46,7 +43,5 @@ def temp_word_recognition(A, word, state, id):
         for next_state in A.transitions[state, "ε"]:
             if temp_word_recognition(A, word, next_state, id):
                 return True
-
-
 
     return False

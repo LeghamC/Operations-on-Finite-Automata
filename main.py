@@ -48,9 +48,9 @@ def main():
                 if PC.is_standard(FA):
                     print("\nThe automaton is already standard.")
                 else:
-                    FA = OP.standardization(FA)
+                    SFA = OP.standardization(FA)
                     print("\nThe standardized version of the automaton if the following: ")
-                    FA.display_automaton()
+                    SFA.display_automaton()
 
 
             # 2. Determinization and completion

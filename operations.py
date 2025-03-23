@@ -16,7 +16,6 @@ import general_functions
  * @return SFA: The standardized automaton
  '''
 
-
 def standardization(FA: automata.FiniteAutomaton) -> automata.FiniteAutomaton:
     """
         When using this function, we assume that the automaton is not standard and is deterministic.
@@ -28,32 +27,40 @@ def standardization(FA: automata.FiniteAutomaton) -> automata.FiniteAutomaton:
         former initial state(s)
 
     """
-    nb_initial_states = len(FA.initial_states)  # gives the number of initial states
-    FA.states.append('I')  # Add the new initial state to the existing states
-    FA.initial_states.append('I')  # Add I as an initial state
+    # We create the automaton that will become the standardized version of the one given in parameter
+    # We copy the alphabet, the states, the terminal states and the transitions of the original automaton
+    SFA = automata.FiniteAutomaton()
+    SFA.alphabet = FA.alphabet.copy()
+    SFA.states = FA.states.copy()
+    SFA.initial_states = FA.initial_states.copy()
+    SFA.terminal_states = FA.terminal_states.copy()
+    SFA.transitions = FA.transitions.copy()
+
+    nb_initial_states = len(SFA.initial_states)  # gives the number of initial states
+    SFA.states.append('I')  # Add the new initial state to the existing states
+    SFA.initial_states.append('I')  # Add I as an initial state
     new_transitions = {}  # The dictionary of transitions containing I
 
-    for (state, symbol), next_state in FA.transitions.items():
+    for (state, symbol), next_state in SFA.transitions.items():
         # If we have the transition of an initial state we copy the transition with I
-        if state in FA.initial_states:
+        if state in SFA.initial_states:
             new_transitions[('I', symbol)] = next_state.copy()
 
     # Add the transitions of all states including the former initial ones
-    for (state, symbol), next_state in FA.transitions.items():
+    for (state, symbol), next_state in SFA.transitions.items():
         new_transitions[(state, symbol)] = next_state.copy()
 
-    FA.transitions = new_transitions  # We replace with our new dictionary
-    FA.initial_states = ['I']  # There is only one state and is I
+    SFA.transitions = new_transitions  # We replace with our new dictionary
+    SFA.initial_states = ['I']  # There is only one state and is I
 
-    return FA
+    return SFA
 
 
 '''
  * @brief : Completes an automaton
  * @param FA : The FA that we want to complete
- * @return CDFA: The complete automaton
+ * @return FA: The complete automaton
  '''
-
 
 def completion(FA):
     # if the bin doesn't exist we create it and create the transitions to itself to complete the bin
@@ -73,10 +80,9 @@ def completion(FA):
 
 '''
  * @brief : Determinizes and completes an automaton
- * @param FA : The FA that we want to determinize then complete
- * @return CDFA : The determinized and complete automaton
+ * @param FA : The FA that we want to determinize and/or complete
+ * @return FA/CDFA : The determinized and complete automaton
  '''
-
 
 def determinization_and_completion_automaton(FA) -> automata.FiniteAutomaton:
     # We store the conditions determining if the fa is deterministic or not
@@ -250,28 +256,25 @@ def minimization(CDFA):
 
 '''
  * @brief : Constructs an automaton recognizing the complementary language
- * @param A : previously obtained CDFA or MCDFA
- * @return complementary_A: The automaton recognizing the complementary language
+ * @param FA : The automaton given by the user for which we want to construct the automaton recognizing the complementary language
+ * @return CA: The automaton recognizing the complementary language
  '''
 
+def complementary_automaton(FA: automata.FiniteAutomaton):
+    # We create the automaton that will become the complementary version of the one given in parameter
+    # We copy the alphabet, the states, the initial states and the transitions of the original automaton but not the terminal states
+    CA = automata.FiniteAutomaton()
+    CA.alphabet = FA.alphabet.copy()
+    CA.states = FA.states.copy()
+    CA.initial_states = FA.initial_states.copy()
+    CA.transitions = FA.transitions.copy()
+    CA.terminal_states = []
 
-def complementary_automaton(A: automata.FiniteAutomaton):
-    """
-    This function returns the complementary automaton of the automaton A
-    :param A:
-    :return:
-    """
-    B = automata.FiniteAutomaton()
-    B.terminal_states = []
-    B.initial_states = A.initial_states
-    B.states = A.states
-    B.alphabet = A.alphabet
-    B.transitions = A.transitions
-
-    for i in B.states:
-        if i not in A.terminal_states:
-            B.terminal_states.append(i)
-    return B
+    # We go through the states and if one is not terminal in the original automaton, we add it to the terminal states of the complementary automaton
+    for i in CA.states:
+        if i not in FA.terminal_states:
+            CA.terminal_states.append(i)
+    return CA
 
 
 def epsilon_closure(FA: automata.FiniteAutomaton, state: int) -> list:
