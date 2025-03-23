@@ -1,5 +1,6 @@
 # Operations-on-Finite-Automata
 Project of Finite Automata and Regular Expressions, P2-S4
+link to the github : https://github.com/LeghamC/Operations-on-Finite-Automata.git
 
 
 ## Introduction 
